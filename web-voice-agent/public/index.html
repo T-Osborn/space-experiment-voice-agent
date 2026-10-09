@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>在轨实验助手 · Voice Agent</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="masthead">
+        <div class="brand"><span class="brand-mark" aria-hidden="true">◎</span><div><span class="brand-name">在轨实验助手</span><span class="brand-subtitle">SPACE EXPERIMENT ASSISTANT</span></div></div>
+        <div class="header-status"><span class="status-dot" aria-hidden="true"></span>语音交互原型<span class="mode-tag" id="deploymentMode">本机演示</span></div>
+      </header>
+
+      <section class="intro">
+        <div><p class="eyebrow">VOICE-ONLY EXPERIMENT GUIDANCE</p><h1>专注实验，<br class="mobile-break" />让对话跟上每一步。</h1><p class="description">通过语音报告、核对与追问，保持实验步骤清晰。实际操作由实验人员完成。</p></div>
+        <p class="scope-note"><span>验证边界</span>当前为项目演示，非飞行任务系统。<br />不连接或控制实验设备。</p>
+      </section>
+
+      <div class="workspace-grid">
+        <section class="voice-panel panel" aria-labelledby="voiceHeading">
+          <div class="panel-heading"><h2 id="voiceHeading">语音工作台</h2><span class="pill" id="voicePhase">等待接入</span></div>
+          <div class="voice-orbit" id="voiceOrbit" data-phase="READY">
+            <div class="orbit-ring ring-one" aria-hidden="true"></div><div class="orbit-ring ring-two" aria-hidden="true"></div>
+            <span class="orbit-marker" aria-hidden="true"></span>
+            <button id="voiceButton" class="voice-button" type="button" disabled aria-describedby="supportMessage">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="18" y="8" width="12" height="23" rx="6"></rect><path d="M12 24v2a12 12 0 0 0 24 0v-2M24 38v5M18 43h12"></path></svg>
+              <span id="voiceButtonLabel">语音待接入</span>
+            </button>
+          </div>
+          <p id="status" class="status" role="status">正在检查服务</p>
+          <p class="voice-caption">点按录音 · 再次点按提交 · 语音播报反馈</p>
+          <button id="stopSpeakingButton" class="secondary-button" type="button"><span aria-hidden="true">■</span> 停止播报</button>
+          <div class="connection-strip"><span><i id="asrDot"></i>识别 <b id="asrStatus">检查中</b></span><span><i id="ttsDot"></i>播报 <b id="ttsStatus">检查中</b></span></div>
+          <p id="understandingStatus" class="task-footnote">知识理解：本地检索 · 语义模型暂未配置</p>
+          <p id="supportMessage" class="support-message" aria-live="polite"></p>
+          <a id="recordDownload" class="secondary-button" hidden>下载刚生成的实验记录</a>
+          <ul id="recordHistory" class="record-history" aria-label="已归档实验记录" hidden></ul>
+        </section>
+
+        <section class="task-panel panel" aria-labelledby="taskHeading">
+          <div class="panel-heading"><h2 id="taskHeading">任务上下文</h2><span id="experimentStatus" class="pill">等待实验</span></div>
+          <div class="task-title"><span class="field-label">当前实验</span><h3 id="experimentName">尚未选择实验</h3><p id="procedureScope">请在语音接入后说出实验名称。水稻仅用于最终展示。</p></div>
+          <div class="current-step-card"><span class="field-label">当前步骤</span><strong id="currentStep">等待实验选择</strong><span id="progressLabel">尚未开始</span></div>
+          <ol id="stepTimeline" class="step-timeline" aria-label="流程进度"><li class="timeline-empty">选择已加载流程的实验后显示步骤。</li></ol>
+          <p id="guidanceState" class="guidance-state" aria-live="polite">等待语音指令</p>
+          <p class="task-footnote">具体时间与编号读回后确认再推进。异常分类追问不代替技术处置。</p>
+          <p id="recordStorage" class="task-footnote">正在检查记录保存方式。</p>
+        </section>
+      </div>
+
+      <section class="capability-strip" aria-label="当前已加载能力">
+        <div><strong id="experimentCount">—</strong><span>实验目录项</span></div><div><strong id="demoCount">—</strong><span>待审核演示流程</span></div><div><strong id="questionCount">—</strong><span>可追溯专业问答</span></div><div><strong id="sourceCount">—</strong><span>公开来源登记</span></div>
+        <p>目录登记 ≠ 流程可用<br />来源登记 ≠ 全部数据已复算</p>
+      </section>
+
+      <section class="commands-section" aria-labelledby="commandsHeading">
+        <div><p class="eyebrow">SPOKEN COMMANDS</p><h2 id="commandsHeading">用语音保持任务连贯</h2></div>
+        <div class="command-examples"><span>“语音帮助”</span><span>“选择太空水稻实验”</span><span>“开始流程”</span><span>“确认无误”</span><span>“这步要报什么”</span><span>“本步还缺什么”</span><span>“重新核对本步骤”</span><span>“暂停”</span><span>“保存记录”</span></div>
+        <p>示例仅供阅读，不是文字聊天入口。数值由你报告，助手不会猜测设备读数。</p>
+      </section>
+
+      <section class="directory-section panel" aria-labelledby="directoryHeading">
+        <div class="panel-heading"><div><p class="eyebrow">MULTI-EXPERIMENT REGISTRY</p><h2 id="directoryHeading">多实验目录</h2></div><span class="directory-legend"><i></i> 演示流程 · 其余待补齐</span></div>
+        <div id="experimentDirectory" class="experiment-directory"><p class="directory-empty">正在加载目录</p></div>
+      </section>
+
+      <footer class="page-footer"><span>VOICE ONLY / HUMAN IN THE LOOP</span><p>录音仅在你主动开始后采集；配置后发送至语音提供商。可选语义模型开启后也会接收待匹配问题。记录保存方式见任务面板；重要记录请另行下载留存。</p><span class="version-label">v1.0.0 · 团队试用版</span></footer>
+    </main>
+    <script src="/audio-tools.js"></script>
+    <script src="/dashboard.js"></script>
+    <script src="/voice-network.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

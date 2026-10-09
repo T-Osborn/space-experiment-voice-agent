@@ -1,0 +1,70 @@
+[
+  {
+    "id": "project_doc_rice_preprocessing",
+    "title": "太空水稻在轨取样预处理实验.docx",
+    "source_type": "USER_PROVIDED_PROJECT_DOCUMENT",
+    "scope": "水稻最终展示流程和交互要求",
+    "authority": "项目演示资料，待任务级审核",
+    "local_reference": "太空水稻在轨取样预处理实验.docx"
+  },
+  {
+    "id": "project_md_20_experiment_sops",
+    "title": "知识库-20个实验sop.md",
+    "source_type": "USER_PROVIDED_PROJECT_KNOWLEDGE_BASE",
+    "scope": "20个实验的流程提示、达标条件和异常告警草案",
+    "authority": "项目知识库草案，不能替代飞行任务SOP",
+    "local_reference": "知识库-20个实验sop.md"
+  },
+  {
+    "id": "project_skill_space_experiment",
+    "title": "space_experiment_skills/SKILL.md",
+    "source_type": "USER_PROVIDED_AGENT_SPECIFICATION",
+    "scope": "通用状态机、输入输出格式、异常暂停和防跳步规则",
+    "authority": "Agent产品规范，不是实验事实来源",
+    "local_reference": "space_experiment_skills/SKILL.md"
+  },
+  {
+    "id": "project_persona_questions",
+    "title": "角色设定、20个问题.docx",
+    "source_type": "USER_PROVIDED_PRODUCT_REQUIREMENT",
+    "scope": "角色、人设、连续追问交互和固定问答要求",
+    "authority": "产品需求材料，不直接提供可执行SOP",
+    "local_reference": "角色设定、20个问题.docx"
+  },
+  {
+    "id": "project_prompt_engineering",
+    "title": "提示词工程(2).docx",
+    "source_type": "USER_PROVIDED_PROMPT_SPECIFICATION",
+    "scope": "语音播报风格、强制约束和Agent/Skill职责边界",
+    "authority": "Agent行为规范，不直接提供实验事实",
+    "local_reference": "提示词工程(2).docx"
+  },
+  {
+    "id": "project_payload_expert_question_bank",
+    "title": "中国空间站载荷专家实验专业问答题库.docx",
+    "source_type": "USER_PROVIDED_QA_KNOWLEDGE_BASE",
+    "scope": "20个实验相关专业问答和固定答案候选",
+    "authority": "待逐条来源核查的问答材料，不能自动转成流程步骤",
+    "local_reference": "中国空间站载荷专家实验专业问答题库.docx"
+  },
+  {
+    "id": "project_traceability_design_2026_10_07",
+    "title": "2026-10-07实验交互核对与追溯设计",
+    "source_type": "PROJECT_DESIGN_EXTENSION",
+    "local_reference": "docs/22-流程细化与对话理解验收.md",
+    "created_on": "2026-10-07",
+    "scope": "细化操作者口述的样品、容器、方案、时间、交接记录",
+    "authority": "T授权的产品实现，不是科学操作来源或任务审核",
+    "execution_allowed": false
+  },
+  {
+    "id": "project_multiexperiment_review_design_2026_10_08",
+    "title": "2026-10-08多实验流程与异常分支待审设计",
+    "source_type": "PROJECT_DESIGN_EXTENSION",
+    "local_reference": "docs/29-多实验流程与专家审核准备.md",
+    "created_on": "2026-10-08",
+    "scope": "植物、水生生态、蛋白质和复杂流体的记录字段、暂停、复核与专家签审要求",
+    "authority": "T授权的流程产品设计，不是已审核的科学操作规程",
+    "execution_allowed": false
+  }
+]

@@ -1,0 +1,726 @@
+[
+  {
+    "record_id": "qa21_css_rice_preservation",
+    "record_type": "verified_qa",
+    "collection": "EXPANDED_PUBLIC_KNOWLEDGE",
+    "title": "研究团队2022年报道中的水稻不同阶段样品怎样保存？",
+    "questions": [
+      "研究团队2022年报道中的水稻不同阶段样品怎样保存？",
+      "2022年水稻孕穗期和种子成熟期的保存条件一样吗？",
+      "2022年研究团队报告里的成熟种子存放在什么温度？"
+    ],
+    "match_groups": [
+      [
+        "水稻"
+      ],
+      [
+        "2022",
+        "研究团队报道"
+      ],
+      [
+        "保存",
+        "存放"
+      ]
+    ],
+    "content": "团队报道记载，水稻孕穗期及拟南芥开花期样品存于负80摄氏度低温柜，两者种子成熟期样品存于4摄氏度低温柜。保存条件需对应样品阶段。",
+    "keywords": [
+      "水稻",
+      "2022",
+      "研究团队报道",
+      "保存",
+      "存放"
+    ],
+    "source_ids": [
+      "official_cemps_rice_2022"
+    ],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "source_checked_on": "2026-10-07",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "报道中三次采样及随后保存说明",
+    "spoken_citation": "分子植物卓越中心2022年12月5日研究报道",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "只说明该次历史任务，不能作为本次样品的保存指令。"
+  },
+  {
+    "record_id": "qa22_css_rice_timeline_conflict",
+    "record_type": "source_conflict",
+    "collection": "EXPANDED_PUBLIC_KNOWLEDGE",
+    "title": "2024年GBCM论文和2022年水稻报道的起止日期一致吗？",
+    "questions": [
+      "2024年GBCM论文和2022年水稻报道的起止日期一致吗？",
+      "GBCM摘要和研究团队报道的日期有什么差异？",
+      "为什么水稻论文日期与2022年报道日期要分别引用？"
+    ],
+    "match_groups": [
+      [
+        "水稻",
+        "gbcm"
+      ],
+      [
+        "日期",
+        "起止",
+        "时间线"
+      ],
+      [
+        "差异",
+        "一致",
+        "分别引用"
+      ]
+    ],
+    "content": "2024年GBCM摘要写7月28日浇水萌发、11月26日获得新种子；团队2022年报道写7月29日启动、11月25日结束。两者都写120天，应分别注明出处；目前没有证据解释日期差异。",
+    "keywords": [
+      "水稻",
+      "gbcm",
+      "日期",
+      "起止",
+      "时间线",
+      "差异",
+      "一致",
+      "分别引用"
+    ],
+    "source_ids": [
+      "paper_css_rice_gbcm_2024",
+      "official_cemps_rice_2022"
+    ],
+    "evidence_level": "SOURCE_CONFLICT",
+    "source_checked_on": "2026-10-07",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "GBCM Abstract的July 28/November 26；团队报道任务起止段落",
+    "spoken_citation": "GBCM论文摘要与分子植物卓越中心任务报道",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "不猜测日期口径差异，也不修改任何实际任务时间记录。"
+  },
+  {
+    "record_id": "qa23_gbcm_environment_tech",
+    "record_type": "verified_qa",
+    "collection": "EXPANDED_PUBLIC_KNOWLEDGE",
+    "title": "GBCM论文介绍了哪些植物环境控制技术？",
+    "questions": [
+      "GBCM论文介绍了哪些植物环境控制技术？",
+      "水稻GBCM研究有哪些光照气体和水回收技术？",
+      "GBCM摘要中的三类培养支持技术是什么？"
+    ],
+    "match_groups": [
+      [
+        "gbcm"
+      ],
+      [
+        "控制技术",
+        "支持技术",
+        "气体和水回收"
+      ]
+    ],
+    "content": "GBCM摘要介绍LED光照控制、气体调控和水回收，用于支持空间站内水稻与拟南芥的长期培养。",
+    "keywords": [
+      "gbcm",
+      "控制技术",
+      "支持技术",
+      "气体和水回收"
+    ],
+    "source_ids": [
+      "paper_css_rice_gbcm_2024"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-07",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Abstract的LED light control, gas regulation and water recovery",
+    "spoken_citation": "2024年GBCM植物培养模块论文摘要",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "设施技术说明不确定本次培养温湿度、光照或营养液参数。"
+  },
+  {
+    "record_id": "qa24_gbcm_launch_seeds",
+    "record_type": "verified_qa",
+    "collection": "EXPANDED_PUBLIC_KNOWLEDGE",
+    "title": "GBCM论文中植物以什么状态随问天舱发射？",
+    "questions": [
+      "GBCM论文中植物以什么状态随问天舱发射？",
+      "GBCM摘要说水稻和拟南芥干种子放在哪里？",
+      "GBCM论文中的初始种子位于几个培养室？"
+    ],
+    "match_groups": [
+      [
+        "gbcm"
+      ],
+      [
+        "干种子",
+        "初始种子",
+        "随问天舱",
+        "发射"
+      ]
+    ],
+    "content": "摘要记载，水稻与拟南芥干种子置于四个培养室的根部模块，随问天舱于2022年7月24日发射。",
+    "keywords": [
+      "gbcm",
+      "干种子",
+      "初始种子",
+      "随问天舱",
+      "发射"
+    ],
+    "source_ids": [
+      "paper_css_rice_gbcm_2024"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-07",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Abstract的dry seeds、root module、four culture chambers和launch说明",
+    "spoken_citation": "2024年GBCM论文摘要",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "不是下一次任务的装载程序、布局或器具要求。"
+  },
+  {
+    "record_id": "qa25_kft_rna_preservation",
+    "record_type": "verified_qa",
+    "collection": "EXPANDED_PUBLIC_KNOWLEDGE",
+    "title": "2005年KFT论文为什么把固定管与RNAlater配合使用？",
+    "questions": [
+      "2005年KFT论文为什么把固定管与RNAlater配合使用？",
+      "KFT研究中固定管和RNAlater各起什么作用？",
+      "2005年植物固定研究如何解释RNA保存与液体封存？"
+    ],
+    "match_groups": [
+      [
+        "kft",
+        "2005年植物固定"
+      ],
+      [
+        "rnalater",
+        "rna保存",
+        "液体封存"
+      ],
+      [
+        "作用",
+        "为什么",
+        "解释"
+      ]
+    ],
+    "content": "该研究以RNA完整性为保存目标；RNAlater用于保存植物材料，KFT固定管提供采收和存放期间的固定液封存。摘要讨论了这套组合的空间实验应用。",
+    "keywords": [
+      "kft",
+      "2005年植物固定",
+      "rnalater",
+      "rna保存",
+      "液体封存",
+      "作用",
+      "为什么",
+      "解释"
+    ],
+    "source_ids": [
+      "paper_kft_rnalater_2005"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-07",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "PubMed Abstract的RNA integrity、preservative和containment说明",
+    "spoken_citation": "2005年植物KFT与RNAlater研究摘要",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "没有证明中国空间站水稻采用该器具或试剂；不提供用量、配方和封装步骤。"
+  },
+  {
+    "record_id": "qa26_kft_freezing_distinction",
+    "record_type": "verified_qa",
+    "collection": "EXPANDED_PUBLIC_KNOWLEDGE",
+    "title": "2011年KFT案例为何区分入冷冻柜与快速冻结？",
+    "questions": [
+      "2011年KFT案例为何区分入冷冻柜与快速冻结？",
+      "2011年ISS样品保存论文认为慢冻与速冻有什么区别？",
+      "KFT保存案例为什么要同时考虑在轨存储和返回运输？"
+    ],
+    "match_groups": [
+      [
+        "2011年",
+        "kft保存案例"
+      ],
+      [
+        "慢冻",
+        "速冻",
+        "快速冻结",
+        "返回运输"
+      ]
+    ],
+    "content": "2011年案例指出，把材料放入低温柜产生的冻结过程，不等同于地面液氮快速冻结。样品还需要返回运输，因此采收、保存和返回配置需一起评估。",
+    "keywords": [
+      "2011年",
+      "kft保存案例",
+      "慢冻",
+      "速冻",
+      "快速冻结",
+      "返回运输"
+    ],
+    "source_ids": [
+      "paper_kft_operations_2011"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-07",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Publisher Introduction关于slow freeze/snap freezing和return facility",
+    "spoken_citation": "2011年ISS固定管与样品返回案例",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "不能据此给出本次解冻容许时间、温度或替代保存操作。"
+  },
+  {
+    "record_id": "qa27_apex04_geo_accessions",
+    "record_type": "verified_qa",
+    "collection": "EXPANDED_PUBLIC_KNOWLEDGE",
+    "title": "APEX04表观遗传研究的公开测序数据编号是什么？",
+    "questions": [
+      "APEX04表观遗传研究的公开测序数据编号是什么？",
+      "APEX04研究中Bisulfite-seq与RNA-seq分别对应哪个GEO编号？",
+      "APEX04的GSE118503包含哪些测序子系列？"
+    ],
+    "match_groups": [
+      [
+        "apex04",
+        "apex-04"
+      ],
+      [
+        "数据编号",
+        "测序数据",
+        "geo编号",
+        "gse118503",
+        "测序子系列"
+      ]
+    ],
+    "content": "该论文的数据声明对应GSE118503总系列：GSE118483是Bisulfite-seq，GSE118502是RNA-seq；对象为拟南芥。叶与根的处理表达文件列在RNA-seq系列页。",
+    "keywords": [
+      "apex04",
+      "apex-04",
+      "数据编号",
+      "测序数据",
+      "geo编号",
+      "gse118503",
+      "测序子系列"
+    ],
+    "source_ids": [
+      "paper_apex04_epigenomics_2021",
+      "geo_gse118483",
+      "geo_gse118502"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-07",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Paper Data Availability；两个GEO系列的Title与Supplementary file列表",
+    "spoken_citation": "APEX04原始论文和NCBI GEO登记",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "编号、元数据与下载成功是不同状态；数据不能直接用于水稻参数。"
+  },
+  {
+    "record_id": "qa28_apex04_genotypes",
+    "record_type": "verified_qa",
+    "collection": "EXPANDED_PUBLIC_KNOWLEDGE",
+    "title": "APEX04表观遗传实验比较了哪几种拟南芥基因型？",
+    "questions": [
+      "APEX04表观遗传实验比较了哪几种拟南芥基因型？",
+      "APEX04论文中的Col-0、met1-7和elp2-5是什么比较对象？",
+      "APEX04原始研究的植物品系有哪些？"
+    ],
+    "match_groups": [
+      [
+        "apex04",
+        "apex-04"
+      ],
+      [
+        "基因型",
+        "品系",
+        "比较对象"
+      ]
+    ],
+    "content": "论文比较拟南芥野生型Col-0与两种甲基化调控相关突变体met1-7、elp2-5，并分别研究叶和根的反应。",
+    "keywords": [
+      "apex04",
+      "apex-04",
+      "基因型",
+      "品系",
+      "比较对象"
+    ],
+    "source_ids": [
+      "paper_apex04_epigenomics_2021"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-07",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Materials and Methods / Plant Material and Experimental Design",
+    "spoken_citation": "2021年APEX04拟南芥表观遗传原始论文",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "具体突变体表现不能推广为所有植物或任务的状态判据。"
+  },
+  {
+    "record_id": "qa29_apex04_replicate_pooling",
+    "record_type": "verified_qa",
+    "collection": "EXPANDED_PUBLIC_KNOWLEDGE",
+    "title": "APEX04论文里的培养皿能直接当成独立生物学重复吗？",
+    "questions": [
+      "APEX04论文里的培养皿能直接当成独立生物学重复吗？",
+      "APEX04方法中为什么需要区分培养皿与混样后的重复？",
+      "APEX04论文如何说明培养皿合并和丢失样本？"
+    ],
+    "match_groups": [
+      [
+        "apex04",
+        "apex-04"
+      ],
+      [
+        "培养皿",
+        "混样",
+        "合并"
+      ],
+      [
+        "重复",
+        "丢失样本"
+      ]
+    ],
+    "content": "论文方法说明，材料量导致部分培养皿合并为一个重复；一皿丢失，使其中一个重复只来自单皿。不能简单把每个培养皿都统计成独立分析重复，应核对方法和样本表。",
+    "keywords": [
+      "apex04",
+      "apex-04",
+      "培养皿",
+      "混样",
+      "合并",
+      "重复",
+      "丢失样本"
+    ],
+    "source_ids": [
+      "paper_apex04_epigenomics_2021"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-07",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Plant Material and Experimental Design关于mass values、combination of two plates及lost plate",
+    "spoken_citation": "APEX04论文的实验设计方法",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "这是该论文的设计说明，不能决定本次实验的样本数量。"
+  },
+  {
+    "record_id": "qa30_apex04_rna_quality",
+    "record_type": "verified_qa",
+    "collection": "EXPANDED_PUBLIC_KNOWLEDGE",
+    "title": "APEX04论文用什么方法评估RNA质量？",
+    "questions": [
+      "APEX04论文用什么方法评估RNA质量？",
+      "APEX04原始研究怎样检测RNA浓度和完整性？",
+      "APEX04论文中的RIN范围代表什么？"
+    ],
+    "match_groups": [
+      [
+        "apex04",
+        "apex-04"
+      ],
+      [
+        "rna质量",
+        "rna浓度",
+        "完整性",
+        "rin"
+      ]
+    ],
+    "content": "论文用Qubit测RNA浓度、Agilent 2100 Bioanalyzer评估质量；用于建库的RNA报告RIN为7.1至9.3。这是研究所用材料的观测范围。",
+    "keywords": [
+      "apex04",
+      "apex-04",
+      "rna质量",
+      "rna浓度",
+      "完整性",
+      "rin"
+    ],
+    "source_ids": [
+      "paper_apex04_epigenomics_2021"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-07",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Total RNA Isolation and RNASeq Library Construction首段",
+    "spoken_citation": "APEX04原始论文的RNA方法",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "不能把论文中的RIN范围直接设成当前任务合格线。"
+  },
+  {
+    "record_id": "qa31_css_zebrafish_ecosystem",
+    "record_type": "verified_qa",
+    "collection": "EXPANDED_PUBLIC_KNOWLEDGE",
+    "title": "2025年空间站斑马鱼筛选论文介绍了哪些生态系统成员？",
+    "questions": [
+      "2025年空间站斑马鱼筛选论文介绍了哪些生态系统成员？",
+      "斑马鱼首次空间站培养论文中的密闭生态系统由什么组成？",
+      "2025年CSS斑马鱼论文包括哪些水生植物和微生物成员？"
+    ],
+    "match_groups": [
+      [
+        "斑马鱼",
+        "zebrafish"
+      ],
+      [
+        "2025",
+        "空间站",
+        "css"
+      ],
+      [
+        "成员",
+        "组成"
+      ]
+    ],
+    "content": "2025年论文摘要介绍的密闭水生生态系统包括金鱼藻属植物Ceratophyllum、斑马鱼与微生物，位于中国空间站生命生态实验柜。",
+    "keywords": [
+      "斑马鱼",
+      "zebrafish",
+      "2025",
+      "空间站",
+      "css",
+      "成员",
+      "组成"
+    ],
+    "source_ids": [
+      "paper_css_zebrafish_selection_2025"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-07",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "PubMed Abstract首段的CAES composition与cabinet",
+    "spoken_citation": "2025年空间站斑马鱼筛选论文摘要",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "摘要未提供完整培养、采样或异常处置方法。"
+  },
+  {
+    "record_id": "qa32_css_zebrafish_selection",
+    "record_type": "verified_qa",
+    "collection": "EXPANDED_PUBLIC_KNOWLEDGE",
+    "title": "2025年空间站斑马鱼论文筛选时关注哪些因素？",
+    "questions": [
+      "2025年空间站斑马鱼论文筛选时关注哪些因素？",
+      "空间站斑马鱼研究选鱼时观察哪些行为？",
+      "2025年CSS斑马鱼筛选依据包括什么？"
+    ],
+    "match_groups": [
+      [
+        "斑马鱼",
+        "zebrafish"
+      ],
+      [
+        "2025",
+        "空间站",
+        "css"
+      ],
+      [
+        "筛选",
+        "选鱼"
+      ]
+    ],
+    "content": "摘要关注狭小空间适应、个体相容性和生理状态，并通过预实验观察焦虑行为、反应速度、游泳姿态和群游行为，建立筛选依据。",
+    "keywords": [
+      "斑马鱼",
+      "zebrafish",
+      "2025",
+      "空间站",
+      "css",
+      "筛选",
+      "选鱼"
+    ],
+    "source_ids": [
+      "paper_css_zebrafish_selection_2025"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-07",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "PubMed Abstract的selection factors与behavioral aspects",
+    "spoken_citation": "2025年空间站斑马鱼筛选论文摘要",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "未从摘要获得可执行评分阈值；不替代本任务的动物状态审核。"
+  },
+  {
+    "record_id": "qa33_css_zebrafish_duration",
+    "record_type": "verified_qa",
+    "collection": "EXPANDED_PUBLIC_KNOWLEDGE",
+    "title": "2025年斑马鱼论文报告首次空间站培养的数量和时长是多少？",
+    "questions": [
+      "2025年斑马鱼论文报告首次空间站培养的数量和时长是多少？",
+      "空间站斑马鱼筛选论文最终选择几条鱼并报告存活多久？",
+      "2025年CSS斑马鱼论文中的43天对应什么？"
+    ],
+    "match_groups": [
+      [
+        "斑马鱼",
+        "zebrafish"
+      ],
+      [
+        "2025",
+        "空间站",
+        "css"
+      ],
+      [
+        "时长",
+        "多久",
+        "43天",
+        "数量",
+        "几条"
+      ]
+    ],
+    "content": "论文摘要报告从预筛选个体中选出四条斑马鱼，并记载它们在空间环境中存活43天、完成预定科学目标。2025是论文发表年份。",
+    "keywords": [
+      "斑马鱼",
+      "zebrafish",
+      "2025",
+      "空间站",
+      "css",
+      "时长",
+      "多久",
+      "43天",
+      "数量",
+      "几条"
+    ],
+    "source_ids": [
+      "paper_css_zebrafish_selection_2025"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-07",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "PubMed Abstract末两句",
+    "spoken_citation": "2025年空间站斑马鱼筛选论文摘要",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "单次实验结果不是通用存活目标、养殖密度或当前动物健康保证。"
+  },
+  {
+    "record_id": "qa34_caes_species_comparison",
+    "record_type": "verified_qa",
+    "collection": "EXPANDED_PUBLIC_KNOWLEDGE",
+    "title": "四周CAES论文和神舟二号生态实验使用相同生物吗？",
+    "questions": [
+      "四周CAES论文和神舟二号生态实验使用相同生物吗？",
+      "2024年四周CAES研究的生物组成与神舟二号有什么区别？",
+      "四周密闭水生生态论文研究了哪些物种？"
+    ],
+    "match_groups": [
+      [
+        "四周caes",
+        "四周密闭水生",
+        "2024年四周"
+      ],
+      [
+        "生物",
+        "组成",
+        "物种"
+      ]
+    ],
+    "content": "四周CAES研究涉及金鱼藻Ceratophyllum demersum、斑马鱼与微生物；神舟二号历史研究涉及小球藻Chlorella pyrenoidosa和螺Bulinus australianus。两套实验对象不同。",
+    "keywords": [
+      "四周caes",
+      "四周密闭水生",
+      "2024年四周",
+      "生物",
+      "组成",
+      "物种"
+    ],
+    "source_ids": [
+      "paper_caes_nutrient_shift_2024",
+      "paper_shenzhou2_closed_aquatic_ecosystem_2005"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-07",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "两个论文Abstract首句的organism composition",
+    "spoken_citation": "四周CAES研究与神舟二号生态研究摘要",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "四周论文摘要不足以确认在轨运行；不能与43天CSS实验合并。"
+  },
+  {
+    "record_id": "qa35_caes_water_observations",
+    "record_type": "verified_qa",
+    "collection": "EXPANDED_PUBLIC_KNOWLEDGE",
+    "title": "四周CAES论文报告了哪些水质观测指标？",
+    "questions": [
+      "四周CAES论文报告了哪些水质观测指标？",
+      "2024年四周密闭水生研究观察了什么水质变化？",
+      "四周CAES研究涉及溶解氧、电导和哪些其他指标？"
+    ],
+    "match_groups": [
+      [
+        "四周caes",
+        "四周密闭水生",
+        "2024年四周"
+      ],
+      [
+        "水质",
+        "溶解氧",
+        "电导",
+        "观测指标"
+      ]
+    ],
+    "content": "摘要报告溶解氧、pH、电导的周期变化，以及总氮下降、总磷酸盐略升和化学需氧量上升。系统持续运行并不代表水质与组成保持不变。",
+    "keywords": [
+      "四周caes",
+      "四周密闭水生",
+      "2024年四周",
+      "水质",
+      "溶解氧",
+      "电导",
+      "观测指标"
+    ],
+    "source_ids": [
+      "paper_caes_nutrient_shift_2024"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-07",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "PubMed Abstract的DO/pH/conductivity、nitrogen/phosphate、COD段落",
+    "spoken_citation": "2024年四周CAES原始研究摘要",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "不是当前水质读数、告警限值或添加营养物的操作指令。"
+  },
+  {
+    "record_id": "qa36_caes_microbial_shift",
+    "record_type": "verified_qa",
+    "collection": "EXPANDED_PUBLIC_KNOWLEDGE",
+    "title": "四周CAES论文发现了什么微生物群落变化？",
+    "questions": [
+      "四周CAES论文发现了什么微生物群落变化？",
+      "2024年四周密闭水生研究的宏基因组说明了什么？",
+      "四周CAES运行后菌群组成有没有保持不变？"
+    ],
+    "match_groups": [
+      [
+        "四周caes",
+        "四周密闭水生",
+        "2024年四周"
+      ],
+      [
+        "微生物群落",
+        "宏基因组",
+        "菌群",
+        "群落变化"
+      ]
+    ],
+    "content": "摘要的宏基因组结果显示属数量下降、优势属组成明显改变。该研究描述生态运行中的群落变化，没有给出当前载荷的实时污染判据。",
+    "keywords": [
+      "四周caes",
+      "四周密闭水生",
+      "2024年四周",
+      "微生物群落",
+      "宏基因组",
+      "菌群",
+      "群落变化"
+    ],
+    "source_ids": [
+      "paper_caes_nutrient_shift_2024"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-07",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "PubMed Abstract的meta-genomic data与most abundant genera",
+    "spoken_citation": "2024年四周CAES原始研究摘要",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "没有获取该研究原始序列或完整分析文件；不能据此诊断本次样品污染。"
+  }
+]

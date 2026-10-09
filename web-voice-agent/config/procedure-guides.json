@@ -1,0 +1,684 @@
+{
+  "schema_version": "0.1",
+  "procedures": [
+    {
+      "procedure_id": "rice_sampling_preprocess",
+      "experiment_id": "rice_in_orbit_preprocessing_demo",
+      "display_name": "太空水稻在轨取样预处理",
+      "version": "0.2-detailed-demo",
+      "sop_status": "PROJECT_DEMO_REVIEW_REQUIRED",
+      "guidance_mode": "PROJECT_DEMO",
+      "source_refs": [
+        "project_doc_rice_preprocessing",
+        "project_md_20_experiment_sops",
+        "project_skill_space_experiment"
+      ],
+      "scope_note": "项目交互演示，不是正式在轨SOP。未提供的取样器具、部位、数量、包装方法与异常技术处置不补造；任务审核缺失时不能用于真实操作。",
+      "exception_routes": [
+        {
+          "route_id": "pause_and_ground_review",
+          "trigger": "任一当前步骤校验失败",
+          "fixed_alert": "校验未通过。暂停当前步骤。记录偏差，等待地面指令。"
+        }
+      ],
+      "escalation_policy": "校验失败、参数冲突、未知异常或恢复请求缺少有效依据时，暂停流程并请求地面确认。",
+      "steps": [
+        {
+          "step_id": "cultivation_state_check",
+          "sequence": 1,
+          "name": "培养状态校验",
+          "spoken_instruction": "收到水稻取样指令。请核查水稻培养周期、种子成熟度评估状态和营养液剩余百分比。",
+          "preconditions": [
+            "水稻培养周期已进入收获取样阶段"
+          ],
+          "required_inputs": [
+            {
+              "name": "cultivation_days",
+              "label": "水稻培养周期天数",
+              "type": "number",
+              "unit": "天",
+              "aliases": [
+                "培养周期",
+                "培养天数",
+                "培养了"
+              ]
+            },
+            {
+              "name": "seed_maturity_assessed",
+              "label": "种子成熟度评估是否完成",
+              "type": "boolean",
+              "aliases": [
+                "成熟度评估",
+                "成熟评估"
+              ]
+            },
+            {
+              "name": "seed_maturity",
+              "label": "种子是否成熟",
+              "type": "enum",
+              "options": {
+                "mature": [
+                  "成熟",
+                  "已成熟"
+                ],
+                "immature": [
+                  "未成熟",
+                  "不成熟"
+                ]
+              },
+              "aliases": [
+                "种子成熟",
+                "种子",
+                "成熟度"
+              ]
+            },
+            {
+              "name": "nutrient_remaining_percent",
+              "label": "营养液剩余百分比",
+              "type": "number",
+              "unit": "%",
+              "aliases": [
+                "营养液余量",
+                "营养液剩余",
+                "余量"
+              ]
+            }
+          ],
+          "validation_rules": [
+            {
+              "all": [
+                {
+                  "field": "cultivation_days",
+                  "operator": ">",
+                  "value": 90
+                },
+                {
+                  "field": "seed_maturity_assessed",
+                  "operator": "equals",
+                  "value": true
+                },
+                {
+                  "field": "seed_maturity",
+                  "operator": "equals",
+                  "value": "mature"
+                },
+                {
+                  "field": "nutrient_remaining_percent",
+                  "operator": ">=",
+                  "value": 20
+                }
+              ]
+            }
+          ],
+          "on_validation_fail": {
+            "reason": "CULTIVATION_STATE_NOT_READY",
+            "fixed_alert": "校验未通过。暂停当前步骤。记录偏差，等待地面指令。",
+            "handling": "记录培养状态偏差。补给或终结培养均需任务方指令，助手不自行决定。"
+          },
+          "completion_message": "本项目演示的培养状态条件已核对，不代表真实任务放行。",
+          "expected_confirmation": "培养周期、成熟度评估和营养液余量均已确认",
+          "next_step": "melfi_storage_check",
+          "source_refs": [
+            "project_doc_rice_preprocessing",
+            "project_md_20_experiment_sops"
+          ],
+          "missing_details": [],
+          "evidence_note": "PROJECT_DEMO_REVIEW_REQUIRED：数值来自未审核项目资料，新增记录项属于交互设计。"
+        },
+        {
+          "step_id": "melfi_storage_check",
+          "sequence": 2,
+          "name": "MELFI低温存储状态校验",
+          "spoken_instruction": "取样前，请确认MELFI冷冻箱实时工作温度。",
+          "preconditions": [
+            "培养状态校验已通过"
+          ],
+          "required_inputs": [
+            {
+              "name": "melfi_temperature_c",
+              "label": "MELFI实时温度",
+              "type": "number",
+              "unit": "℃",
+              "aliases": [
+                "MELFI温度",
+                "MELFI实时温度",
+                "冷冻箱温度",
+                "实时温度",
+                "温度"
+              ]
+            }
+          ],
+          "validation_rules": [
+            {
+              "field": "melfi_temperature_c",
+              "operator": "<=",
+              "value": -70
+            }
+          ],
+          "on_validation_fail": {
+            "reason": "MELFI_TEMPERATURE_TOO_HIGH",
+            "fixed_alert": "校验未通过。暂停当前步骤。记录偏差，等待地面指令。",
+            "handling": "记录温度偏差，核对任务保存方案与地面指令。公开资料不能决定本次样品临时保存方式或时间限制。"
+          },
+          "completion_message": "本项目演示的温度条件已核对；不能由此认定任何真实样品可以转移。",
+          "expected_confirmation": "已报告MELFI实时温度",
+          "next_step": "original_record_check",
+          "parameter_note": "本项目演示资料同时写明-80℃±5℃和温度不高于-70℃的转移判断条件；正式任务必须以审核后的任务级SOP为准。 2022年任务报道对孕穗/开花期样品与成熟种子使用不同保存条件，不能统一冷冻。",
+          "source_refs": [
+            "project_doc_rice_preprocessing",
+            "project_md_20_experiment_sops"
+          ],
+          "missing_details": [],
+          "evidence_note": "PROJECT_DEMO_REVIEW_REQUIRED：数值来自未审核项目资料，新增记录项属于交互设计。"
+        },
+        {
+          "step_id": "original_record_check",
+          "sequence": 3,
+          "name": "采样原始记录采集",
+          "spoken_instruction": "请口述本组实际UTC时间与设备编号。我会读回供你核对；只说已记录不能替代具体值。",
+          "preconditions": [
+            "MELFI温度校验已通过"
+          ],
+          "required_inputs": [
+            {
+              "name": "sampling_utc",
+              "label": "采样记录UTC时间",
+              "type": "datetime_utc",
+              "aliases": [
+                "UTC时间",
+                "UTC时间戳",
+                "采样时间"
+              ],
+              "max_length": 40
+            },
+            {
+              "name": "equipment_id",
+              "label": "设备编号",
+              "type": "identifier",
+              "aliases": [
+                "设备编号",
+                "设备ID"
+              ],
+              "max_length": 64
+            }
+          ],
+          "validation_rules": [
+            {
+              "field": "sampling_utc",
+              "operator": "present"
+            },
+            {
+              "field": "equipment_id",
+              "operator": "present"
+            }
+          ],
+          "on_validation_fail": {
+            "reason": "ORIGINAL_RECORD_INCOMPLETE",
+            "fixed_alert": "校验未通过。暂停当前步骤。记录偏差，等待地面指令。",
+            "handling": "记录尚未核对完整，标记为需人工审查。助手不擅自判定整批科学结果无效。"
+          },
+          "completion_message": "口述时间与设备编号已读回确认，尚未经独立验证。",
+          "expected_confirmation": "实际UTC时间和设备编号读回无误",
+          "next_step": "sampling_plan_check",
+          "source_refs": [
+            "project_doc_rice_preprocessing",
+            "project_md_20_experiment_sops"
+          ],
+          "missing_details": [],
+          "evidence_note": "PROJECT_DEMO_REVIEW_REQUIRED：数值来自未审核项目资料，新增记录项属于交互设计。"
+        },
+        {
+          "step_id": "sampling_plan_check",
+          "name": "取样对象与任务方案核对",
+          "spoken_instruction": "请按你持有的任务取样方案报告样品编号、取样对象及方案编号。当前资料没有完整取样操作方法，不据此指导剪取动作。",
+          "source_refs": [
+            "project_doc_rice_preprocessing",
+            "project_traceability_design_2026_10_07"
+          ],
+          "interaction_check_only": true,
+          "missing_details": [
+            "取样器具与固定方式",
+            "指定部位与数量",
+            "取样动作及样品约束",
+            "已审核任务SOP版本"
+          ],
+          "required_inputs": [
+            {
+              "name": "sample_id",
+              "label": "样品编号",
+              "type": "identifier",
+              "aliases": [
+                "样品编号",
+                "样本编号"
+              ],
+              "max_length": 64
+            },
+            {
+              "name": "sample_target",
+              "label": "取样对象",
+              "type": "enum",
+              "options": {
+                "plant": [
+                  "植株"
+                ],
+                "seeds": [
+                  "种子"
+                ],
+                "both": [
+                  "植株和种子",
+                  "植株及种子"
+                ]
+              },
+              "aliases": [
+                "取样对象",
+                "样品对象"
+              ]
+            },
+            {
+              "name": "sampling_plan_reference",
+              "label": "取样方案编号",
+              "type": "identifier",
+              "aliases": [
+                "取样方案编号",
+                "取样方案",
+                "方案编号"
+              ],
+              "max_length": 64
+            },
+            {
+              "name": "sampling_plan_checked",
+              "label": "取样方案是否已核对",
+              "type": "boolean",
+              "aliases": [
+                "取样方案核对",
+                "方案核对"
+              ]
+            }
+          ],
+          "validation_rules": [
+            {
+              "field": "sample_id",
+              "operator": "present"
+            },
+            {
+              "field": "sample_target",
+              "operator": "present"
+            },
+            {
+              "field": "sampling_plan_reference",
+              "operator": "present"
+            },
+            {
+              "field": "sampling_plan_checked",
+              "operator": "equals",
+              "value": true
+            }
+          ],
+          "on_validation_fail": {
+            "reason": "SAMPLING_PLAN_CHECK_NOT_CONFIRMED",
+            "fixed_alert": "校验未通过。暂停当前步骤。记录偏差，等待地面指令。",
+            "handling": "保留口述记录，核对该步骤的任务资料。助手不会补造缺失的操作方法或技术处置。"
+          },
+          "completion_message": "本步骤口述信息已读回确认。",
+          "expected_confirmation": "取样对象与任务方案核对读回无误",
+          "sequence": 4,
+          "next_step": "in_orbit_sampling",
+          "evidence_note": "PROJECT_DEMO_REVIEW_REQUIRED：数值来自未审核项目资料，新增记录项属于交互设计。"
+        },
+        {
+          "step_id": "in_orbit_sampling",
+          "sequence": 5,
+          "name": "执行在轨取样",
+          "spoken_instruction": "请依据你持有的任务取样方案操作。助手当前不提供未核验的取样动作；请报告取样结果，并核对样品身份。",
+          "preconditions": [
+            "培养状态、MELFI温度和原始记录校验全部通过"
+          ],
+          "required_inputs": [
+            {
+              "name": "sampling_completed",
+              "label": "取样是否完成",
+              "type": "boolean",
+              "aliases": [
+                "取样",
+                "采样",
+                "采集"
+              ]
+            },
+            {
+              "name": "sample_identity_checked",
+              "label": "样品身份是否已核对",
+              "type": "boolean",
+              "aliases": [
+                "样品身份",
+                "样品标签核对",
+                "身份核对"
+              ]
+            }
+          ],
+          "validation_rules": [
+            {
+              "field": "sampling_completed",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "field": "sample_identity_checked",
+              "operator": "equals",
+              "value": true
+            }
+          ],
+          "on_validation_fail": {
+            "reason": "SAMPLING_NOT_CONFIRMED",
+            "fixed_alert": "校验未通过。暂停当前步骤。记录偏差，等待地面指令。",
+            "handling": "未收到取样完成确认，不进入样品入柜保存步骤。"
+          },
+          "completion_message": "已记录你报告的取样完成和样品身份核对。",
+          "expected_confirmation": "取样已完成",
+          "next_step": "container_identity_check",
+          "source_refs": [
+            "project_doc_rice_preprocessing",
+            "project_md_20_experiment_sops"
+          ],
+          "missing_details": [],
+          "evidence_note": "PROJECT_DEMO_REVIEW_REQUIRED：数值来自未审核项目资料，新增记录项属于交互设计。"
+        },
+        {
+          "step_id": "container_identity_check",
+          "name": "容器身份与包装结果核对",
+          "spoken_instruction": "请按任务包装方案核对容器编号和包装结果。现有资料没有容器材料、封装动作及检漏方法，不由助手生成。",
+          "source_refs": [
+            "project_traceability_design_2026_10_07"
+          ],
+          "interaction_check_only": true,
+          "missing_details": [
+            "容器规格和材料",
+            "封装方法与判定标准",
+            "检漏方法",
+            "污染或破损技术处置"
+          ],
+          "required_inputs": [
+            {
+              "name": "container_id",
+              "label": "容器编号",
+              "type": "identifier",
+              "aliases": [
+                "容器编号",
+                "样品容器编号"
+              ],
+              "max_length": 64
+            },
+            {
+              "name": "packaging_checked",
+              "label": "包装结果是否已核对",
+              "type": "boolean",
+              "aliases": [
+                "包装结果",
+                "包装核对",
+                "封装核对"
+              ]
+            }
+          ],
+          "validation_rules": [
+            {
+              "field": "container_id",
+              "operator": "present"
+            },
+            {
+              "field": "packaging_checked",
+              "operator": "equals",
+              "value": true
+            }
+          ],
+          "on_validation_fail": {
+            "reason": "CONTAINER_IDENTITY_CHECK_NOT_CONFIRMED",
+            "fixed_alert": "校验未通过。暂停当前步骤。记录偏差，等待地面指令。",
+            "handling": "保留口述记录，核对该步骤的任务资料。助手不会补造缺失的操作方法或技术处置。"
+          },
+          "completion_message": "本步骤口述信息已读回确认。",
+          "expected_confirmation": "容器身份与包装结果核对读回无误",
+          "sequence": 6,
+          "next_step": "preservation_plan_check",
+          "evidence_note": "PROJECT_DEMO_REVIEW_REQUIRED：数值来自未审核项目资料，新增记录项属于交互设计。"
+        },
+        {
+          "step_id": "preservation_plan_check",
+          "name": "样品保存方案核对",
+          "spoken_instruction": "请核对该样品的任务保存方案，报告保存方案编号和目标存储位置。公开报道中不同阶段样品保存条件不同；演示温度不能作为统一保存指令。",
+          "source_refs": [
+            "official_cas_rice_2022",
+            "nasa_melfi_official",
+            "project_traceability_design_2026_10_07"
+          ],
+          "interaction_check_only": true,
+          "missing_details": [
+            "样品阶段对应保存方式",
+            "目标设备和温度",
+            "转运路径及限时",
+            "设备异常时的任务处置"
+          ],
+          "required_inputs": [
+            {
+              "name": "preservation_reference",
+              "label": "保存方案编号",
+              "type": "identifier",
+              "aliases": [
+                "保存方案编号",
+                "保存方案"
+              ],
+              "max_length": 64
+            },
+            {
+              "name": "storage_location_id",
+              "label": "目标存储位置编号",
+              "type": "identifier",
+              "aliases": [
+                "存储位置编号",
+                "保存位置编号",
+                "目标位置"
+              ],
+              "max_length": 64
+            },
+            {
+              "name": "preservation_plan_checked",
+              "label": "保存方案是否已核对",
+              "type": "boolean",
+              "aliases": [
+                "保存方案核对",
+                "保存核对"
+              ]
+            }
+          ],
+          "validation_rules": [
+            {
+              "field": "preservation_reference",
+              "operator": "present"
+            },
+            {
+              "field": "storage_location_id",
+              "operator": "present"
+            },
+            {
+              "field": "preservation_plan_checked",
+              "operator": "equals",
+              "value": true
+            }
+          ],
+          "on_validation_fail": {
+            "reason": "PRESERVATION_PLAN_CHECK_NOT_CONFIRMED",
+            "fixed_alert": "校验未通过。暂停当前步骤。记录偏差，等待地面指令。",
+            "handling": "保留口述记录，核对该步骤的任务资料。助手不会补造缺失的操作方法或技术处置。"
+          },
+          "completion_message": "本步骤口述信息已读回确认。",
+          "expected_confirmation": "样品保存方案核对读回无误",
+          "sequence": 7,
+          "next_step": "sample_storage",
+          "evidence_note": "PROJECT_DEMO_REVIEW_REQUIRED：数值来自未审核项目资料，新增记录项属于交互设计。"
+        },
+        {
+          "step_id": "sample_storage",
+          "sequence": 8,
+          "name": "样品保存结果记录",
+          "spoken_instruction": "请依据任务保存方案完成操作，再口述保存结果、保存UTC时间及目标位置核对结果。助手不控制设备，也不确认设备实际执行。",
+          "preconditions": [
+            "取样已完成",
+            "MELFI温度校验已通过"
+          ],
+          "required_inputs": [
+            {
+              "name": "sample_stored",
+              "label": "样品保存是否完成",
+              "type": "boolean",
+              "aliases": [
+                "样品入柜",
+                "样品保存",
+                "存储"
+              ]
+            },
+            {
+              "name": "storage_utc",
+              "label": "保存UTC时间",
+              "type": "datetime_utc",
+              "aliases": [
+                "保存UTC时间",
+                "保存时间"
+              ],
+              "max_length": 40
+            },
+            {
+              "name": "storage_identity_checked",
+              "label": "目标位置是否已核对",
+              "type": "boolean",
+              "aliases": [
+                "目标位置核对",
+                "保存位置核对",
+                "位置核对"
+              ]
+            }
+          ],
+          "validation_rules": [
+            {
+              "field": "sample_stored",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "field": "storage_utc",
+              "operator": "present"
+            },
+            {
+              "field": "storage_identity_checked",
+              "operator": "equals",
+              "value": true
+            }
+          ],
+          "on_validation_fail": {
+            "reason": "SAMPLE_STORAGE_NOT_CONFIRMED",
+            "fixed_alert": "校验未通过。暂停当前步骤。记录偏差，等待地面指令。",
+            "handling": "未收到样品保存完成确认，不结束实验流程。"
+          },
+          "completion_message": "已记录你报告的保存结果与时间，尚未经设备独立验证。",
+          "expected_confirmation": "样品已完成入柜保存",
+          "next_step": "final_record_review",
+          "source_refs": [
+            "project_doc_rice_preprocessing",
+            "project_md_20_experiment_sops"
+          ],
+          "missing_details": [],
+          "evidence_note": "PROJECT_DEMO_REVIEW_REQUIRED：数值来自未审核项目资料，新增记录项属于交互设计。"
+        },
+        {
+          "step_id": "final_record_review",
+          "name": "最终记录复核与交接",
+          "spoken_instruction": "请复核本次口述记录并报告交接记录编号。助手只整理本地会话记录，没有自动向地面发送数据。",
+          "source_refs": [
+            "project_traceability_design_2026_10_07"
+          ],
+          "interaction_check_only": true,
+          "missing_details": [
+            "正式归档渠道",
+            "实验数据质量结论与签署",
+            "任务交接责任与接收确认"
+          ],
+          "required_inputs": [
+            {
+              "name": "handover_record_id",
+              "label": "交接记录编号",
+              "type": "identifier",
+              "aliases": [
+                "交接记录编号",
+                "交接编号"
+              ],
+              "max_length": 64
+            },
+            {
+              "name": "record_review_completed",
+              "label": "最终记录是否已复核",
+              "type": "boolean",
+              "aliases": [
+                "最终记录复核",
+                "最终复核",
+                "记录复核"
+              ]
+            }
+          ],
+          "validation_rules": [
+            {
+              "field": "handover_record_id",
+              "operator": "present"
+            },
+            {
+              "field": "record_review_completed",
+              "operator": "equals",
+              "value": true
+            }
+          ],
+          "on_validation_fail": {
+            "reason": "FINAL_RECORD_REVIEW_NOT_CONFIRMED",
+            "fixed_alert": "校验未通过。暂停当前步骤。记录偏差，等待地面指令。",
+            "handling": "保留口述记录，核对该步骤的任务资料。助手不会补造缺失的操作方法或技术处置。"
+          },
+          "completion_message": "本项目演示的9项交互核对已完成。记录来自操作者口述，不代表真实实验已获审核、独立验证或完成地面交接。",
+          "expected_confirmation": "最终记录复核与交接读回无误",
+          "sequence": 9,
+          "next_step": null,
+          "evidence_note": "PROJECT_DEMO_REVIEW_REQUIRED：数值来自未审核项目资料，新增记录项属于交互设计。"
+        }
+      ],
+      "instruction_prefix": "项目演示核对：",
+      "detail_policy": {
+        "flight_execution_allowed": false,
+        "operator_reports_independently_verified": false,
+        "source_refs": [
+          "project_doc_rice_preprocessing",
+          "project_md_20_experiment_sops",
+          "project_skill_space_experiment"
+        ],
+        "design_extension_source": "project_traceability_design_2026_10_07"
+      }
+    }
+  ],
+  "required_fields": [
+    "procedure_id",
+    "experiment_id",
+    "version",
+    "sop_status",
+    "steps",
+    "exception_routes",
+    "escalation_policy"
+  ],
+  "step_required_fields": [
+    "step_id",
+    "sequence",
+    "spoken_instruction",
+    "preconditions",
+    "expected_confirmation",
+    "completion_checks",
+    "exception_routes"
+  ],
+  "notes": [
+    "当前仅加载一个项目提供的水稻演示流程配置，状态为待任务级审核。",
+    "其他实验仍处于目录登记或知识参考状态，不能开始步骤引导。",
+    "流程引导不控制设备，宇航员负责实际操作并通过语音反馈结果。",
+    "0.2版细化为9项交互核对，新增身份、实际时间和方案引用；不是新增正式飞行SOP。"
+  ]
+}

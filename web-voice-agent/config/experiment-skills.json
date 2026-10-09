@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.1",
+  "skills": [],
+  "required_fields": [
+    "skill_id",
+    "experiment_id",
+    "version",
+    "sop_status",
+    "execution_policy",
+    "steps",
+    "actions",
+    "required_confirmations",
+    "validation_rules",
+    "exception_policy"
+  ],
+  "notes": [
+    "当前没有加载任何经过任务级审核的可执行 Skill。",
+    "实验注册表中的演示配置只能用于上下文识别和知识问答。",
+    "新增 Skill 前必须完成 SOP、设备约束、参数校验、异常处理和地面确认规则审核。"
+  ]
+}

@@ -1,0 +1,410 @@
+[
+  {
+    "record_id": "fact_css_rice_seed_to_seed",
+    "record_type": "scientific_fact",
+    "title": "中国空间站水稻从种子到种子实验",
+    "content": "2024年同行评审论文报道了中国空间站生物培养模块中水稻和拟南芥的全生命周期培养。论文描述的模块技术包括LED光照控制、气体调控和水回收，摘要描述了约120天的培养周期并获得新种子。",
+    "keywords": [
+      "水稻",
+      "中国空间站",
+      "从种子到种子",
+      "生物培养模块",
+      "LED",
+      "气体调控",
+      "水回收"
+    ],
+    "source_ids": [
+      "paper_css_rice_gbcm_2024"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "这是论文报道的特定实验，不是通用水稻取样SOP。",
+    "match_groups": [
+      [
+        "水稻"
+      ],
+      [
+        "全生命周期",
+        "从种子到种子",
+        "生物培养模块",
+        "gbcm"
+      ],
+      [
+        "介绍",
+        "背景",
+        "论文",
+        "设计",
+        "技术"
+      ]
+    ]
+  },
+  {
+    "record_id": "fact_css_rice_sampling_report",
+    "record_type": "mission_context",
+    "title": "2022年中国空间站水稻任务公开报告",
+    "content": "中国科学院转载的2022年任务报道记载120天培养周期，9月21日取水稻孕穗期样品、10月12日取拟南芥开花期样品，11月25日取两种植物的种子成熟期样品。开花期不能笼统写成水稻开花期。",
+    "keywords": [
+      "水稻",
+      "2022",
+      "样品采集",
+      "孕穗期",
+      "成熟期",
+      "中国空间站"
+    ],
+    "source_ids": [
+      "official_cas_rice_2022"
+    ],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "公开报告不是完整飞行操作手册，不能自动转成未来任务的通用阈值。",
+    "match_groups": [
+      [
+        "水稻"
+      ],
+      [
+        "2022",
+        "中国空间站"
+      ],
+      [
+        "任务背景",
+        "任务报道",
+        "任务报告"
+      ]
+    ],
+    "source_checked_on": "2026-10-06"
+  },
+  {
+    "record_id": "fact_sj10_rice_metabolomics",
+    "record_type": "scientific_fact",
+    "title": "SJ-10水稻空间飞行代谢组学研究",
+    "content": "开放论文研究了SJ-10返回卫星搭载的两个水稻品种，记录了12.5天飞行以及返回地面后的三叶期和分蘖期分析，使用了代谢组、抗氧化酶活性、可溶性糖、电子泄漏率和qRT-PCR等方法。",
+    "keywords": [
+      "SJ-10",
+      "水稻",
+      "代谢组学",
+      "三叶期",
+      "分蘖期",
+      "qRT-PCR"
+    ],
+    "source_ids": [
+      "paper_rice_sj10_metabolomics_2021"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "SJ-10实验不能与中国空间站2022年全生命周期实验的参数混用。",
+    "match_groups": [
+      [
+        "sj-10",
+        "sj10",
+        "实践十号"
+      ],
+      [
+        "代谢组",
+        "抗氧化",
+        "qrt-pcr"
+      ],
+      [
+        "方法",
+        "研究",
+        "介绍",
+        "分析"
+      ]
+    ]
+  },
+  {
+    "record_id": "data_nasa_osdr_plants",
+    "record_type": "data_source",
+    "title": "NASA OSDR植物空间实验数据",
+    "content": "NASA OSDR和GeneLab提供ISS植物实验的数据入口，例如OSD-267和VEG-01A。公开记录涉及植物生长、微生物、营养分析、硬件和任务元数据。具体结论必须回到对应数据集的物种、任务、对照组和版本。",
+    "keywords": [
+      "NASA",
+      "OSDR",
+      "GeneLab",
+      "VEG-01A",
+      "OSD-267",
+      "生菜",
+      "植物数据"
+    ],
+    "source_ids": [
+      "nasa_osdr_osd267",
+      "nasa_osdr_veg01a",
+      "nasa_osdr_portal"
+    ],
+    "evidence_level": "B_OFFICIAL_DATA",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "生菜或其他植物数据不能直接作为水稻SOP参数。",
+    "match_groups": [
+      [
+        "osdr",
+        "genelab"
+      ],
+      [
+        "植物"
+      ],
+      [
+        "数据入口",
+        "数据源",
+        "资料入口"
+      ]
+    ]
+  },
+  {
+    "record_id": "conflict_melfi_temperature",
+    "record_type": "source_conflict",
+    "title": "MELFI公开设备资料与项目Demo参数存在冲突",
+    "content": "NASA公开设备页面将MELFI描述为ISS科学样品保存设备，并列出+2°C、-35°C和-95°C公开设定点。项目水稻Demo资料使用-80°C±5°C和不高于-70°C转移判断条件。两者不能直接合并。",
+    "keywords": [
+      "MELFI",
+      "温度",
+      "-80",
+      "-70",
+      "-95",
+      "低温保存",
+      "冲突"
+    ],
+    "source_ids": [
+      "nasa_melfi_official",
+      "project_md_20_experiment_sops"
+    ],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "在任务级SOP未审核前，只能报告冲突，不能生成样品转移指令。",
+    "match_groups": [
+      [
+        "melfi"
+      ],
+      [
+        "项目",
+        "演示",
+        "-70",
+        "负七十"
+      ],
+      [
+        "冲突",
+        "区别",
+        "混用",
+        "通用"
+      ]
+    ]
+  },
+  {
+    "record_id": "data_nasa_psi",
+    "record_type": "data_source",
+    "title": "NASA PSI物理科学数据仓库",
+    "content": "NASA BPS官方数据页面提供PSI空间物理科学数据入口。使用数据时需要逐调查核对实验条件、单位、处理状态和可用文件，不能把数据入口登记等同于已经下载、审查或复算全部数据。",
+    "keywords": [
+      "NASA",
+      "PSI",
+      "燃烧",
+      "复杂流体",
+      "流体物理",
+      "基础物理",
+      "材料科学",
+      "开放数据"
+    ],
+    "source_ids": [
+      "nasa_physical_sciences_program",
+      "nasa_psi_repository"
+    ],
+    "evidence_level": "B_OFFICIAL_DATA",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "必须逐调查检查版本、单位、实验条件和数据处理状态。",
+    "match_groups": [
+      [
+        "psi"
+      ],
+      [
+        "资料库",
+        "仓库",
+        "数据源",
+        "介绍"
+      ]
+    ]
+  },
+  {
+    "record_id": "fact_nasa_fcf",
+    "record_type": "facility_context",
+    "title": "NASA流体与燃烧设施",
+    "content": "NASA公开资料显示，流体与燃烧设施由Combustion Integration Rack和Fluids Integration Rack组成，支持燃烧、火灾安全、沸腾传热、多相流、液气界面、蒸发和冷凝等研究。",
+    "keywords": [
+      "FCF",
+      "CIR",
+      "FIR",
+      "燃烧",
+      "多相流",
+      "沸腾",
+      "冷凝",
+      "火灾安全"
+    ],
+    "source_ids": [
+      "nasa_fluids_combustion_facility"
+    ],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "设施介绍不是具体载荷的操作或安全放行文件。",
+    "match_groups": [
+      [
+        "fcf"
+      ],
+      [
+        "设施背景",
+        "设施介绍",
+        "介绍"
+      ]
+    ]
+  },
+  {
+    "record_id": "fact_css_sref",
+    "record_type": "facility_context",
+    "title": "中国空间站空间辐射生物学暴露设施",
+    "content": "同行评审论文介绍了中国空间站空间辐射生物学暴露设施，公开描述了温度可控实验、植物种子和微生物等模型对象、微流控和显微成像，以及LET、中子和太阳紫外探测器。",
+    "keywords": [
+      "SREF",
+      "辐射生物学",
+      "LET",
+      "中子",
+      "太阳紫外",
+      "植物种子",
+      "微生物",
+      "中国空间站"
+    ],
+    "source_ids": [
+      "paper_css_radiobiology_facility_2025"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "设施论文不提供通用辐射限值或人员安全处置指令。",
+    "match_groups": [
+      [
+        "sref",
+        "空间辐射生物学暴露设施"
+      ],
+      [
+        "介绍",
+        "模型对象",
+        "功能"
+      ]
+    ]
+  },
+  {
+    "record_id": "fact_css_champ",
+    "record_type": "scientific_fact",
+    "title": "中国空间站栖息区微生物组",
+    "content": "CHAMP研究使用宏基因组和培养方法分析中国空间站早期栖息区微生物群落，论文讨论了人源微生物、群落差异、菌株变异和长期任务中的微生物管理意义。",
+    "keywords": [
+      "CHAMP",
+      "微生物组",
+      "宏基因组",
+      "中国空间站",
+      "微生物管理",
+      "生物安全"
+    ],
+    "source_ids": [
+      "paper_css_champ_microbiome_2025",
+      "paper_css_microbiome_2019"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "研究结果不能直接生成污染限值、消毒方案或医学处置指令。",
+    "match_groups": [
+      [
+        "champ",
+        "栖息区微生物组"
+      ],
+      [
+        "研究",
+        "介绍",
+        "宏基因组",
+        "培养方法"
+      ]
+    ]
+  },
+  {
+    "record_id": "fact_css_cold_atom_interferometer",
+    "record_type": "scientific_fact",
+    "title": "中国空间站冷原子干涉仪",
+    "content": "同行评审论文介绍了中国空间站双物种冷铷原子干涉仪的设计，实验过程包括激光冷却、原子干涉和荧光探测，并讨论了微重力科学实验柜、载荷尺寸和地面测试结果。",
+    "keywords": [
+      "冷原子",
+      "原子干涉仪",
+      "等效原理",
+      "铷",
+      "激光冷却",
+      "荧光探测",
+      "中国空间站"
+    ],
+    "source_ids": [
+      "paper_css_cold_atom_interferometer_2023"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "科研设计参数不能转成航天员可直接修改的仪器运行指令。",
+    "match_groups": [
+      [
+        "冷原子干涉仪"
+      ],
+      [
+        "论文介绍",
+        "设计背景"
+      ]
+    ]
+  },
+  {
+    "record_id": "fact_esa_eml",
+    "record_type": "facility_context",
+    "title": "ESA电磁悬浮炉",
+    "content": "ESA公开资料介绍了Columbus电磁悬浮炉，用于无容器条件下研究金属熔融和凝固过程，并记录高速影像和传感器数据后发送给地面支持和科学团队。",
+    "keywords": [
+      "EML",
+      "电磁悬浮",
+      "材料",
+      "熔融",
+      "凝固",
+      "高温",
+      "Columbus"
+    ],
+    "source_ids": [
+      "esa_eml_official"
+    ],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "公开设施说明不构成具体样品的高温运行边界。",
+    "match_groups": [
+      [
+        "eml",
+        "电磁悬浮炉"
+      ],
+      [
+        "设施介绍",
+        "介绍"
+      ]
+    ]
+  },
+  {
+    "record_id": "conflict_rice_preservation_stage",
+    "record_type": "source_conflict",
+    "title": "2022年水稻不同阶段样品保存条件与项目统一冷冻设定的差异",
+    "content": "中国科学院转载的2022年任务报道写明：水稻孕穗期和拟南芥开花期样品在零下80摄氏度保存；两种植物的种子成熟期样品在4摄氏度保存。用户项目资料把水稻取样后保存统一写为零下80摄氏度。不同阶段及任务条件不能混用，也不能把该报道中的4摄氏度改成未来任务的通用操作参数。",
+    "match_groups": [["水稻"], ["2022", "中国空间站", "项目", "演示"], ["保存", "冷冻", "冷藏", "统一", "成熟种子"]],
+    "keywords": ["水稻", "2022", "成熟种子", "保存", "孕穗期", "4", "-80"],
+    "source_ids": ["official_cas_rice_2022", "project_doc_rice_preprocessing"],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "source_checked_on": "2026-10-07",
+    "evidence_locator": "报道末段：孕穗/开花期样品-80℃，成熟期样品4℃；项目文档取样后存储段落",
+    "spoken_citation": "中国科学院2022年12月5日任务报道，与用户提供的水稻项目文档",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "未获得已审核任务保存与异常SOP，不授权当前样品转运、设温或入柜。"
+  }
+]

@@ -1,0 +1,199 @@
+{
+  "registry_version": "0.1",
+  "selection_policy": "仅从登记实验的名称和别名识别实验上下文；未登记实验不得进入执行流程。",
+  "experiments": [
+    {
+      "experiment_id": "rice_in_orbit_preprocessing_demo",
+      "display_name": "太空水稻在轨取样预处理（演示实验）",
+      "aliases": [
+        "太空水稻",
+        "水稻",
+        "水稻实验",
+        "水稻取样",
+        "水稻预处理",
+        "rice"
+      ],
+      "role": "最终展示用演示实验，不代表系统只支持水稻实验。",
+      "sop_status": "PENDING_TASK_LEVEL_REVIEW",
+      "guidance_available": true,
+      "execution_policy": "BLOCK_UNTIL_APPROVED_SOP",
+      "knowledge_tags": ["水稻", "取样", "预处理", "样品保存", "MELFI"],
+      "current_step": null,
+      "notes": [
+        "公开论文和任务报告只能作为知识参考，不能直接生成在轨操作指令。",
+        "正式执行前必须加载经过审核的任务级SOP、设备配置和地面确认规则。"
+      ]
+    },
+    {
+      "experiment_id": "cardiovascular_brain_function",
+      "display_name": "长期失重心血管与脑功能检测实验",
+      "aliases": ["心血管脑功能检测", "失重生理检测", "脑功能检测"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["心血管", "脑功能", "前庭眼动", "生理监测"]
+    },
+    {
+      "experiment_id": "biomechanics_operation_force",
+      "display_name": "人体运动生物力学与操作力测试实验",
+      "aliases": ["生物力学测试", "操作力测试", "运动特性测量"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["生物力学", "操作力", "表面肌电", "足底压力"]
+    },
+    {
+      "experiment_id": "medical_metabolomics_raman",
+      "display_name": "太空医学样本营养代谢组学实验",
+      "aliases": ["代谢组学", "拉曼光谱", "尿液代谢检测"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["代谢组学", "拉曼", "尿液样本"]
+    },
+    {
+      "experiment_id": "medical_sample_centrifuge",
+      "display_name": "太空医学样本冷藏与离心分离实验",
+      "aliases": ["样本离心", "冷藏离心", "体液样本分离"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["冷藏", "离心", "体液样本"]
+    },
+    {
+      "experiment_id": "plant_animal_microgravity_culture",
+      "display_name": "空间植物与微小动物微重力培养实验",
+      "aliases": ["植物微重力培养", "微小动物培养", "生物培养单元"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["植物培养", "微小动物", "温湿度", "光照"]
+    },
+    {
+      "experiment_id": "closed_aquatic_ecosystem",
+      "display_name": "密闭水生生态系统循环实验",
+      "aliases": ["密闭水生生态", "水生生态系统", "生态循环实验"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["水生生态", "密闭系统", "水分循环"]
+    },
+    {
+      "experiment_id": "microbial_nucleic_acid_radiation",
+      "display_name": "空间微生物核酸扩增与辐射检测实验",
+      "aliases": ["微生物核酸检测", "辐射检测", "微生物采样"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["微生物", "核酸扩增", "辐射"]
+    },
+    {
+      "experiment_id": "cell_tissue_3d_culture",
+      "display_name": "空间细胞与组织三维培养与显微观测实验",
+      "aliases": ["细胞三维培养", "组织培养", "显微观测"],
+      "role": "材料中的目录实验，不作为当前最终展示实验；流程仍需任务级审核。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["细胞", "组织", "三维培养", "显微成像"]
+    },
+    {
+      "experiment_id": "protein_crystallization",
+      "display_name": "空间蛋白质结晶与生化分子组装实验",
+      "aliases": ["蛋白质结晶", "生化分子组装", "晶体生长"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["蛋白质结晶", "分光光度计", "晶体"]
+    },
+    {
+      "experiment_id": "microgravity_fluid_field",
+      "display_name": "微重力流体动力学速度场与温度场测量实验",
+      "aliases": ["流体速度场", "温度场测量", "流体动力学"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["流体动力学", "速度场", "温度场"]
+    },
+    {
+      "experiment_id": "complex_fluid_rheology",
+      "display_name": "复杂流体多角度散射光观测与流变学实验",
+      "aliases": ["复杂流体", "散射光", "流变学"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["复杂流体", "散射光", "流变仪"]
+    },
+    {
+      "experiment_id": "two_phase_heat_transfer",
+      "display_name": "空间两相系统蒸发冷凝与沸腾传热实验",
+      "aliases": ["两相系统", "蒸发冷凝", "沸腾传热"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["两相流", "蒸发", "冷凝", "沸腾"]
+    },
+    {
+      "experiment_id": "microgravity_combustion",
+      "display_name": "气液固燃料微重力燃烧动力学实验",
+      "aliases": ["微重力燃烧", "燃烧动力学", "燃烧实验"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["燃烧", "点火", "排气净化"]
+    },
+    {
+      "experiment_id": "high_temperature_alloy_growth",
+      "display_name": "高温合金安瓿样品定向凝固与熔体生长实验",
+      "aliases": ["高温合金", "定向凝固", "熔体生长"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["高温合金", "安瓿", "定向凝固"]
+    },
+    {
+      "experiment_id": "xray_solid_liquid_interface",
+      "display_name": "高温材料X射线透射固液界面实时观察实验",
+      "aliases": ["X射线透射", "固液界面", "高温材料观察"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["X射线", "固液界面", "实时成像"]
+    },
+    {
+      "experiment_id": "electrostatic_levitation_material",
+      "display_name": "静电悬浮无容器材料热物性与深过冷实验",
+      "aliases": ["静电悬浮", "无容器材料", "深过冷"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["静电悬浮", "激光加热", "热物性"]
+    },
+    {
+      "experiment_id": "bec_quantum_degeneracy",
+      "display_name": "超冷原子玻色-爱因斯坦凝聚量子简并实验",
+      "aliases": ["BEC", "超冷原子", "量子简并"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["BEC", "超冷原子", "87Rb", "40K"]
+    },
+    {
+      "experiment_id": "cold_atom_time_frequency",
+      "display_name": "高精度时频冷原子微波钟与锶光钟时频比对实验",
+      "aliases": ["冷原子微波钟", "锶光钟", "时频比对"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["时频", "冷原子钟", "锶光钟"]
+    },
+    {
+      "experiment_id": "variable_gravity_comparison",
+      "display_name": "变重力科学模拟比对实验",
+      "aliases": ["变重力", "模拟重力", "离心比对"],
+      "role": "已登记的多实验目录项，当前仅保留来源知识和流程待审核状态。",
+      "sop_status": "REFERENCE_ONLY_NEEDS_REVIEW",
+      "guidance_available": false,
+      "knowledge_tags": ["变重力", "离心机", "模拟重力"]
+    }
+  ]
+}

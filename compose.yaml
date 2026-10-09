@@ -1,0 +1,20 @@
+services:
+  voice-agent:
+    build: .
+    env_file:
+      - web-voice-agent/.env.deploy
+    ports:
+      - "127.0.0.1:8080:8080"
+    read_only: true
+    volumes:
+      - experiment-records:/app/web-voice-agent/data
+    init: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 128
+    mem_limit: 512m
+    restart: unless-stopped
+volumes:
+  experiment-records:

@@ -1,0 +1,27 @@
+{
+  "version": "0.1",
+  "asr": {
+    "provider": "server_gateway",
+    "mode": "provider_selectable",
+    "endpoint": "/api/asr/transcribe",
+    "input": "audio/webm;codecs=opus",
+    "language": "zh-CN",
+    "continuous": false,
+    "interim_results": false,
+    "max_alternatives": 1
+  },
+  "tts": {
+    "provider": "server_gateway_with_browser_fallback",
+    "mode": "provider_selectable",
+    "language": "zh-CN",
+    "target_voice": "青年播音女声",
+    "rate": 0.95,
+    "pitch": 1,
+    "volume": 1
+  },
+  "production_contract": {
+    "asr_provider": "通过服务端网关接入；支持百度短语音识别、generic_http 和 OpenAI Audio Transcriptions",
+    "tts_provider": "通过服务端网关接入；支持百度普通音色与声音复刻、OpenAI Speech；浏览器 TTS 作为兜底",
+    "credential_location": "server_environment_only"
+  }
+}

@@ -1,0 +1,952 @@
+[
+  {
+    "record_id": "qa01_css_rice_duration",
+    "record_type": "verified_qa",
+    "title": "中国空间站2022年水稻全生命周期实验持续了多久？",
+    "questions": [
+      "中国空间站2022年水稻全生命周期实验持续了多久？",
+      "2022年空间站水稻培养了多少天？",
+      "水稻从种子到种子的那次空间站实验有多长？"
+    ],
+    "match_groups": [
+      [
+        "水稻"
+      ],
+      [
+        "2022",
+        "中国空间站",
+        "从种子到种子"
+      ],
+      [
+        "持续",
+        "多久",
+        "多少天",
+        "几天",
+        "多长",
+        "周期"
+      ]
+    ],
+    "content": "公开任务报道记载，该次实验从2022年7月29日启动，到11月25日结束，共120天。",
+    "keywords": [
+      "水稻",
+      "2022",
+      "中国空间站",
+      "从种子到种子",
+      "持续",
+      "多久",
+      "多少天",
+      "几天",
+      "多长",
+      "周期"
+    ],
+    "source_ids": [
+      "official_cas_rice_2022"
+    ],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "报道中的任务起止日期与120天说明",
+    "spoken_citation": "中国科学院转载《解放日报》的2022年12月5日报道",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "这不是所有水稻取样任务的统一培养时长。"
+  },
+  {
+    "record_id": "qa02_css_rice_sampling",
+    "record_type": "verified_qa",
+    "title": "2022年中国空间站水稻和拟南芥分别在哪些阶段取样？",
+    "questions": [
+      "2022年中国空间站水稻和拟南芥分别在哪些阶段取样？",
+      "那次水稻与拟南芥的取样时间是什么？",
+      "报道中的开花期样品是水稻吗？"
+    ],
+    "match_groups": [
+      [
+        "水稻",
+        "拟南芥"
+      ],
+      [
+        "2022",
+        "那次",
+        "报道",
+        "中国空间站"
+      ],
+      [
+        "哪些阶段",
+        "取样时间",
+        "采样日期",
+        "开花期",
+        "发育阶段",
+        "取样阶段",
+        "什么时候取样"
+      ]
+    ],
+    "content": "报道列出9月21日水稻孕穗期、10月12日拟南芥开花期，以及11月25日两种植物种子成熟期样品。开花期样品不能误记为水稻样品。",
+    "keywords": [
+      "水稻",
+      "拟南芥",
+      "2022",
+      "那次",
+      "报道",
+      "中国空间站",
+      "取样",
+      "采样",
+      "样品",
+      "开花期"
+    ],
+    "source_ids": [
+      "official_cas_rice_2022"
+    ],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "报道中三次采样日期及对应物种",
+    "spoken_citation": "中国科学院2022年任务报道",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "这份报道不是完整取样、预处理或保存操作手册。"
+  },
+  {
+    "record_id": "qa03_sj10_cultivars",
+    "record_type": "verified_qa",
+    "title": "SJ-10水稻代谢组学研究用了哪两个品种？",
+    "questions": [
+      "SJ-10水稻代谢组学研究用了哪两个品种？",
+      "SJ10论文中的DN3和DN6是什么品种？",
+      "实践十号那篇水稻研究的品种名称是什么？"
+    ],
+    "match_groups": [
+      [
+        "sj-10",
+        "sj10",
+        "实践十号"
+      ],
+      [
+        "品种",
+        "dn3",
+        "dn6"
+      ]
+    ],
+    "content": "论文使用东农423，记作DN3，以及东农416，记作DN6。研究对象是空间飞行后的水稻种子及其后续地面生长阶段。",
+    "keywords": [
+      "sj-10",
+      "sj10",
+      "实践十号",
+      "品种",
+      "dn3",
+      "dn6"
+    ],
+    "source_ids": [
+      "paper_rice_sj10_metabolomics_2021"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Abstract；Materials and Methods中的DN3和DN6",
+    "spoken_citation": "2021年SJ-10水稻代谢组学论文",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "品种信息不能决定当前水稻任务的取样或仪器参数。"
+  },
+  {
+    "record_id": "qa04_sj10_sampling",
+    "record_type": "verified_qa",
+    "title": "SJ-10水稻论文的三叶期和分蘖期样品是在轨采集的吗？",
+    "questions": [
+      "SJ-10水稻论文的三叶期和分蘖期样品是在轨采集的吗？",
+      "SJ10水稻代谢组样品在什么阶段分析？",
+      "实践十号水稻三叶期取样是在地面还是太空？"
+    ],
+    "match_groups": [
+      [
+        "sj-10",
+        "sj10",
+        "实践十号"
+      ],
+      [
+        "取样",
+        "样品",
+        "三叶期",
+        "分蘖期"
+      ],
+      [
+        "地面",
+        "在轨",
+        "阶段",
+        "分析",
+        "太空"
+      ]
+    ],
+    "content": "不是。论文研究的干种子经历12.5天飞行，返回后在地面种植，再在三叶期和分蘖期取样分析。",
+    "keywords": [
+      "sj-10",
+      "sj10",
+      "实践十号",
+      "取样",
+      "样品",
+      "三叶期",
+      "分蘖期",
+      "地面",
+      "在轨",
+      "阶段",
+      "分析",
+      "太空"
+    ],
+    "source_ids": [
+      "paper_rice_sj10_metabolomics_2021"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Abstract；Rice Cultivation and Experimental Design",
+    "spoken_citation": "2021年SJ-10水稻代谢组学论文",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "这不是中国空间站在轨水稻预处理流程。"
+  },
+  {
+    "record_id": "qa05_rice_mission_separation",
+    "record_type": "verified_qa",
+    "title": "为什么不能把SJ-10水稻研究参数直接用于中国空间站水稻实验？",
+    "questions": [
+      "为什么不能把SJ-10水稻研究参数直接用于中国空间站水稻实验？",
+      "SJ10和2022年空间站水稻实验能混用参数吗？",
+      "实践十号与中国空间站水稻研究有什么区别？"
+    ],
+    "match_groups": [
+      [
+        "sj-10",
+        "sj10",
+        "实践十号"
+      ],
+      [
+        "中国空间站",
+        "2022",
+        "空间站水稻"
+      ],
+      [
+        "混用",
+        "区别",
+        "直接",
+        "为什么"
+      ]
+    ],
+    "content": "两项研究的任务、飞行时长和生长地点不同：SJ-10是干种子飞行后地面培养；2022年空间站任务是全生命周期在轨培养。基于这些设计差异，不能直接迁移取样或保存参数。",
+    "keywords": [
+      "sj-10",
+      "sj10",
+      "实践十号",
+      "中国空间站",
+      "2022",
+      "空间站水稻",
+      "混用",
+      "区别",
+      "直接",
+      "为什么"
+    ],
+    "source_ids": [
+      "paper_rice_sj10_metabolomics_2021",
+      "official_cas_rice_2022"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "两来源实验设计比较；不可迁移结论为项目证据规则",
+    "spoken_citation": "SJ-10论文及中国科学院2022年任务报道",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "这是对实验设计差异的推论，不是两篇来源发布的操作指令。"
+  },
+  {
+    "record_id": "qa06_melfi_setpoints",
+    "record_type": "verified_qa",
+    "title": "NASA公开的MELFI资料列出了哪些温度设定点？",
+    "questions": [
+      "NASA公开的MELFI资料列出了哪些温度设定点？",
+      "MELFI官方页面的设定温度有哪些？",
+      "ISS的MELFI公开设定点是多少？"
+    ],
+    "match_groups": [
+      [
+        "melfi"
+      ],
+      [
+        "公开",
+        "官方",
+        "nasa",
+        "iss"
+      ],
+      [
+        "设定点",
+        "设定温度"
+      ]
+    ],
+    "content": "NASA设备页面列出MELFI的三种公开设定点：正2、负35和负95摄氏度。它是国际空间站的样品保存设施。",
+    "keywords": [
+      "melfi",
+      "公开",
+      "官方",
+      "nasa",
+      "iss",
+      "设定点",
+      "设定温度"
+    ],
+    "source_ids": [
+      "nasa_melfi_official"
+    ],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "MELFI设备段落中的dewar set points",
+    "spoken_citation": "NASA Ovens and Freezers设备说明",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "设施设定点不是本次样品转移温度，也不说明设备的实时读数。"
+  },
+  {
+    "record_id": "qa07_melfi_conflict",
+    "record_type": "source_conflict",
+    "title": "项目水稻演示中的MELFI温度与NASA公开资料一致吗？",
+    "questions": [
+      "项目水稻演示中的MELFI温度与NASA公开资料一致吗？",
+      "为什么MELFI温度有负七十和负九十五摄氏度的区别？",
+      "演示用的负80度是MELFI通用标准吗？"
+    ],
+    "match_groups": [
+      [
+        "melfi"
+      ],
+      [
+        "项目",
+        "演示",
+        "负七十",
+        "负70",
+        "-70",
+        "负80",
+        "-80"
+      ],
+      [
+        "一致",
+        "区别",
+        "通用",
+        "冲突",
+        "混用",
+        "标准"
+      ]
+    ],
+    "content": "不一致。项目草案使用负80摄氏度上下5度及负70摄氏度转移条件；NASA的ISS MELFI资料列出正2、负35、负95摄氏度设定点。草案与设施资料不能合并为通用操作标准。",
+    "keywords": [
+      "melfi",
+      "项目",
+      "演示",
+      "负七十",
+      "负70",
+      "-70",
+      "负80",
+      "-80",
+      "一致",
+      "区别",
+      "通用",
+      "冲突",
+      "混用",
+      "标准"
+    ],
+    "source_ids": [
+      "nasa_melfi_official",
+      "project_md_20_experiment_sops"
+    ],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "NASA MELFI段落；项目草案实验1（未审核）",
+    "spoken_citation": "NASA设备说明与用户提供的20个实验SOP草案",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "项目数值仅用于演示校验，尚未获得任务级审核。"
+  },
+  {
+    "record_id": "qa08_aph_design",
+    "record_type": "verified_qa",
+    "title": "NASA的Advanced Plant Habitat怎样向植物根部提供生长条件？",
+    "questions": [
+      "NASA的Advanced Plant Habitat怎样向植物根部提供生长条件？",
+      "APH植物培养设施有哪些公开设计特征？",
+      "APH使用什么光源和基质？"
+    ],
+    "match_groups": [
+      [
+        "aph",
+        "advanced plant habitat"
+      ],
+      [
+        "根部",
+        "光源",
+        "基质",
+        "设计",
+        "特征",
+        "肥料"
+      ]
+    ],
+    "content": "NASA说明，APH使用LED照明、多孔黏土基质和控释肥料；其系统向植物根部提供水、养分和氧气。",
+    "keywords": [
+      "aph",
+      "advanced plant habitat",
+      "根部",
+      "光源",
+      "基质",
+      "设计",
+      "特征",
+      "肥料"
+    ],
+    "source_ids": [
+      "nasa_aph_official"
+    ],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "APH页面开头的设施设计说明",
+    "spoken_citation": "NASA Advanced Plant Habitat设施说明",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "这是ISS设施背景，不是中国空间站水稻培养参数。"
+  },
+  {
+    "record_id": "qa09_veg04_harvest",
+    "record_type": "verified_qa",
+    "title": "VEG-04研究的是哪种植物，有哪些采收设计？",
+    "questions": [
+      "VEG-04研究的是哪种植物，有哪些采收设计？",
+      "VEG04芥菜实验的28天和56天设计是什么？",
+      "VEG-04种的是什么，多久采收？"
+    ],
+    "match_groups": [
+      [
+        "veg-04",
+        "veg04"
+      ],
+      [
+        "植物",
+        "芥菜",
+        "采收",
+        "28",
+        "56"
+      ]
+    ],
+    "content": "NASA技术记录描述Mizuna芥菜研究：28天方案进行一次采收，56天方案进行三次剪收后再生的采收。研究还关注光质、营养、微生物安全与乘员接受度。",
+    "keywords": [
+      "veg-04",
+      "veg04",
+      "植物",
+      "芥菜",
+      "采收",
+      "28",
+      "56"
+    ],
+    "source_ids": [
+      "nasa_veg04_ntrs"
+    ],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "NTRS记录的Description/Abstract",
+    "spoken_citation": "NASA VEG-04技术报告，编号20190033231",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "这是特定研究设计，不能当成水稻或任意作物的采收SOP。"
+  },
+  {
+    "record_id": "qa10_iss_lettuce_accessions",
+    "record_type": "verified_qa",
+    "title": "ISS生菜微生物与营养研究的数据编号如何对应任务？",
+    "questions": [
+      "ISS生菜微生物与营养研究的数据编号如何对应任务？",
+      "OSD-267对应什么植物，其他两次任务编号是什么？",
+      "VEG-01A、VEG-01B和VEG-03A对应哪些GLDS编号？"
+    ],
+    "match_groups": [
+      [
+        "osd-267",
+        "glds",
+        "生菜",
+        "veg-01a",
+        "veg-01b",
+        "veg-03a"
+      ],
+      [
+        "编号",
+        "数据",
+        "对应"
+      ]
+    ],
+    "content": "2020年论文研究红色罗马生菜Outredgeous。数据可用性段落给出VEG-01A对应GLDS-267，VEG-01B对应GLDS-268，VEG-03A对应GLDS-269；库内另登记了OSD-267官方入口。",
+    "keywords": [
+      "osd-267",
+      "glds",
+      "生菜",
+      "veg-01a",
+      "veg-01b",
+      "veg-03a",
+      "编号",
+      "数据",
+      "对应"
+    ],
+    "source_ids": [
+      "paper_iss_lettuce_microbiology_2020",
+      "nasa_osdr_osd267"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Data Availability Statement；官方OSD-267入口登记",
+    "spoken_citation": "2020年ISS生菜微生物与营养论文的数据可用性段落",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "未下载并复算全部数据文件；这些生菜数据不能代替水稻实验数据。"
+  },
+  {
+    "record_id": "qa11_nasa_physical_fields",
+    "record_type": "verified_qa",
+    "title": "NASA空间物理科学研究分为哪六个方向？",
+    "questions": [
+      "NASA空间物理科学研究分为哪六个方向？",
+      "NASA物理科学项目有哪些研究领域？",
+      "NASA缩减重力物理研究的六个领域是什么？"
+    ],
+    "match_groups": [
+      [
+        "nasa"
+      ],
+      [
+        "物理科学",
+        "物理研究"
+      ],
+      [
+        "方向",
+        "领域",
+        "六个"
+      ]
+    ],
+    "content": "NASA项目介绍列出生物物理、燃烧科学、复杂流体、流体物理、基础物理和材料科学六个方向。",
+    "keywords": [
+      "nasa",
+      "物理科学",
+      "物理研究",
+      "方向",
+      "领域",
+      "六个"
+    ],
+    "source_ids": [
+      "nasa_physical_sciences_program"
+    ],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Program Overview中六个研究领域",
+    "spoken_citation": "NASA Physical Sciences Program项目介绍",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "分类用于资料检索，不表示Agent已具备这六类实验的任务SOP。"
+  },
+  {
+    "record_id": "qa12_fcf_racks",
+    "record_type": "verified_qa",
+    "title": "NASA的流体与燃烧设施FCF由哪些实验柜组成？",
+    "questions": [
+      "NASA的流体与燃烧设施FCF由哪些实验柜组成？",
+      "FCF里的CIR和FIR分别是什么？",
+      "FCF包含哪两个研究柜？"
+    ],
+    "match_groups": [
+      [
+        "fcf",
+        "流体与燃烧设施"
+      ],
+      [
+        "组成",
+        "cir",
+        "fir",
+        "两个",
+        "包含"
+      ]
+    ],
+    "content": "FCF包括燃烧综合实验柜CIR与流体综合实验柜FIR。它们是ISS研究设施，分别支撑燃烧和流体等物理科学研究。",
+    "keywords": [
+      "fcf",
+      "流体与燃烧设施",
+      "组成",
+      "cир",
+      "cir",
+      "fir",
+      "两个",
+      "包含"
+    ],
+    "source_ids": [
+      "nasa_fluids_combustion_facility"
+    ],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "FCF简介；CIR与FIR段落",
+    "spoken_citation": "NASA Fluids and Combustion Facility设施说明",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "设施介绍不能替代点火、压力、流量或材料安全操作文件。"
+  },
+  {
+    "record_id": "qa13_fir_research",
+    "record_type": "verified_qa",
+    "title": "FIR公开介绍涉及哪些流体研究现象？",
+    "questions": [
+      "FIR公开介绍涉及哪些流体研究现象？",
+      "NASA流体综合柜研究哪些多相流问题？",
+      "FIR是否研究沸腾、蒸发和冷凝？"
+    ],
+    "match_groups": [
+      [
+        "fir",
+        "流体综合柜"
+      ],
+      [
+        "现象",
+        "多相",
+        "沸腾",
+        "蒸发",
+        "冷凝",
+        "研究"
+      ]
+    ],
+    "content": "NASA介绍的主要方向包括沸腾传热、多相流、液汽界面控制，以及液体和蒸汽的蒸发与冷凝，也包括胶体研究。",
+    "keywords": [
+      "fir",
+      "流体综合柜",
+      "现象",
+      "多相",
+      "沸腾",
+      "蒸发",
+      "冷凝",
+      "研究"
+    ],
+    "source_ids": [
+      "nasa_fluids_combustion_facility"
+    ],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "FIR段落的primary focus及colloids说明",
+    "spoken_citation": "NASA流体与燃烧设施说明",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "这不提供任何具体载荷的流量、压力或温度设定值。"
+  },
+  {
+    "record_id": "qa14_shenzhou2_controls",
+    "record_type": "verified_qa",
+    "title": "神舟二号闭合水生生态系统研究有哪些对照组？",
+    "questions": [
+      "神舟二号闭合水生生态系统研究有哪些对照组？",
+      "神舟二号水生生态实验怎样设置重力对照？",
+      "神舟二号CAES有没有空间1g和地面对照？"
+    ],
+    "match_groups": [
+      [
+        "神舟二号",
+        "神舟2",
+        "shenzhou-ii",
+        "shenzhou2"
+      ],
+      [
+        "对照",
+        "1g",
+        "重力"
+      ]
+    ],
+    "content": "论文摘要描述空间离心机1g对照、地面1g对照和地面离心机1.4g对照，用来比较微重力下的闭合水生生态系统表现。",
+    "keywords": [
+      "神舟二号",
+      "神舟2",
+      "shenzhou-ii",
+      "shenzhou2",
+      "对照",
+      "1g",
+      "重力"
+    ],
+    "source_ids": [
+      "paper_shenzhou2_closed_aquatic_ecosystem_2005"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Publisher abstract中的space and ground controls",
+    "spoken_citation": "神舟二号闭合水生生态系统研究论文摘要",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "这是历史研究设计，不是当前载荷离心机操作指令。"
+  },
+  {
+    "record_id": "qa15_shenzhou2_recorded_data",
+    "record_type": "verified_qa",
+    "title": "神舟二号闭合水生生态系统研究记录了哪些数据？",
+    "questions": [
+      "神舟二号闭合水生生态系统研究记录了哪些数据？",
+      "神舟二号CAES按分钟记录了什么？",
+      "神舟二号水生生态论文有哪些环境观测字段？"
+    ],
+    "match_groups": [
+      [
+        "神舟二号",
+        "神舟2",
+        "shenzhou-ii",
+        "shenzhou2"
+      ],
+      [
+        "数据",
+        "记录",
+        "字段",
+        "观测"
+      ]
+    ],
+    "content": "论文摘要描述按分钟记录藻类生物量、温度、光照与离心状态；其中藻类生物量通过透射光方式评估。",
+    "keywords": [
+      "神舟二号",
+      "神舟2",
+      "shenzhou-ii",
+      "shenzhou2",
+      "数据",
+      "记录",
+      "字段",
+      "观测"
+    ],
+    "source_ids": [
+      "paper_shenzhou2_closed_aquatic_ecosystem_2005"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Publisher abstract中的data acquisition说明",
+    "spoken_citation": "神舟二号闭合水生生态系统研究论文摘要",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "摘要字段不等于原始文件已经下载或当前实验正在采集这些数据。"
+  },
+  {
+    "record_id": "qa16_sref_detectors",
+    "record_type": "verified_qa",
+    "title": "中国空间站SREF的公开论文介绍了哪些辐射探测器？",
+    "questions": [
+      "中国空间站SREF的公开论文介绍了哪些辐射探测器？",
+      "SREF如何描述LET、中子和太阳紫外测量？",
+      "空间辐射生物学暴露设施监测哪些辐射信息？"
+    ],
+    "match_groups": [
+      [
+        "sref",
+        "空间辐射生物学暴露设施"
+      ],
+      [
+        "探测器",
+        "let",
+        "中子",
+        "太阳紫外",
+        "辐射信息"
+      ]
+    ],
+    "content": "论文介绍LET探测器记录带电粒子LET谱，中子探测器记录能谱与剂量当量，太阳紫外探测器记录紫外辐照量。设施还面向种子、微生物等模型对象。",
+    "keywords": [
+      "sref",
+      "空间辐射生物学暴露设施",
+      "探测器",
+      "let",
+      "中子",
+      "太阳紫外",
+      "辐射信息"
+    ],
+    "source_ids": [
+      "paper_css_radiobiology_facility_2025"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Publisher abstract中的三类探测器",
+    "spoken_citation": "中国空间站SREF设施论文摘要",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "这些测量说明不是乘员辐射限值，也不是异常暴露处置方案。"
+  },
+  {
+    "record_id": "qa17_cold_atom_interferometer",
+    "record_type": "verified_qa",
+    "title": "中国空间站冷原子干涉仪论文的研究目标和主要阶段是什么？",
+    "questions": [
+      "中国空间站冷原子干涉仪论文的研究目标和主要阶段是什么？",
+      "双物种冷铷原子干涉仪怎样获取信号？",
+      "冷原子干涉仪用什么方法探测原子？"
+    ],
+    "match_groups": [
+      [
+        "冷原子干涉仪",
+        "冷铷原子干涉仪"
+      ],
+      [
+        "目标",
+        "阶段",
+        "信号",
+        "探测",
+        "等效原理"
+      ]
+    ],
+    "content": "2023年论文介绍双物种冷铷原子干涉仪，用于弱等效原理检验的设计；公开过程涉及激光冷却、原子干涉和荧光探测。论文中的设计及地面测试不能说成已完成的在轨检验结果。",
+    "keywords": [
+      "冷原子干涉仪",
+      "冷铷原子干涉仪",
+      "目标",
+      "阶段",
+      "信号",
+      "探测",
+      "等效原理"
+    ],
+    "source_ids": [
+      "paper_css_cold_atom_interferometer_2023"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Abstract；experiment sequence；fluorescence detection",
+    "spoken_citation": "2023年中国空间站冷原子干涉仪论文",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "不提供激光功率、频率调节或当前任务的仪器放行标准。"
+  },
+  {
+    "record_id": "qa18_cold_atom_clock",
+    "record_type": "verified_qa",
+    "title": "中国空间站冷原子微波钟的腔内冷却方案有什么特点？",
+    "questions": [
+      "中国空间站冷原子微波钟的腔内冷却方案有什么特点？",
+      "冷原子微波钟为什么采用腔内冷却？",
+      "空间站微波钟在腔内完成哪些过程？"
+    ],
+    "match_groups": [
+      [
+        "冷原子微波钟",
+        "空间站微波钟"
+      ],
+      [
+        "腔内",
+        "特点",
+        "冷却"
+      ]
+    ],
+    "content": "2024年论文提出在微波腔内冷却原子，并在腔内完成态选择、微波询问和探测；微重力环境有利于延长原子与微波的相互作用时间。",
+    "keywords": [
+      "冷原子微波钟",
+      "空间站微波钟",
+      "腔内",
+      "特点",
+      "冷却"
+    ],
+    "source_ids": [
+      "paper_css_cold_atom_clock_2024"
+    ],
+    "evidence_level": "A_PRIMARY_PAPER",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Abstract；intracavity cooling scheme",
+    "spoken_citation": "2024年中国空间站冷原子微波钟论文",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "论文工程验证不是Agent可执行的校准或调参SOP。"
+  },
+  {
+    "record_id": "qa19_esa_eml",
+    "record_type": "verified_qa",
+    "title": "ESA电磁悬浮炉EML主要研究什么？",
+    "questions": [
+      "ESA电磁悬浮炉EML主要研究什么？",
+      "哥伦布舱的EML怎样研究材料熔融与凝固？",
+      "电磁悬浮材料实验的科学用途是什么？"
+    ],
+    "match_groups": [
+      [
+        "eml",
+        "电磁悬浮炉",
+        "电磁悬浮材料"
+      ],
+      [
+        "研究",
+        "用途",
+        "熔融",
+        "凝固"
+      ]
+    ],
+    "content": "ESA介绍，哥伦布舱EML在悬浮条件下研究金属熔融、冷却和凝固，减少重力与容器接触对观察的影响。",
+    "keywords": [
+      "eml",
+      "电磁悬浮炉",
+      "电磁悬浮材料",
+      "研究",
+      "用途",
+      "熔融",
+      "凝固"
+    ],
+    "source_ids": [
+      "esa_eml_official"
+    ],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Electromagnetic Levitator turns ten正文",
+    "spoken_citation": "ESA Electromagnetic Levitator设施介绍",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "电磁悬浮与其他静电悬浮设施不能混同；不据此发布高温操作参数。"
+  },
+  {
+    "record_id": "qa20_public_physical_data",
+    "record_type": "verified_qa",
+    "title": "公开的空间物理实验数据可以从哪里查找？",
+    "questions": [
+      "公开的空间物理实验数据可以从哪里查找？",
+      "NASA PSI物理科学数据入口在哪里？",
+      "哪些官方入口可以查空间物理实验数据？"
+    ],
+    "match_groups": [
+      [
+        "空间物理",
+        "物理实验数据",
+        "psi",
+        "物理科学数据"
+      ],
+      [
+        "入口",
+        "查找",
+        "哪里",
+        "官方",
+        "公开"
+      ]
+    ],
+    "content": "NASA的BPS数据页面提供PSI物理科学数据入口。使用任何调查的数据前，应核对具体调查、样品、实验条件、单位、处理状态及可用文件。",
+    "keywords": [
+      "空间物理",
+      "物理实验数据",
+      "psi",
+      "物理科学数据",
+      "入口",
+      "查找",
+      "哪里",
+      "官方",
+      "公开"
+    ],
+    "source_ids": [
+      "nasa_psi_repository",
+      "nasa_physical_sciences_program"
+    ],
+    "evidence_level": "B_OFFICIAL_DATA",
+    "source_checked_on": "2026-10-06",
+    "verification_scope": "PUBLIC_BACKGROUND_QA_ONLY",
+    "evidence_locator": "Physical Sciences Data入口；元数据核对为本项目使用规则",
+    "spoken_citation": "NASA BPS Data and Repositories页面",
+    "direct_answer_allowed": true,
+    "execution_allowed": false,
+    "limitations": "这里只提供查找路径；未声称已下载全部调查或已经复算研究结论。"
+  }
+]

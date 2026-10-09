@@ -1,0 +1,71 @@
+name: 1.0试用反馈
+description: 提交语音、实验流程、记录或体验反馈，供2.0改进。
+title: "[1.0反馈] "
+body:
+  - type: markdown
+    attributes:
+      value: "请使用虚构测试数据描述问题，不填写密钥、Cookie或真实私密任务记录。未测试的功能请注明。"
+  - type: input
+    id: version
+    attributes:
+      label: 版本
+      value: "1.0.0"
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 操作系统、浏览器与Node版本
+      placeholder: "例如 Windows 11 / Edge / Node 24.x"
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: 反馈类型
+      options:
+        - 启动或配置
+        - 语音识别与数字编号
+        - 播报音色与延迟
+        - 实验选择与流程状态
+        - 数据确认与纠错
+        - 异常暂停
+        - 记录保存与恢复
+        - 功能建议
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 原话与复现步骤
+      description: "说明当前实验/步骤、你说的测试原话和操作顺序。"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望结果
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际回复、状态或错误提示
+    validations:
+      required: true
+  - type: dropdown
+    id: impact
+    attributes:
+      label: 影响
+      options:
+        - 无法继续试用
+        - 数字或编号读回错误
+        - 流程状态不一致
+        - 回复或播报不清晰
+        - 体验改进建议
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 2.0优先改进建议

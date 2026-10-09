@@ -1,0 +1,16 @@
+dist/
+web-voice-agent/.env
+web-voice-agent/.env.*
+!web-voice-agent/.env.example
+!web-voice-agent/.env.deploy.example
+web-voice-agent/node_modules/
+*.log
+docs/baidu-voice-discovery-latest.json
+web-voice-agent/data/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+.release-tools/
+github-release/
+docs/.voice-check-*/
+docs/.presentation-build-*/

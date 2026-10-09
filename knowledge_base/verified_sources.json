@@ -1,0 +1,740 @@
+[
+  {
+    "id": "paper_css_rice_gbcm_2024",
+    "title": "Biological culture module for plant research from seed-to-seed on the Chinese Space Station",
+    "source_type": "peer_reviewed_primary_paper",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors": "Chaoxian Jia et al.",
+    "journal": "Life Sciences in Space Research",
+    "year": 2024,
+    "doi": "10.1016/j.lssr.2024.04.005",
+    "url": "https://doi.org/10.1016/j.lssr.2024.04.005",
+    "public_record": "https://pubmed.ncbi.nlm.nih.gov/39067990/",
+    "supports": [
+      "Chinese Space Station biological culture module research",
+      "rice and Arabidopsis seed-to-seed cultivation context",
+      "LED lighting, gas control and water recovery as module technologies",
+      "reported 120-day cultivation period in the described experiment"
+    ],
+    "limits": "Does not define the operational SOP for a future rice sampling task or authorize any threshold outside the reported experiment. Its abstract reports July 28 to November 26, while the 2022 team report uses July 29 to November 25; both timelines must be attributed.",
+    "checked_on": "2026-10-07",
+    "verification_scope": "indexed_PubMed_complete_abstract_and_publisher_intro_snippets; full_text_not_obtained"
+  },
+  {
+    "id": "official_cas_rice_2022",
+    "title": "我国科学家在国际上首次完成水稻从种子到种子全生命周期空间培养实验",
+    "source_type": "official_mission_report",
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "中国科学院转载《解放日报》",
+    "year": 2022,
+    "url": "https://www.cas.cn/cm/202212/t20221205_4857067.shtml",
+    "supports": [
+      "2022 Chinese Space Station rice mission public timeline",
+      "reported 120-day full life-cycle cultivation",
+      "reported in-orbit sampling stages",
+      "reported sample storage temperatures for the described mission",
+      "species-specific sampling: rice booting, Arabidopsis flowering, both at seed maturity"
+    ],
+    "limits": "A public mission report is not a complete flight operations manual and must not be converted into a universal sampling SOP.",
+    "authors": "黄海华",
+    "published_on": "2022-12-05",
+    "checked_on": "2026-10-07",
+    "verification_scope": "mission_report_body"
+  },
+  {
+    "id": "paper_rice_sj10_metabolomics_2021",
+    "title": "Metabolomics Analysis in Different Development Stages on SP0 Generation of Rice Seeds After Spaceflight",
+    "source_type": "open_access_primary_paper",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors": "Deyong Zeng et al.",
+    "journal": "Frontiers in Plant Science",
+    "year": 2021,
+    "doi": "10.3389/fpls.2021.700267",
+    "url": "https://doi.org/10.3389/fpls.2021.700267",
+    "full_text": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8278407/",
+    "supports": [
+      "SJ-10 rice seed spaceflight study context",
+      "two rice cultivars and post-flight growth stages",
+      "metabolomic, antioxidant and qRT-PCR measurements",
+      "reported flight duration, gravity and radiation values for that study"
+    ],
+    "limits": "SJ-10 is not the Chinese Space Station rice experiment. Its cultivar, mission, exposure and ground-control conditions must not be merged with the 2022 CSS mission.",
+    "checked_on": "2026-10-06",
+    "verification_scope": "open_access_abstract_and_relevant_methods"
+  },
+  {
+    "id": "nasa_osdr_osd267",
+    "title": "Microbiological and nutritional analysis of lettuce crops grown on the International Space Station VEG-01A",
+    "source_type": "official_open_data_study",
+    "evidence_level": "B_OFFICIAL_DATA",
+    "publisher": "NASA Open Science Data Repository / GeneLab",
+    "study_id": "OSD-267 / GLDS-267",
+    "doi": "10.26030/0cpc-g985",
+    "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-267",
+    "supports": [
+      "ISS plant-growth study metadata",
+      "flight and ground comparison context",
+      "microbiology, mineral and nutritional measurements",
+      "downloadable study data and files"
+    ],
+    "limits": "Lettuce data are not rice data and cannot supply rice cultivation or sample-storage thresholds."
+  },
+  {
+    "id": "nasa_osdr_veg01a",
+    "title": "Vegetable Production System 01A",
+    "source_type": "official_payload_record",
+    "evidence_level": "B_OFFICIAL_DATA",
+    "publisher": "NASA Open Science Data Repository",
+    "url": "https://osdr.nasa.gov/bio/repo/data/payloads/VEG-01A",
+    "supports": [
+      "VEG-01A payload and plant-pillow context",
+      "crew watering and harvest operations described for that payload",
+      "hardware, human-factors, microbiology and chemistry data context"
+    ],
+    "limits": "Payload-specific records are not a generic crew procedure for all plant experiments."
+  },
+  {
+    "id": "nasa_plant_biology_experiments",
+    "title": "Plant Biology Program Experiments",
+    "source_type": "official_program_catalog",
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "NASA Science",
+    "url": "https://science.nasa.gov/biological-physical/focus-areas/plant-biology/experiments/",
+    "supports": [
+      "NASA plant experiment names, organisms and facilities",
+      "public links to Life Sciences Data Archive and GeneLab",
+      "scope of PH, VEG and APEX plant investigations"
+    ],
+    "limits": "Program descriptions are not substitutes for experiment-specific protocols or raw data analysis."
+  },
+  {
+    "id": "nasa_aph_official",
+    "title": "Advanced Plant Habitat",
+    "source_type": "official_facility_description",
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "NASA Science",
+    "url": "https://science.nasa.gov/mission/advanced-plant-habitat/",
+    "supports": [
+      "APH facility purpose and ISS location",
+      "LED lighting, porous clay substrate and controlled-release fertilizer description",
+      "reported design for controlled plant research over extended experiments"
+    ],
+    "limits": "APH properties do not define conditions for the Chinese Space Station GBCM or the rice demonstration SOP.",
+    "checked_on": "2026-10-06",
+    "verification_scope": "facility_design_description"
+  },
+  {
+    "id": "nasa_melfi_official",
+    "title": "Ovens and Freezers: MELFI",
+    "source_type": "official_facility_description",
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "NASA Johnson Space Center",
+    "url": "https://www.nasa.gov/reference/jsc-ovens-freezers/",
+    "supports": [
+      "MELFI purpose as ISS science-sample preservation equipment",
+      "publicly described dewar set points of +2°C, -35°C and -95°C",
+      "public statement that three units were on ISS at the page revision"
+    ],
+    "limits": "This public facility page does not authorize a mission-specific transfer threshold. It conflicts with the supplied demo value of -80°C ± 5°C and must remain a flagged conflict.",
+    "checked_on": "2026-10-07",
+    "verification_scope": "facility_MELFI_paragraph"
+  },
+  {
+    "id": "nasa_veg04_ntrs",
+    "title": "VEG-04: the Effects of Light Quality on Mizuna Mustard Growth, Nutritional Composition, and Organoleptic Acceptability for a Space Diet",
+    "source_type": "official_technical_record",
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "NASA Technical Reports Server",
+    "record_id": "20190033231",
+    "url": "https://ntrs.nasa.gov/citations/20190033231",
+    "supports": [
+      "VEG-04 study design and red-blue light comparison",
+      "28-day and 56-day harvest scenarios described in the record",
+      "nutritional, microbial-safety and crew acceptability objectives"
+    ],
+    "limits": "The record is a technical presentation, not a universal crop-production SOP.",
+    "checked_on": "2026-10-06",
+    "verification_scope": "technical_record_description"
+  },
+  {
+    "id": "paper_auxin_transport_2020",
+    "title": "Comprehensive report on the Auxin Transport space experiment",
+    "source_type": "peer_reviewed_experiment_report",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors": "Junichi Ueda",
+    "journal": "Biological Sciences in Space",
+    "year": 2020,
+    "doi": "10.2187/bss.34.12",
+    "url": "https://doi.org/10.2187/bss.34.12",
+    "supports": [
+      "ISS JEM Auxin Transport experiment context",
+      "pea and maize seedlings, microgravity and 1 g comparison",
+      "auxin transport, gene expression and hormone-analysis context"
+    ],
+    "limits": "This is plant-biology evidence, not an operational procedure for rice sampling or MELFI transfer."
+  },
+  {
+    "id": "review_plant_omics_spaceflight_2022",
+    "title": "-Omics studies of plant biology in spaceflight: A critical review of recent experiments",
+    "source_type": "peer_reviewed_review",
+    "evidence_level": "D_REVIEW",
+    "authors": "Ariel M. Hughes and John Z. Kiss",
+    "journal": "Frontiers in Astronomy and Space Sciences",
+    "year": 2022,
+    "doi": "10.3389/fspas.2022.964657",
+    "url": "https://doi.org/10.3389/fspas.2022.964657",
+    "supports": [
+      "finding relevant plant spaceflight omics studies",
+      "importance of in-flight 1 g controls and ground controls",
+      "background on transcriptomic and proteomic response themes"
+    ],
+    "limits": "A review is for context and retrieval, not a standalone source for operational thresholds."
+  },
+  {
+    "id": "nasa_osdr_portal",
+    "title": "NASA Open Science Data Repository Biological Data and Visualization Portal",
+    "source_type": "official_data_portal",
+    "evidence_level": "B_OFFICIAL_DATA",
+    "publisher": "NASA OSDR / GeneLab",
+    "url": "https://visualization.genelab.nasa.gov/data/",
+    "supports": [
+      "discovery of public plant spaceflight datasets",
+      "study-level metadata and links to downloadable data"
+    ],
+    "limits": "Each dataset must be individually reviewed for species, mission, assay, controls and release version before use."
+  },
+  {
+    "id": "nasa_physical_sciences_program",
+    "title": "Physical Sciences Program",
+    "source_type": "official_program_catalog",
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "NASA Science",
+    "url": "https://science.nasa.gov/biological-physical/programs/physical-sciences/",
+    "supports": [
+      "scope of NASA reduced-gravity physical-science research",
+      "six PSI research areas: biophysics, combustion, complex fluids, fluid physics, fundamental physics and materials science",
+      "public data repository entry point"
+    ],
+    "limits": "Program-level descriptions do not provide a procedure or threshold for a specific payload.",
+    "checked_on": "2026-10-06",
+    "verification_scope": "program_overview"
+  },
+  {
+    "id": "nasa_psi_repository",
+    "title": "NASA BPS Data and Repositories: PSI entry",
+    "source_type": "official_open_data_repository",
+    "evidence_level": "B_OFFICIAL_DATA",
+    "publisher": "NASA PSI",
+    "url": "https://science.nasa.gov/biological-physical/data/",
+    "supports": [
+      "official PSI physical-sciences data entry point",
+      "links to biological and physical-sciences repositories"
+    ],
+    "limits": "The old PSI root redirected to this official entry page on 2026-10-06. No claim that every investigation/file is accessible, downloaded or independently reanalysed.",
+    "original_url": "https://psi.nasa.gov/",
+    "checked_on": "2026-10-06",
+    "verification_scope": "official_data_entry_page"
+  },
+  {
+    "id": "nasa_psi_strata1",
+    "title": "Strata-1: An International Space Station Experiment into Fundamental Regolith Processes in Microgravity",
+    "source_type": "official_open_data_investigation",
+    "evidence_level": "B_OFFICIAL_DATA",
+    "publisher": "NASA Physical Sciences Informatics",
+    "investigation_id": "PSI-110",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-110",
+    "doi": "10.1016/j.actaastro.2017.10.025",
+    "supports": [
+      "example of investigation-level raw data, videos, metadata and publications",
+      "microgravity granular/regolith experiment context"
+    ],
+    "limits": "This is an example dataset and is not evidence for other materials or equipment."
+  },
+  {
+    "id": "nasa_fluids_combustion_facility",
+    "title": "Fluids and Combustion Facility",
+    "source_type": "official_facility_description",
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "NASA Glenn Research Center",
+    "url": "https://www.nasa.gov/glenn/glenn-expertise-space-exploration/physical-sciences-program/science-facilities-on-the-iss/fluids-combustion-facility/",
+    "supports": [
+      "CIR and FIR facility roles",
+      "ISS combustion, fluid, multiphase-flow, boiling and condensation research context",
+      "public description of remote operations and facility purpose"
+    ],
+    "limits": "The page describes facility capability, not a payload-specific crew procedure or safety clearance.",
+    "checked_on": "2026-10-06",
+    "verification_scope": "facility_description_CIR_and_FIR"
+  },
+  {
+    "id": "esa_columbus_laboratory",
+    "title": "European Columbus laboratory",
+    "source_type": "official_facility_description",
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "European Space Agency",
+    "url": "https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/Columbus/European_Columbus_laboratory",
+    "supports": [
+      "Columbus payload research domains",
+      "public facility and hardware context for life, material and fluid science"
+    ],
+    "limits": "Public module information does not replace experiment-specific flight documentation."
+  },
+  {
+    "id": "esa_musc",
+    "title": "Microgravity User Support Centre",
+    "source_type": "official_operations_description",
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "European Space Agency / DLR",
+    "url": "https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/International_Space_Station/Microgravity_User_Support_Centre",
+    "supports": [
+      "public description of flight-readiness, operational support, data acquisition and archiving roles",
+      "Biolab, materials, fluid and radiation-facility support context"
+    ],
+    "limits": "It does not disclose a generic crew command set or authorize the Agent to issue operational commands."
+  },
+  {
+    "id": "nasa_osdr_osd344",
+    "title": "Cardiovascular progenitor cells cultured aboard the International Space Station exhibit altered developmental and functional properties",
+    "source_type": "official_open_data_study",
+    "evidence_level": "B_OFFICIAL_DATA",
+    "publisher": "NASA Open Science Data Repository",
+    "study_id": "OSD-344",
+    "doi": "10.1038/s41526-018-0048-x",
+    "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-344",
+    "supports": [
+      "ISS cell-biology dataset and publication metadata",
+      "cardiovascular progenitor-cell experiment context"
+    ],
+    "limits": "Cell-culture findings do not provide human-crew medical thresholds or real-time medical advice."
+  },
+  {
+    "id": "paper_iss_cardiovascular_2009",
+    "title": "Adaptation of heart rate and blood pressure to short and long duration space missions",
+    "source_type": "peer_reviewed_human_study",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors": "Bart Verheyden et al.",
+    "journal": "Respiratory Physiology & Neurobiology",
+    "year": 2009,
+    "doi": "10.1016/j.resp.2009.03.008",
+    "url": "https://doi.org/10.1016/j.resp.2009.03.008",
+    "public_record": "https://pubmed.ncbi.nlm.nih.gov/19833299/",
+    "supports": [
+      "small-cohort ISS astronaut cardiovascular research context",
+      "heart-rate and arterial-blood-pressure measurement design"
+    ],
+    "limits": "The study is not a clinical decision rule and must not be used to set go/no-go limits for an individual astronaut."
+  },
+  {
+    "id": "paper_iss_cardiovascular_2012",
+    "title": "Cardiovascular regulation during long-duration spaceflights to the International Space Station",
+    "source_type": "peer_reviewed_human_study",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors": "R. L. Hughson et al.",
+    "journal": "Journal of Applied Physiology",
+    "year": 2012,
+    "doi": "10.1152/japplphysiol.01196.2011",
+    "url": "https://doi.org/10.1152/japplphysiol.01196.2011",
+    "public_record": "https://pubmed.ncbi.nlm.nih.gov/22134699/",
+    "supports": [
+      "long-duration ISS cardiovascular regulation research context",
+      "baroreflex, heart-rate, blood-pressure and cardiac-output measurement context"
+    ],
+    "limits": "Population-level research findings are not individual medical clearance criteria."
+  },
+  {
+    "id": "paper_css_radiobiology_facility_2025",
+    "title": "The Space Radiobiological Exposure Facility on the China Space Station",
+    "source_type": "peer_reviewed_facility_paper",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors": "Binquan Zhang et al.",
+    "journal": "Astrobiology",
+    "year": 2025,
+    "doi": "10.1089/ast.2024.0027",
+    "url": "https://doi.org/10.1089/ast.2024.0027",
+    "public_record": "https://pubmed.ncbi.nlm.nih.gov/39778906/",
+    "supports": [
+      "China Space Station radiobiological exposure facility context",
+      "temperature-controlled experiments with model organisms and plant seeds",
+      "LET, neutron and solar-UV detector roles",
+      "microfluidic and microscopy capability description"
+    ],
+    "limits": "Facility description does not define a universal radiation limit or crew-safety procedure.",
+    "checked_on": "2026-10-06",
+    "verification_scope": "publisher_abstract"
+  },
+  {
+    "id": "paper_css_champ_microbiome_2025",
+    "title": "An early microbial landscape: inspiring endeavor from the China Space Station Habitation Area Microbiome Program",
+    "source_type": "peer_reviewed_primary_paper",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors": "Junxia Yuan et al.",
+    "journal": "Science China Life Sciences",
+    "year": 2025,
+    "doi": "10.1007/s11427-024-2894-2",
+    "url": "https://doi.org/10.1007/s11427-024-2894-2",
+    "public_record": "https://pubmed.ncbi.nlm.nih.gov/40178790/",
+    "supports": [
+      "CHAMP survey design and CSS habitation-area microbiome context",
+      "metagenomic and cultivation-based analysis",
+      "microbial management and closed-habitat biosafety background"
+    ],
+    "limits": "Survey findings describe sampled station microbiomes, not a real-time contamination threshold or sterilization SOP."
+  },
+  {
+    "id": "paper_css_microbiome_2019",
+    "title": "Microbiomes of China's Space Station During Assembly, Integration, and Test Operations",
+    "source_type": "peer_reviewed_primary_paper",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors": "Ying Zhang et al.",
+    "journal": "Microbial Ecology",
+    "year": 2019,
+    "doi": "10.1007/s00248-019-01344-4",
+    "url": "https://doi.org/10.1007/s00248-019-01344-4",
+    "public_record": "https://pubmed.ncbi.nlm.nih.gov/30809693/",
+    "supports": [
+      "CSS assembly, integration and test microbiome context",
+      "air and surface sampling methods",
+      "cultivation and amplicon-sequencing study context"
+    ],
+    "limits": "AIT and early CSS microbiome observations cannot be used as universal crew or payload contamination limits."
+  },
+  {
+    "id": "paper_shenzhou2_closed_aquatic_ecosystem_2005",
+    "title": "Performance of a simple Closed Aquatic Ecosystem (CAES) in space",
+    "source_type": "peer_reviewed_primary_paper",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors_verification": "Author list not verified in this round; previous team placeholder removed",
+    "journal": "Advances in Space Research",
+    "year": 2004,
+    "doi": "10.1016/j.asr.2004.06.005",
+    "url": "https://doi.org/10.1016/j.asr.2004.06.005",
+    "public_record": "https://pubmed.ncbi.nlm.nih.gov/15881791/",
+    "supports": [
+      "Shenzhou-II closed aquatic ecosystem study",
+      "microgravity, space 1 g centrifuge and ground controls",
+      "minute-level logging of algae biomass, temperature, light and centrifugation"
+    ],
+    "limits": "This is a historical seven-day ecosystem experiment and not a current station life-support control procedure.",
+    "metadata_note": "Publisher search result identifies Advances in Space Research 34(6), 2004; earlier registry year 2005 followed PubMed indexing. Legacy source id retained for compatibility.",
+    "checked_on": "2026-10-06",
+    "verification_scope": "publisher_search_abstract_only_full_text_not_retrieved"
+  },
+  {
+    "id": "paper_shenzhou8_arabidopsis_simbx_2015",
+    "title": "A whole-genome microarray study of Arabidopsis thaliana semisolid callus cultures exposed to microgravity and nonmicrogravity related spaceflight conditions for 5 days on board of Shenzhou 8",
+    "source_type": "peer_reviewed_primary_paper",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors": "Simbox research team",
+    "journal": "PubMed-indexed journal record",
+    "year": 2015,
+    "public_record": "https://pubmed.ncbi.nlm.nih.gov/25654111/",
+    "supports": [
+      "Shenzhou-8 Simbox plant-culture experiment context",
+      "flight, ground static and in-flight centrifugation comparison design",
+      "whole-genome microarray data context"
+    ],
+    "limits": "The record must be checked for full-text methods before extracting numerical parameters."
+  },
+  {
+    "id": "paper_china_celss_platform_2021",
+    "title": "Design and establishment of a large-scale controlled ecological life-support system integrated experimental platform",
+    "source_type": "peer_reviewed_platform_paper",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "journal": "PubMed-indexed record",
+    "year": 2021,
+    "public_record": "https://pubmed.ncbi.nlm.nih.gov/34689944/",
+    "supports": [
+      "controlled ecological life-support system platform context",
+      "integrated food, air and water regeneration research context"
+    ],
+    "limits": "A ground platform validation is not equivalent to an on-orbit operating procedure."
+  },
+  {
+    "id": "paper_css_cold_atom_interferometer_2023",
+    "title": "The space cold atom interferometer for testing the equivalence principle in the China Space Station",
+    "source_type": "peer_reviewed_primary_paper",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors": "Meng He et al.",
+    "journal": "npj Microgravity",
+    "year": 2023,
+    "doi": "10.1038/s41526-023-00306-y",
+    "url": "https://doi.org/10.1038/s41526-023-00306-y",
+    "supports": [
+      "dual-species cold-rubidium atom interferometer design",
+      "China Space Station microgravity scientific laboratory context",
+      "laser cooling, atom interference and fluorescence detection stages",
+      "payload design constraints and ground-test results"
+    ],
+    "limits": "Research design and ground-test results are not a crew command sequence or a generic cold-atom experiment SOP.",
+    "checked_on": "2026-10-06",
+    "verification_scope": "abstract_and_relevant_experiment_sequence"
+  },
+  {
+    "id": "paper_css_cold_atom_clock_2024",
+    "title": "Cold atom microwave clock based on intracavity cooling in China space station",
+    "source_type": "peer_reviewed_primary_paper",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors": "Siminda Deng et al.",
+    "journal": "npj Microgravity",
+    "year": 2024,
+    "doi": "10.1038/s41526-024-00407-2",
+    "url": "https://doi.org/10.1038/s41526-024-00407-2",
+    "public_record": "https://pubmed.ncbi.nlm.nih.gov/38844756/",
+    "supports": [
+      "CSS cold-atom microwave clock design and reliability-test context",
+      "intracavity cooling and microwave interaction architecture",
+      "reported ground-test stability metrics with their stated conditions"
+    ],
+    "limits": "Ground-test stability is not an in-orbit operational threshold.",
+    "checked_on": "2026-10-06",
+    "verification_scope": "abstract_and_intracavity_scheme"
+  },
+  {
+    "id": "paper_css_cold_atom_gyro_2025",
+    "title": "Realization of a cold atom gyroscope in space",
+    "source_type": "peer_reviewed_primary_paper",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "journal": "National Science Review",
+    "year": 2025,
+    "url": "https://academic.oup.com/nsr/article/12/4/nwaf012/7951977",
+    "supports": [
+      "China Space Station atom-interferometer gyroscope context",
+      "in-orbit rotation-measurement demonstration"
+    ],
+    "limits": "Reported performance values are experiment-specific and cannot be used as a general sensor acceptance threshold."
+  },
+  {
+    "id": "esa_eml_official",
+    "title": "Electromagnetic Levitator turns ten",
+    "source_type": "official_facility_description",
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "European Space Agency",
+    "url": "https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/Electromagnetic_Levitator_turns_ten",
+    "supports": [
+      "Columbus Electromagnetic Levitator facility context",
+      "high-temperature levitation, melting and solidification observation",
+      "high-speed camera and sensor data flow to support teams"
+    ],
+    "limits": "The public page does not define a payload-specific high-temperature operating envelope.",
+    "checked_on": "2026-10-06",
+    "verification_scope": "official_facility_article"
+  },
+  {
+    "id": "paper_iss_lettuce_microbiology_2020",
+    "title": "Microbiological and Nutritional Analysis of Lettuce Crops Grown on the International Space Station",
+    "source_type": "peer_reviewed_primary_paper",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors": "Christina L. M. Khodadad et al.",
+    "journal": "Frontiers in Plant Science",
+    "year": 2020,
+    "doi": "10.3389/fpls.2020.00199",
+    "url": "https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2020.00199/full",
+    "checked_on": "2026-10-06",
+    "verification_scope": "open_access_experiment_description_and_data_availability",
+    "supports": [
+      "red romaine lettuce Outredgeous and ISS/ground comparison context",
+      "Data Availability: VEG-01A GLDS-267, VEG-01B GLDS-268, VEG-03A GLDS-269"
+    ],
+    "limits": "Study-specific microbiological/nutritional findings do not establish general food safety or rice SOP parameters. Dataset files not downloaded or reanalysed in this round."
+  },
+  {
+    "id": "official_cemps_rice_2022",
+    "title": "中科院分子植物卓越中心在国际上首次完成了水稻从种子到种子全生命周期空间培养实验",
+    "source_type": "official_research_team_report",
+    "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "中国科学院分子植物科学卓越创新中心",
+    "year": 2022,
+    "published_on": "2022-12-05",
+    "url": "https://www.sippe.ac.cn/kyjz/kyjz2019_189720/202212/t20221205_6566562.html",
+    "checked_on": "2026-10-07",
+    "verification_scope": "indexed_research_team_article_body; direct_page_fetch_failed",
+    "supports": [
+      "stage-specific reported rice/Arabidopsis preservation",
+      "post-return fixation and handover context",
+      "reported July 29 to November 25 mission timeline"
+    ],
+    "limits": "Historical mission report. It does not disclose tool choice, tissue quantity, sealing, transfer time or fixation protocol. Timeline differs from the 2024 GBCM abstract; retain both."
+  },
+  {
+    "id": "paper_kft_rnalater_2005",
+    "title": "Plant molecular biology in the space station era: utilization of KSC fixation tubes with RNAlater",
+    "source_type": "peer_reviewed_primary_paper",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors": "Anna-Lisa Paul et al.",
+    "journal": "Acta Astronautica",
+    "year": 2005,
+    "doi": "10.1016/j.actaastro.2004.10.001",
+    "url": "https://doi.org/10.1016/j.actaastro.2004.10.001",
+    "public_record": "https://pubmed.ncbi.nlm.nih.gov/15736319/",
+    "checked_on": "2026-10-07",
+    "verification_scope": "indexed_PubMed_abstract_and_publisher_preview; full_text_not_obtained",
+    "supports": [
+      "KFT containment and RNAlater use for plant RNA preservation"
+    ],
+    "limits": "Method context for particular spaceflight experiments; not the CSS rice fixation or packaging SOP. No reagent recipe, transfer deadline or compatibility claim is supplied."
+  },
+  {
+    "id": "paper_kft_operations_2011",
+    "title": "The performance of KSC Fixation Tubes with RNALater for orbital experiments: A case study in ISS operations for molecular biology",
+    "source_type": "peer_reviewed_primary_paper",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors": "Robert J. Ferl et al.",
+    "journal": "Advances in Space Research",
+    "year": 2011,
+    "doi": "10.1016/j.asr.2011.03.002",
+    "url": "https://doi.org/10.1016/j.asr.2011.03.002",
+    "public_record": "https://www.sciencedirect.com/science/article/abs/pii/S027311771100161X",
+    "checked_on": "2026-10-07",
+    "verification_scope": "indexed_publisher_abstract_introduction_and_section_snippets; complete_full_text_not_obtained",
+    "supports": [
+      "sample collection, cold stowage and return require linked preservation considerations",
+      "slow freezing versus snap freezing distinction in this case study"
+    ],
+    "limits": "ISS-era case study, not current transport approval or a universal tolerance to thawing. No permitted excursion temperature/time is adopted."
+  },
+  {
+    "id": "paper_apex04_epigenomics_2021",
+    "title": "Epigenomic Regulators Elongator Complex Subunit 2 and Methyltransferase 1 Differentially Condition the Spaceflight Response in Arabidopsis",
+    "source_type": "open_access_primary_paper",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors": "Anna-Lisa Paul, Natasha Haveman, Brandon Califar, Robert J. Ferl",
+    "journal": "Frontiers in Plant Science",
+    "year": 2021,
+    "doi": "10.3389/fpls.2021.691790",
+    "url": "https://doi.org/10.3389/fpls.2021.691790",
+    "full_text": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8475764/",
+    "public_record": "https://pubmed.ncbi.nlm.nih.gov/34589093/",
+    "checked_on": "2026-10-07",
+    "verification_scope": "open_access_abstract; Materials and Methods plant design/operations/RNA quality; Data Availability",
+    "supports": [
+      "APEX04 Arabidopsis genotypes and organ-specific analysis",
+      "biological replicate pooling and a lost plate",
+      "RNA quality assessment methods",
+      "GSE118503 with Bisulfite-seq GSE118483 and RNA-seq GSE118502"
+    ],
+    "limits": "Specific ISS Arabidopsis study. RIN observations, culture conditions and pooling design are not generic rice criteria. Methods contain pooling details absent from simplified GEO design descriptions."
+  },
+  {
+    "id": "geo_gse118483",
+    "title": "GSE118483: Characterizing Epigenetic Changes in Methylation Mutants (elp2-5 and met1-7) in Response to Spaceflight. [Bisulfite-Seq]",
+    "source_type": "official_open_data_study",
+    "evidence_level": "B_OFFICIAL_DATA",
+    "publisher": "NCBI Gene Expression Omnibus; submitted by the study investigators",
+    "study_id": "GSE118483",
+    "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE118483",
+    "checked_on": "2026-10-07",
+    "verification_scope": "series_metadata; 48 sample entries; platform; relations; supplementary file listing",
+    "supports": [
+      "Arabidopsis ISS versus ground comparison metadata",
+      "Bisulfite-seq accession and file discovery"
+    ],
+    "limits": "Metadata inspected. The 2.8 Gb processed archive and raw SRA reads were not downloaded or reanalysed. Use the paper to resolve replicate pooling; this is not a rice dataset."
+  },
+  {
+    "id": "geo_gse118502",
+    "title": "GSE118502: Characterizing Epigenetic Changes in Methylation Mutants (elp2-5 and met1-7) in Response to Spaceflight. [RNA-Seq]",
+    "source_type": "official_open_data_study",
+    "evidence_level": "B_OFFICIAL_DATA",
+    "publisher": "NCBI Gene Expression Omnibus; submitted by the study investigators",
+    "study_id": "GSE118502",
+    "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE118502",
+    "checked_on": "2026-10-07",
+    "verification_scope": "series_metadata; sample entries; BioProject/SRA relations; processed expression and differential-expression file listing",
+    "supports": [
+      "RNA-seq dataset identity and leaf/root processed expression file discovery"
+    ],
+    "limits": "Raw SRA reads and differential-expression workbooks have not been reanalysed. Any downloaded FPKM files are processed data, not new flight telemetry or rice data; download status is recorded separately."
+  },
+  {
+    "id": "paper_css_zebrafish_selection_2025",
+    "title": "Zebrafish selection strategy for the first zebrafish cultivation experiment on the Chinese space station",
+    "source_type": "peer_reviewed_primary_paper",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors": "Chaoxian Jia et al.",
+    "journal": "Life Sciences in Space Research",
+    "year": 2025,
+    "doi": "10.1016/j.lssr.2025.03.012",
+    "url": "https://doi.org/10.1016/j.lssr.2025.03.012",
+    "public_record": "https://pubmed.ncbi.nlm.nih.gov/40774745/",
+    "checked_on": "2026-10-07",
+    "verification_scope": "indexed_PubMed_complete_abstract; complete_methods_not_obtained",
+    "supports": [
+      "Ceratophyllum/zebrafish/microorganism CAES composition",
+      "behavioral and physiological preselection context",
+      "reported four selected fish surviving 43 days"
+    ],
+    "limits": "The 2025 publication describes one experiment, not universal welfare, stocking or survival criteria. Exact screening thresholds and current crew procedures are not supplied by the abstract."
+  },
+  {
+    "id": "paper_caes_nutrient_shift_2024",
+    "title": "Microbes and nutrient shift in a Closed Aquatic Ecosystem (CAES) during four weeks of operation",
+    "source_type": "peer_reviewed_primary_paper",
+    "evidence_level": "A_PRIMARY_PAPER",
+    "authors": "Peifan Gu et al.",
+    "journal": "Life Sciences in Space Research",
+    "year": 2024,
+    "doi": "10.1016/j.lssr.2024.06.001",
+    "url": "https://doi.org/10.1016/j.lssr.2024.06.001",
+    "public_record": "https://pubmed.ncbi.nlm.nih.gov/39067997/",
+    "checked_on": "2026-10-07",
+    "verification_scope": "indexed_PubMed_and_publisher_complete_abstract; complete_methods_and_data_not_obtained",
+    "supports": [
+      "four-week aquatic ecosystem composition",
+      "reported water chemistry and microbial shifts"
+    ],
+    "limits": "The abstract alone does not establish that the 28-day study was an on-orbit run. Do not merge with the 43-day CSS or historical Shenzhou-II experiment, or turn nutrient conclusions into crew intervention instructions."
+  },
+  {
+    "id": "nasa_veg05_challenges_2023", "title": "NASA Teams Persevere Through Plant Challenges in Space",
+    "source_type": "official_mission_report", "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "NASA Kennedy Space Center", "authors": "Jim Cawley", "published_on": "2023-04-20", "year": 2023,
+    "url": "https://www.nasa.gov/missions/station/nasa-teams-persevere-through-plant-challenges-in-space/",
+    "checked_on": "2026-10-08", "verification_scope": "article_body_humidity_water_stress_and_fungal_concerns",
+    "supports": ["VEG-05 humidity and watering difficulties", "potential fungal contamination concerns prevented crew tasting"],
+    "limits": "Historical ISS tomato case, not a CSS plant procedure. No watering volume, current humidity limit, disinfection instruction or food-safety clearance is inferred."
+  },
+  {
+    "id": "nasa_veggie_ponds_water_2020", "title": "The Shape of Watering Plants in Space",
+    "source_type": "official_hardware_and_mission_description", "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "NASA", "authors": "Danielle Sempsrott", "published_on": "2020-03-04", "year": 2020,
+    "url": "https://www.nasa.gov/missions/station/the-shape-of-watering-plants-in-space/",
+    "checked_on": "2026-10-08", "verification_scope": "article_body_Veggie_plant_pillows_and_PONDS_design_distinction",
+    "supports": ["Veggie plant pillows and PONDS have distinct water delivery hardware", "both excess and insufficient water occurred in earlier PONDS tests"],
+    "limits": "Hardware-specific description. Do not substitute ISS reservoirs or watering schedules for CSS modules, rice sampling or small-animal husbandry."
+  },
+  {
+    "id": "official_ihb_caes_43days_2024", "title": "太空密闭水生生态系统的新突破:支持斑马鱼空间培养43天",
+    "source_type": "official_research_team_report", "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "中国科学院水生生物研究所", "year": 2024,
+    "url": "https://ihb.cas.cn/xwdt/kydt/202411/t20241119_7442337.html",
+    "checked_on": "2026-10-08", "verification_scope": "article_body_CAEs_monitoring_control_and_sampling_description",
+    "supports": ["43-day CSS zebrafish and Ceratophyllum closed ecosystem", "dissolved oxygen, pH and conductivity monitoring", "light-related oxygen regulation and circulation pump", "water sampled at three stages"],
+    "limits": "Team report is not a flight manual. Reported oxygen conditions do not authorize alarm thresholds, light changes, aeration, opening, water exchange, animal fixation or euthanasia in another task."
+  },
+  {
+    "id": "jaxa_advanced_nanostep_operations", "title": "Effects of impurities on perfection of protein crystals, partition functions, and growth mechanisms",
+    "source_type": "official_experiment_description", "evidence_level": "C_OFFICIAL_DESCRIPTION", "publisher": "JAXA",
+    "url": "https://humans-in-space.jaxa.jp/en/biz-lab/experiment/theme/detail/000804.html",
+    "checked_on": "2026-10-08", "verification_scope": "Experiment_Description_and_Operational_Requirements_and_Protocols_sections",
+    "supports": ["Advanced Nano Step uses glucose isomerase and impurity studies", "concentration and crystal surface observations", "ISS crew support for solution cell replacement"],
+    "limits": "Named ISS experiment only, an analogue for the project directory. Not a universal protein, CSS biochemical assembly or cell-replacement SOP; public temperature conditions are not copied into task limits."
+  },
+  {
+    "id": "official_imech_fluid_racks_2022", "title": "力学所两个流体科学实验柜随梦天实验舱成功发射入轨",
+    "source_type": "official_hardware_team_report", "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "中国科学院力学研究所", "published_on": "2022-10-31", "year": 2022,
+    "url": "https://imech.cas.cn/picnews/202302/t20230227_6684600.html",
+    "checked_on": "2026-10-08", "verification_scope": "article_body_complex_fluid_instrument_functions; body_date_distinguished_from_URL_archive_date",
+    "supports": ["CSS complex-fluid microscopy, rheometry, dynamic/static light scattering and spectroscopy"],
+    "limits": "Facility capabilities, not task settings or an operating sequence. Does not supply actual wavelengths, angles, shear geometry, shear-rate units, torque alarms or crew maintenance permissions."
+  },
+  {
+    "id": "official_imech_colloid_bcc_2025", "title": "力学所在微重力下带电胶体结晶方面取得进展",
+    "source_type": "official_research_team_report", "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "中国科学院力学研究所", "published_on": "2025-06-07", "year": 2025,
+    "url": "https://www.imech.ac.cn/research/kyjz/202506/t20250607_7799358.html",
+    "checked_on": "2026-10-08", "verification_scope": "research_team_article_body_and_linked_paper_identity; complete_paper_not_obtained",
+    "supports": ["CSS charged-colloid experiments used spectral/light-scattering instrumentation", "long-lived metastable bcc phase reported for the described study"],
+    "limits": "The linked primary paper was not obtained: publisher retrieval failed and PubMed returned a challenge. No raw spectra, fitting parameters, acceptance criteria or full methods were verified. An unusual structure is not automatically an equipment fault."
+  }
+]
