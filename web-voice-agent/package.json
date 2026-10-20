@@ -1,11 +1,14 @@
 {
   "name": "space-experiment-voice-agent",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.2",
   "private": true,
   "description": "Restricted voice-only multi-experiment demonstration prototype",
   "engines": { "node": ">=24 <25" },
   "scripts": {
     "start": "node server/index.js",
+    "start:api": "node server/api-index.js",
+    "start:demo": "node server/frontend-index.js",
+    "start:admin": "node server/admin-index.js",
     "test": "node scripts/run-tests.js",
     "rehearse": "node scripts/rehearse-demo.js",
     "rehearse:http": "node scripts/rehearse-http.js",

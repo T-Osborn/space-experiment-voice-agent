@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="color-scheme" content="light"/>
+  <title>Agent 管理控制台</title>
+  <link rel="stylesheet" href="/admin.css"/>
+</head>
+<body>
+  <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="orbit" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(-35 12 12)"/></symbol>
+    <symbol id="grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="layers" viewBox="0 0 24 24"><path d="m12 3 10 5-10 5L2 8zM2 12l10 5 10-5M2 16l10 5 10-5"/></symbol>
+    <symbol id="book" viewBox="0 0 24 24"><path d="M12 5c-3-2-7-2-10-1v15c3-1 7-1 10 1m0-15c3-2 7-2 10-1v15c-3-1-7-1-10 1z"/></symbol>
+    <symbol id="flow" viewBox="0 0 24 24"><rect x="2" y="3" width="6" height="6" rx="1"/><rect x="16" y="9" width="6" height="6" rx="1"/><rect x="2" y="15" width="6" height="6" rx="1"/><path d="M8 6h4v12H8m4-6h4"/></symbol>
+    <symbol id="text" viewBox="0 0 24 24"><path d="M4 4h16M12 4v16m-4 0h8M4 8V4m16 4V4"/></symbol>
+    <symbol id="mic" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="13" rx="4"/><path d="M5 10v2a7 7 0 0 0 14 0v-2m-7 9v3m-4 0h8"/></symbol>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+    <symbol id="refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M5 7a8 8 0 0 1 13-2l2 3M4 16l2 3a8 8 0 0 0 13-2"/></symbol>
+  </defs></svg>
+  <aside class="sidebar">
+    <a href="#overview" class="brand" aria-label="Agent管理总览"><svg><use href="#orbit"/></svg><span>在轨实验助手<small>AGENT CONSOLE</small></span></a>
+    <p class="nav-label">工作空间</p>
+    <nav aria-label="管理模块">
+      <button type="button" class="nav-item selected" data-module="overview" aria-current="page"><svg><use href="#grid"/></svg>运行总览</button>
+      <span class="nav-divider">五个独立模块</span>
+      <button type="button" class="nav-item" data-module="ui"><svg><use href="#layers"/></svg>UI设计</button>
+      <button type="button" class="nav-item" data-module="knowledge"><svg><use href="#book"/></svg>知识库搭建</button>
+      <button type="button" class="nav-item" data-module="skills"><svg><use href="#flow"/></svg>Skills增强</button>
+      <button type="button" class="nav-item" data-module="prompts"><svg><use href="#text"/></svg>提示词工程</button>
+      <button type="button" class="nav-item" data-module="voice"><svg><use href="#mic"/></svg>音色配置</button>
+    </nav>
+    <div class="sidebar-foot"><span class="local-label"><i></i> 独立管理端</span><p>演示与管理分开运行<br/>任务记录由Agent服务保存</p></div>
+  </aside>
+  <div class="main-shell">
+    <header class="topbar"><p>工作空间 <span>/</span> <strong id="breadcrumb">运行总览</strong></p><span class="administrator">T · 本机管理</span></header>
+    <main>
+      <div class="page-heading"><div><p class="eyebrow">ORBITAL SCIENCE / MANAGEMENT</p><h1 id="pageTitle">Agent 管理控制台</h1><p id="pageDescription">查看演示服务与五个模块的当前状态。</p></div><a id="openDemo" class="button button-primary" target="_blank" rel="noopener noreferrer" hidden>打开演示前台 <svg><use href="#arrow"/></svg></a></div>
+      <section class="stage-note"><span class="stage-badge">分离阶段</span><p>本阶段提供独立入口与只读检查。各模块的编辑、保存和生效功能后续逐项接入。</p></section>
+      <div id="errorBanner" class="error-banner" role="alert" hidden></div>
+      <section class="runtime-strip" aria-label="服务连接状态"><div><span id="runtimeDot" class="status-dot neutral"></span><strong id="runtimeLabel">正在检查Agent服务</strong><span id="runtimeVersion" class="runtime-version">—</span></div><div class="runtime-actions"><span id="checkedAt">尚未检查</span><button id="refresh" class="button button-subtle" type="button"><svg><use href="#refresh"/></svg>刷新状态</button></div></section>
+      <div id="overview">
+        <section class="stats" aria-label="已加载配置"><div><span>可引用问答</span><strong id="questionCount">—</strong><small>当前整理记录</small></div><div><span>公开来源</span><strong id="sourceCount">—</strong><small>包含资料及数据索引</small></div><div><span>实验目录</span><strong id="experimentCount">—</strong><small id="procedureCount">读取流程配置中</small></div><div><span>管理模块</span><strong id="moduleCount">—</strong><small>按职责独立组织</small></div></section>
+        <div class="overview-grid">
+          <section class="panel"><div class="panel-heading"><span class="section-icon"><svg><use href="#flow"/></svg></span><h2>对话与任务</h2><span class="badge" id="modelBadge">检查中</span></div><dl class="settings-list"><div><dt>当前对话方式</dt><dd id="dialogueMode">正在读取</dd></div><div><dt>自由对话模型</dt><dd id="modelStatus">正在读取</dd></div><div><dt>任务记录存储</dt><dd id="storageStatus">正在读取</dd></div><div><dt>流程核对</dt><dd id="approvedStatus">正在读取</dd></div></dl><p class="panel-footnote">模型连接与检索规则分别显示，配置状态以实际服务为准。</p></section>
+          <section class="panel"><div class="panel-heading"><span class="section-icon"><svg><use href="#mic"/></svg></span><h2>语音服务</h2><span class="badge" id="speechBadge">检查中</span></div><div class="speech-columns"><div><span class="small-label">ASR 语音识别</span><strong id="asrProvider">—</strong><span id="asrState" class="text-status">正在读取</span></div><div><span class="small-label">TTS 语音合成</span><strong id="ttsProvider">—</strong><span id="ttsState" class="text-status">正在读取</span></div></div><div class="voice-detail"><span>当前播报音色</span><strong id="voiceName">正在读取</strong></div><p class="panel-footnote">仅检查本地配置，不发起录音或合成，不读取或展示API密钥。</p></section>
+          <section class="panel role-panel"><div class="panel-heading"><span class="section-icon"><svg><use href="#text"/></svg></span><h2>角色与提示词</h2><button class="text-button" data-open="prompts" type="button">查看模块 →</button></div><h3 id="agentName">正在读取角色</h3><p id="agentRole" class="role-description"></p><div id="toneTags" class="tone-tags"></div><div class="policy-note"><span>提示词修订</span><strong id="promptRevision">—</strong></div></section>
+          <section class="panel architecture-panel"><div class="panel-heading"><span class="section-icon"><svg><use href="#layers"/></svg></span><h2>前台与后台</h2><span class="badge subtle">独立入口</span></div><ol class="service-map"><li><span>01</span><div><strong>演示前台</strong><small id="demoAddress">正在读取</small></div><em>展示与语音</em></li><li><span>02</span><div><strong>Agent服务</strong><small id="backendAddress">正在读取</small></div><em>任务与数据</em></li><li><span>03</span><div><strong>管理后台</strong><small id="adminAddress">当前管理地址</small></div><em>配置检查</em></li></ol></section>
+        </div>
+        <section class="module-section"><div class="section-heading"><div><h2>模块工作区</h2><p>选择一个模块，查看文件边界与当前配置。</p></div><span class="small-label">MODULE WORKSPACES</span></div><div id="moduleCards" class="module-cards"></div></section>
+      </div>
+      <section id="moduleDetail" hidden aria-live="polite"><div class="detail-intro"><p id="moduleDescription"></p><span class="badge subtle">本阶段只读</span></div><section class="panel file-panel"><div class="panel-heading"><h2>模块文件</h2><span class="small-label">固定文件清单</span></div><div class="file-table-wrap"><table><thead><tr><th>文件路径</th><th>状态</th><th>大小</th></tr></thead><tbody id="fileRows"></tbody></table></div><p class="panel-footnote">文件相对于项目根目录。密钥文件和个人实验数据库不在此清单中。</p></section><div id="moduleDocuments"></div></section>
+      <footer>本机开发预览 · 管理页面不确认实验数据或推进步骤 · <span id="workspaceVersion">正在读取版本</span></footer>
+    </main>
+  </div>
+  <script src="/admin.js"></script>
+</body>
+</html>

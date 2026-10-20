@@ -39,10 +39,12 @@ function assertSameOrigin(req, config) {
 }
 
 class DemoAccess {
-  constructor(config, { now = Date.now, maxOwners = 128, ownerTTL = 3600000, requestLimit = 90, persistentIdentity = false } = {}) {
+  constructor(config, { now = Date.now, maxOwners = 128, ownerTTL = 3600000, requestLimit = 90, persistentIdentity = false, cookieName = 'va_owner' } = {}) {
     this.config = config; this.now = now; this.maxOwners = maxOwners;
     this.ownerTTL = ownerTTL; this.requestLimit = requestLimit;
     this.persistentIdentity = persistentIdentity;
+    if (!['va_owner', 'va_admin'].includes(cookieName)) throw failure('COOKIE_NAME_INVALID');
+    this.cookieName = cookieName;
     this.owners = new Map(); this.accessRates = new Map();
   }
   prune() {
@@ -61,14 +63,14 @@ class DemoAccess {
   }
   owner(req) {
     this.prune();
-    const id = this.identity(cookieValue(req, "va_owner"));
+    const id = this.identity(cookieValue(req, this.cookieName));
     if (!this.owners.has(id)) throw failure("DEMO_ACCESS_REQUIRED", 401);
     return id;
   }
   grant(req, res, suppliedToken) {
     this.prune();
     this.rate(this.accessRates, req.socket.remoteAddress || "unknown", 20);
-    const existingCookie = cookieValue(req, "va_owner");
+    const existingCookie = cookieValue(req, this.cookieName);
     const existing = this.identity(existingCookie);
     if (this.owners.has(existing)) return existing;
     if (this.config.production) {
@@ -83,7 +85,7 @@ class DemoAccess {
     const id = this.identity(cookie);
     this.owners.set(id, { expires: this.now() + this.ownerTTL, requests: new Map() });
     const cookieAge = this.persistentIdentity ? 180 * 24 * 3600 : Math.floor(this.ownerTTL / 1000);
-    res.setHeader("Set-Cookie", `va_owner=${cookie}; HttpOnly; SameSite=Strict; Path=/; Max-Age=${cookieAge}${this.config.production ? "; Secure" : ""}`);
+    res.setHeader("Set-Cookie", `${this.cookieName}=${cookie}; HttpOnly; SameSite=Strict; Path=/; Max-Age=${cookieAge}${this.config.production ? "; Secure" : ""}`);
     return id;
   }
   identity(cookie) { return this.persistentIdentity ? createHash("sha256").update(cookie).digest("hex") : cookie; }

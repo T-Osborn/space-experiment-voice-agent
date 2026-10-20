@@ -15,6 +15,7 @@ try {
   if (!["sqlite", "memory"].includes(mode)) throw new Error("RECORD_STORAGE_CONFIG_INVALID");
   if (mode === "sqlite") repository = new RecordRepository({ directory: recordDirectory() });
   const { server } = createApp({ config,
+    serveFrontend: process.env.SERVE_DEMO_FRONTEND !== 'false',
     access: new DemoAccess(config, { persistentIdentity: Boolean(repository) }),
     sessions: new SessionStore({ repository }),
   });

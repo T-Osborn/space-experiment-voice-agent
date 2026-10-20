@@ -1,6 +1,5 @@
-const fs = require("node:fs");
-const path = require("node:path");
 const http = require("node:http");
+const { DEMO_DIR, DEMO_FILES, serveAsset } = require('./frontend-assets');
 const { AgentOrchestrator } = require("./agent-orchestrator");
 const { VoiceAdapterRegistry } = require("./voice-adapters");
 const { ASRAdapterRegistry } = require("./asr-adapters");
@@ -11,17 +10,6 @@ const { summarizeReadiness } = require("./readiness");
 const { behaviorPolicy } = require("./behavior-policy");
 const { version: applicationVersion } = require("../package.json");
 const { deploymentConfig, DemoAccess, SessionStore, assertSameOrigin, setSecurityHeaders, failure } = require("./deployment-security");
-
-const PUBLIC_DIR = path.join(__dirname, "..", "public");
-const STATIC_FILES = new Map([
-  ["/", ["index.html", "text/html; charset=utf-8"]],
-  ["/index.html", ["index.html", "text/html; charset=utf-8"]],
-  ["/styles.css", ["styles.css", "text/css; charset=utf-8"]],
-  ["/app.js", ["app.js", "text/javascript; charset=utf-8"]],
-  ["/dashboard.js", ["dashboard.js", "text/javascript; charset=utf-8"]],
-  ["/audio-tools.js", ["audio-tools.js", "text/javascript; charset=utf-8"]],
-  ["/voice-network.js", ["voice-network.js", "text/javascript; charset=utf-8"]],
-]);
 
 function json(res, status, payload) {
   res.writeHead(status, { "Content-Type": "application/json; charset=utf-8" });
@@ -66,7 +54,8 @@ function speechFailure(result) {
 
 function createApp({ config = deploymentConfig(), orchestrator = new AgentOrchestrator(),
   voiceAdapters = new VoiceAdapterRegistry(), asrAdapters = new ASRAdapterRegistry(),
-  ttsAdapters = new TTSAdapterRegistry(), access = new DemoAccess(config), sessions = new SessionStore() } = {}) {
+  ttsAdapters = new TTSAdapterRegistry(), access = new DemoAccess(config), sessions = new SessionStore(),
+  serveFrontend = true } = {}) {
   const { knowledgeRetriever, experimentRegistry, procedureRegistry } = orchestrator;
   let activeSpeech = 0;
   async function speechWork(handler) {
@@ -80,11 +69,7 @@ function createApp({ config = deploymentConfig(), orchestrator = new AgentOrches
       const url = new URL(req.url, "http://localhost");
       const route = url.pathname;
       if (req.method === "GET" && route === "/api/health") return json(res, 200, { ok: true, service: "space-experiment-voice-agent" });
-      if (req.method === "GET" && STATIC_FILES.has(route)) {
-        const [filename, type] = STATIC_FILES.get(route);
-        const data = await fs.promises.readFile(path.join(PUBLIC_DIR, filename));
-        res.writeHead(200, { "Content-Type": type, "Content-Length": data.length }); res.end(data); return;
-      }
+      if (serveFrontend && await serveAsset(req, res, route, DEMO_DIR, DEMO_FILES)) return;
       if (!route.startsWith("/api/")) throw failure("NOT_FOUND", 404);
       if (req.method === "POST") assertSameOrigin(req, config);
       if (req.method === "POST" && route === "/api/access") {

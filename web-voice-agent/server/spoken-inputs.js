@@ -139,7 +139,13 @@ function extractStepInputs(step, query, observations = {}) {
   for (let i = 0; i < selected.length; i += 1) {
     const anchor = selected[i];
     const end = selected[i + 1]?.start ?? text.length;
-    const context = text.slice(anchor.end, end).split(/[，,。；;\n]/u)[0].trim();
+    const remainder = text.slice(anchor.end, end);
+    // ASR can insert a comma between the date and clock time. Keep the full
+    // timestamp field, bounded by the next field alias, instead of truncating it.
+    // parseUtc must still consume the whole value, including any conflicting text.
+    const context = anchor.input.type === "datetime_utc"
+      ? remainder.trim().replace(/[，,。；;\s]+$/u, "")
+      : remainder.split(/[，,。；;\n]/u)[0].trim();
     // Keep enum aliases (e.g. "种子成熟") because the value can be in the alias itself.
     add(anchor.input, readValue(anchor.input, anchor.input.type === "enum" ? text.slice(anchor.start, anchor.end) + context : context));
   }
@@ -160,11 +166,21 @@ function parseIdentifier(text, maxLength = 64) {
 }
 
 function parseUtc(text) {
-  const iso = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z$/iu.exec(text);
-  const spoken = /^(?:UTC\s*)?(\d{4})年(\d{1,2})月(\d{1,2})日\s*(\d{1,2})(?:时|点)(\d{1,2})分(\d{1,2})秒(?:\s*UTC)?$/iu.exec(text);
+  if (typeof text !== "string") return null;
+  const normalized = text.normalize("NFKC").trim().replace(/[。.]$/u, "").replace(/\s/gu, "");
+  const value = normalized.replace(/^UTC(?:时间戳|时间)?[:：]?/iu, "").replace(/UTC$/iu, "");
+  const iso = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z$/iu.exec(value);
+  const part = "([\\d零〇一二两三四五六七八九十百千]+)";
+  const datePattern = `${part}年${part}月${part}(?:日|号)[,，、;；。]?`;
+  const spoken = new RegExp(`^${datePattern}${part}(?:时|点)${part}分${part}秒$`, "u").exec(value)
+    || new RegExp(`^${datePattern}${part}:${part}:${part}$`, "u").exec(value);
   const match = iso || spoken;
   if (!match) return null;
-  const [year, month, day, hour, minute, second] = match.slice(1).map(Number);
+  // Every component is explicit. Never supply missing seconds/date or convert
+  // an unspecified/local timezone; the caller's field is explicitly UTC.
+  const components = match.slice(1).map(parseInteger);
+  if (components.some(component => component === null || !Number.isSafeInteger(component))) return null;
+  const [year, month, day, hour, minute, second] = components;
   if (year < 1000 || year > 9999) return null;
   const date = new Date(Date.UTC(year, month - 1, day, hour, minute, second));
   if (date.getUTCFullYear() !== year || date.getUTCMonth() !== month - 1 || date.getUTCDate() !== day
