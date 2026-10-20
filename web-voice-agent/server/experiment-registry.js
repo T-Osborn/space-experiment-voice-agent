@@ -72,6 +72,8 @@ class ExperimentRegistry {
             pause_reason: null,
             paused_from_step_state: null,
             last_exception: null,
+            unresolved_conflicts: [],
+            pending_resume_basis: null,
             last_operator_feedback: null,
           } : {}),
         },

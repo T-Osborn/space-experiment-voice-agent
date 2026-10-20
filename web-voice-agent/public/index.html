@@ -1,77 +1,75 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="dark" />
-    <title>在轨实验助手 · Voice Agent</title>
-    <link rel="stylesheet" href="/styles.css" />
-  </head>
-  <body>
-    <main class="app-shell">
-      <header class="masthead">
-        <div class="brand"><span class="brand-mark" aria-hidden="true">◎</span><div><span class="brand-name">在轨实验助手</span><span class="brand-subtitle">SPACE EXPERIMENT ASSISTANT</span></div></div>
-        <div class="header-status"><span class="status-dot" aria-hidden="true"></span>语音交互原型<span class="mode-tag" id="deploymentMode">本机演示</span></div>
-      </header>
-
-      <section class="intro">
-        <div><p class="eyebrow">VOICE-ONLY EXPERIMENT GUIDANCE</p><h1>专注实验，<br class="mobile-break" />让对话跟上每一步。</h1><p class="description">通过语音报告、核对与追问，保持实验步骤清晰。实际操作由实验人员完成。</p></div>
-        <p class="scope-note"><span>验证边界</span>当前为项目演示，非飞行任务系统。<br />不连接或控制实验设备。</p>
-      </section>
-
-      <div class="workspace-grid">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="color-scheme" content="dark"/>
+  <meta name="description" content="多实验语音任务工作台。口述报告、逐项读回、独立确认；软件交互演示，不用于真实飞行操作。"/>
+  <title>在轨实验助手 · 任务工作台</title><link rel="stylesheet" href="/styles.css"/>
+</head>
+<body>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="icon-orbit" viewBox="0 0 32 32"><circle cx="16" cy="16" r="6"/><ellipse cx="16" cy="16" rx="15" ry="6" transform="rotate(-35 16 16)"/><path d="M16 2v4m0 20v4M2 16h4m20 0h4"/></symbol>
+    <symbol id="icon-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="icon-mic" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="13" rx="4"/><path d="M5 10v2a7 7 0 0 0 14 0v-2m-7 9v3m-4 0h8"/></symbol>
+    <symbol id="icon-flow" viewBox="0 0 24 24"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><path d="M7 5h5v7h5M12 12v7H7"/></symbol>
+    <symbol id="icon-record" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 12h7m-7 4h7"/></symbol>
+    <symbol id="icon-book" viewBox="0 0 24 24"><path d="M12 6C9 3 5 3 2 4v15c3-1 7-1 10 2m0-15c3-3 7-3 10-2v15c-3-1-7-1-10 2z"/></symbol>
+    <symbol id="icon-signal" viewBox="0 0 24 24"><path d="M3 19v-4m6 4v-8m6 8V7m6 12V3"/></symbol>
+    <symbol id="icon-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-11v2"/></symbol>
+    <symbol id="icon-alert" viewBox="0 0 24 24"><path d="m12 3 10 18H2zM12 9v5m0 3v1"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+  </defs></svg>
+  <aside class="navigation-rail" aria-label="页面导航">
+    <a class="brand" href="#workbench" aria-label="在轨实验助手工作台"><svg class="brand-symbol"><use href="#icon-orbit"/></svg><span><strong>在轨实验助手</strong><small>ORBITAL SCIENCE</small></span></a>
+    <p class="rail-label">任务空间 <span>WORKSPACE</span></p>
+    <nav class="rail-links">
+      <a class="nav-link nav-primary" href="#workbench"><svg><use href="#icon-mic"/></svg><span>语音工作台</span><i></i></a>
+      <a class="nav-link" href="#directory"><svg><use href="#icon-grid"/></svg><span>实验目录</span><small id="navExperimentCount">—</small></a>
+      <a class="nav-link" href="#flow"><svg><use href="#icon-flow"/></svg><span>核对流程</span></a>
+      <a class="nav-link" href="#records"><svg><use href="#icon-record"/></svg><span>任务记录</span></a>
+      <a class="nav-link" href="#sources"><svg><use href="#icon-book"/></svg><span>知识与来源</span></a>
+    </nav>
+    <p class="rail-label rail-secondary-label">系统 <span>SYSTEM</span></p>
+    <nav class="rail-links"><a class="nav-link" href="#connections"><svg><use href="#icon-signal"/></svg><span>语音与连接</span></a><a class="nav-link" href="#boundary"><svg><use href="#icon-info"/></svg><span>演示说明</span></a></nav>
+    <div class="rail-bottom"><span class="rail-mode"><i></i> HUMAN IN THE LOOP</span><p>你完成实验操作<br/>助手协助核对与记录</p><span class="version-label" id="versionLabel">检查版本中</span></div>
+  </aside>
+  <main class="app-shell" id="workbench">
+    <header class="masthead"><div class="workspace-heading"><p class="eyebrow">MISSION WORKSPACE <span>/</span> VOICE AGENT</p><h1>实验任务工作台</h1></div><div class="header-status"><span class="mode-tag" id="deploymentMode">本机演示</span><span class="header-connection"><i class="status-dot"></i><span id="serviceState">正在检查服务</span></span></div></header>
+    <section class="mission-context panel" aria-label="当前实验与任务状态">
+      <div class="mission-icon" aria-hidden="true"><svg><use href="#icon-orbit"/></svg></div>
+      <div class="mission-identity"><p class="eyebrow">ACTIVE EXPERIMENT <span>当前实验</span></p><h2 id="experimentName">尚未选择实验</h2><p id="procedureScope">请通过语音选择实验。水稻是展示任务，多实验架构保持不变。</p></div>
+      <div class="mission-state"><span id="experimentStatus" class="pill">等待实验</span><p id="progressLabel">尚未开始</p><div class="progress-track" role="img" aria-label="已确认步骤比例"><span id="progressFill"></span></div></div>
+    </section>
+    <section id="exceptionBanner" class="exception-banner" aria-live="polite" hidden><svg aria-hidden="true"><use href="#icon-alert"/></svg><div><strong id="pauseTitle">任务已暂停</strong><p id="pauseMessage">等待适用恢复依据，不自动推进。</p></div><span class="pause-tag">PAUSED</span></section>
+    <div class="workspace-grid">
+      <section class="steps-panel panel" id="flow" aria-labelledby="flowHeading"><div class="panel-heading"><div><p class="eyebrow">PROCEDURE</p><h2 id="flowHeading">实验核对流程</h2></div><span class="small-counter" id="stepCounter">—</span></div><p class="section-caption">逐项报告 · 读回 · 独立确认</p><ol id="stepTimeline" class="step-timeline" aria-label="流程进度"><li class="timeline-empty">选择已配置演示流程的实验后显示。</li></ol><div class="flow-boundary"><svg aria-hidden="true"><use href="#icon-info"/></svg><p>这是软件核对结构<br/>不是已审核的飞行 SOP</p></div></section>
+      <div class="central-column">
         <section class="voice-panel panel" aria-labelledby="voiceHeading">
-          <div class="panel-heading"><h2 id="voiceHeading">语音工作台</h2><span class="pill" id="voicePhase">等待接入</span></div>
-          <div class="voice-orbit" id="voiceOrbit" data-phase="READY">
-            <div class="orbit-ring ring-one" aria-hidden="true"></div><div class="orbit-ring ring-two" aria-hidden="true"></div>
-            <span class="orbit-marker" aria-hidden="true"></span>
-            <button id="voiceButton" class="voice-button" type="button" disabled aria-describedby="supportMessage">
-              <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="18" y="8" width="12" height="23" rx="6"></rect><path d="M12 24v2a12 12 0 0 0 24 0v-2M24 38v5M18 43h12"></path></svg>
-              <span id="voiceButtonLabel">语音待接入</span>
-            </button>
-          </div>
-          <p id="status" class="status" role="status">正在检查服务</p>
-          <p class="voice-caption">点按录音 · 再次点按提交 · 语音播报反馈</p>
-          <button id="stopSpeakingButton" class="secondary-button" type="button"><span aria-hidden="true">■</span> 停止播报</button>
-          <div class="connection-strip"><span><i id="asrDot"></i>识别 <b id="asrStatus">检查中</b></span><span><i id="ttsDot"></i>播报 <b id="ttsStatus">检查中</b></span></div>
-          <p id="understandingStatus" class="task-footnote">知识理解：本地检索 · 语义模型暂未配置</p>
-          <p id="supportMessage" class="support-message" aria-live="polite"></p>
-          <a id="recordDownload" class="secondary-button" hidden>下载刚生成的实验记录</a>
-          <ul id="recordHistory" class="record-history" aria-label="已归档实验记录" hidden></ul>
+          <div class="panel-heading"><p class="eyebrow" id="voiceHeading">VOICE CHANNEL <span>语音交互</span></p><span class="pill" id="voicePhase">等待接入</span></div>
+          <div class="voice-orbit" id="voiceOrbit" data-phase="PENDING"><svg class="voice-wave" viewBox="0 0 720 180" fill="none" aria-hidden="true"><path d="M0 92C90 92 92 62 155 78S244 145 291 89 328 35 360 81 393 152 440 104 497 56 545 80 629 104 720 82"/><path d="M0 105C75 105 109 75 160 91S249 156 294 102 329 48 360 94 393 162 443 117 496 69 549 93 632 117 720 95"/><path d="M0 79C90 79 92 49 155 65S244 132 291 76 328 22 360 68 393 139 440 91 497 43 545 67 629 91 720 69"/></svg><div class="voice-core" aria-hidden="true"><svg><use href="#icon-mic"/></svg></div></div>
+          <p class="channel-caption" id="status" role="status">正在检查语音服务</p>
+          <div class="current-step-card"><div class="step-eyebrow"><span class="field-label">当前核对事项</span><span id="stepNumber">等待选择</span></div><h2 id="currentStep">从一句语音开始</h2><p id="stepDecision" class="step-decision">等待实验选择</p></div>
+          <div class="assistant-message" aria-live="polite"><div class="message-label"><span class="assistant-mark">AI</span> 助手提示 <span>只读</span></div><p id="assistantReply">可以先说“语音帮助”，或通过语音选择实验。</p></div>
+          <div class="heard-message"><span class="field-label">你的语音报告 <small>识别结果</small></span><p id="recognizedText">尚无本轮语音输入</p></div>
+          <div class="voice-actions"><button id="voiceButton" class="voice-button" type="button" disabled aria-describedby="supportMessage" aria-pressed="false"><svg aria-hidden="true"><use href="#icon-mic"/></svg><span id="voiceButtonLabel">语音待接入</span></button><button id="stopSpeakingButton" class="secondary-button" type="button"><span aria-hidden="true">■</span> 停止播报</button></div>
+          <p class="voice-caption">点按开始录音 · 再次点按提交 · 不开放文字输入</p><p id="supportMessage" class="support-message" aria-live="polite"></p><p id="guidanceState" class="guidance-state" aria-live="polite">等待语音指令</p>
         </section>
-
-        <section class="task-panel panel" aria-labelledby="taskHeading">
-          <div class="panel-heading"><h2 id="taskHeading">任务上下文</h2><span id="experimentStatus" class="pill">等待实验</span></div>
-          <div class="task-title"><span class="field-label">当前实验</span><h3 id="experimentName">尚未选择实验</h3><p id="procedureScope">请在语音接入后说出实验名称。水稻仅用于最终展示。</p></div>
-          <div class="current-step-card"><span class="field-label">当前步骤</span><strong id="currentStep">等待实验选择</strong><span id="progressLabel">尚未开始</span></div>
-          <ol id="stepTimeline" class="step-timeline" aria-label="流程进度"><li class="timeline-empty">选择已加载流程的实验后显示步骤。</li></ol>
-          <p id="guidanceState" class="guidance-state" aria-live="polite">等待语音指令</p>
-          <p class="task-footnote">具体时间与编号读回后确认再推进。异常分类追问不代替技术处置。</p>
-          <p id="recordStorage" class="task-footnote">正在检查记录保存方式。</p>
-        </section>
+        <div class="next-action-panel"><svg aria-hidden="true"><use href="#icon-arrow"/></svg><div><span class="field-label">下一步怎么说</span><p id="nextAction">可直接提问，或通过语音选择实验流程。</p></div></div>
       </div>
-
-      <section class="capability-strip" aria-label="当前已加载能力">
-        <div><strong id="experimentCount">—</strong><span>实验目录项</span></div><div><strong id="demoCount">—</strong><span>待审核演示流程</span></div><div><strong id="questionCount">—</strong><span>可追溯专业问答</span></div><div><strong id="sourceCount">—</strong><span>公开来源登记</span></div>
-        <p>目录登记 ≠ 流程可用<br />来源登记 ≠ 全部数据已复算</p>
-      </section>
-
-      <section class="commands-section" aria-labelledby="commandsHeading">
-        <div><p class="eyebrow">SPOKEN COMMANDS</p><h2 id="commandsHeading">用语音保持任务连贯</h2></div>
-        <div class="command-examples"><span>“语音帮助”</span><span>“选择太空水稻实验”</span><span>“开始流程”</span><span>“确认无误”</span><span>“这步要报什么”</span><span>“本步还缺什么”</span><span>“重新核对本步骤”</span><span>“暂停”</span><span>“保存记录”</span></div>
-        <p>示例仅供阅读，不是文字聊天入口。数值由你报告，助手不会猜测设备读数。</p>
-      </section>
-
-      <section class="directory-section panel" aria-labelledby="directoryHeading">
-        <div class="panel-heading"><div><p class="eyebrow">MULTI-EXPERIMENT REGISTRY</p><h2 id="directoryHeading">多实验目录</h2></div><span class="directory-legend"><i></i> 演示流程 · 其余待补齐</span></div>
-        <div id="experimentDirectory" class="experiment-directory"><p class="directory-empty">正在加载目录</p></div>
-      </section>
-
-      <footer class="page-footer"><span>VOICE ONLY / HUMAN IN THE LOOP</span><p>录音仅在你主动开始后采集；配置后发送至语音提供商。可选语义模型开启后也会接收待匹配问题。记录保存方式见任务面板；重要记录请另行下载留存。</p><span class="version-label">v1.0.0 · 团队试用版</span></footer>
-    </main>
-    <script src="/audio-tools.js"></script>
-    <script src="/dashboard.js"></script>
-    <script src="/voice-network.js"></script>
-    <script src="/app.js"></script>
-  </body>
+      <aside class="review-column" aria-label="字段读回与确认">
+        <section class="review-panel panel" aria-labelledby="reviewHeading"><div class="panel-heading"><div><p class="eyebrow">READBACK CHECK</p><h2 id="reviewHeading">本步字段核对</h2></div><span class="review-dot" aria-hidden="true"></span></div><p id="confirmationStatus" class="confirmation-status">等待报告</p><ul id="reportFields" class="field-review-list"><li class="review-empty">选择实验并开始后显示待报告字段。</li></ul><p id="readbackInstruction" class="readback-footnote">口述数据经读回后，再单独说“确认无误”。</p><details class="report-details"><summary>查看本步记录摘要</summary><p id="reportedInputs">本步报告：尚无</p><p id="pendingInputs">待补充：选择实验后显示</p></details></section>
+        <section class="trust-panel panel"><div class="panel-heading"><h2>任务状态</h2><span class="mono-label">LIVE STATE</span></div><div class="state-detail"><span>当前判定</span><strong id="taskStateLabel">未开始</strong></div><div class="state-detail"><span>核对依据</span><strong>项目演示规则</strong></div><div class="state-detail"><span>数据来源</span><strong>操作者口述</strong></div><details id="exceptionReadback" hidden><summary>异常记录与恢复依据</summary><div id="exceptionDetails"></div></details><p class="trust-note"><svg aria-hidden="true"><use href="#icon-info"/></svg>不连接设备遥测<br/>未独立验证地面授权</p></section>
+      </aside>
+    </div>
+    <section class="commands-section" aria-labelledby="commandsHeading"><div><p class="eyebrow">SAY IT TO CONTINUE</p><h2 id="commandsHeading">你可以这样说</h2></div><div class="command-examples"><span>“语音帮助”</span><span>“选择太空水稻实验”</span><span>“本步还缺什么”</span><span>“确认无误”</span><span>“重新核对本步骤”</span><span>“暂停”</span><span>“保存记录”</span></div><p>示例只供阅读。页面导航不会切换实验、确认字段或推进任务。</p></section>
+    <div class="secondary-grid">
+      <section class="knowledge-panel panel" id="sources" aria-labelledby="sourcesHeading"><div class="panel-heading"><div><p class="eyebrow">KNOWLEDGE DESK <span>P06</span></p><h2 id="sourcesHeading">知识问答与来源</h2></div><span class="pill" id="sourceState">等待提问</span></div><p class="section-caption" id="understandingStatus">正在检查本地题库</p><div class="knowledge-question" id="knowledgeQuestion">可以在实验中途查询，当前步骤保持不变。</div><p id="knowledgeAnswer" class="knowledge-answer" hidden></p><div id="sourceCards" class="source-cards"><p class="source-empty">语音提问后，这里显示对应的已登记来源及适用限制。没有依据时不生成操作指令。</p></div></section>
+      <section class="records-panel panel" id="records" aria-labelledby="recordsHeading"><div class="panel-heading"><div><p class="eyebrow">TASK ARCHIVE <span>P05</span></p><h2 id="recordsHeading">记录与交接</h2></div><span class="mono-label">OPERATOR REPORTED</span></div><p id="recordStorage" class="section-caption">正在检查记录保存方式。</p><details open><summary>已确认步骤与字段</summary><p id="confirmedInputs">尚无已确认参数</p></details><details><summary>最近的任务事件</summary><ul id="taskEvents" class="task-events"><li>尚无事件记录</li></ul></details><a id="recordDownload" class="secondary-button" hidden>下载刚生成的实验记录</a><ul id="recordHistory" class="record-history" aria-label="已归档实验记录" hidden></ul><p class="record-hint">说“保存记录”或“查看历史记录”。导出内容是演示口述记录，不是正式飞行任务报告。</p></section>
+    </div>
+    <section class="directory-section panel" id="directory" aria-labelledby="directoryHeading"><div class="panel-heading"><div><p class="eyebrow">EXPERIMENT LIBRARY <span>P01</span></p><h2 id="directoryHeading">多实验目录</h2></div><span class="directory-legend"><i></i> 语音选择 · 可用状态分别标注</span></div><p class="section-caption">只有已配置的演示流程可启动核对。目录卡片只读，不通过点击开始实验。</p><div id="experimentDirectory" class="experiment-directory"><p class="directory-empty">正在加载实验目录</p></div></section>
+    <section class="connection-panel panel" id="connections" aria-labelledby="connectionsHeading"><div><p class="eyebrow">VOICE & CONNECTION <span>P08</span></p><h2 id="connectionsHeading">语音与连接</h2></div><div class="connection-strip"><span><i id="asrDot"></i>语音识别 <b id="asrStatus">检查中</b></span><span><i id="ttsDot"></i>语音播报 <b id="ttsStatus">检查中</b></span></div><div class="voice-identity"><span class="field-label">当前播报配置</span><strong id="voiceIdentity">检查中</strong><small>显示实际配置，不代表定制音色已验收</small></div></section>
+    <section class="capability-strip" aria-label="当前已加载能力"><div><strong id="experimentCount">—</strong><span>实验目录项</span></div><div><strong id="demoCount">—</strong><span>待审核演示流程</span></div><div><strong id="questionCount">—</strong><span>可追溯问答记录</span></div><div><strong id="sourceCount">—</strong><span>公开来源登记</span></div><p>目录登记 ≠ 流程可用<br/>来源登记 ≠ 数据已复算</p></section>
+    <footer class="page-footer" id="boundary"><svg aria-hidden="true"><use href="#icon-info"/></svg><div><strong>软件交互原型 不可用于真实飞行操作</strong><p>公开研究不替代任务级 SOP。录音仅在你主动开始后采集，并按配置发送至语音提供商；没有设备控制、遥测或独立地面授权核验。可选语义模型开启后会接收待匹配问题，重要记录请下载留存。</p></div><span>VOICE ONLY<br/>HUMAN IN THE LOOP</span></footer>
+  </main>
+  <script src="/audio-tools.js"></script><script src="/dashboard.js"></script><script src="/voice-network.js"></script><script src="/app.js"></script>
+</body>
 </html>

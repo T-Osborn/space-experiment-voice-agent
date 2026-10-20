@@ -30,15 +30,26 @@ function knowledgeBoundary(query) {
 }
 
 class KnowledgeRetriever {
-  constructor({ records, sources } = {}) {
+  constructor({ records, sources, load = loadJson } = {}) {
     // Unverified user candidate answers are intentionally NOT loaded.
-    this.records = records || [...loadJson("records.json"), ...loadJson("qa-core.json"), ...loadJson("qa-expanded.json")];
-    this.sources = new Map((sources || [
-      ...loadJson("verified_sources.json"), ...loadJson("project_sources.json"),
-    ]).map((source) => [source.id, source]));
+    try {
+      this.records = records || [...load("records.json"), ...load("qa-core.json"), ...load("qa-expanded.json"), ...load("qa-rice-2026-10.json")];
+      this.sources = new Map((sources || [
+        ...load("verified_sources.json"), ...load("project_sources.json"),
+      ]).map((source) => [source.id, source]));
+      if (!Array.isArray(this.records)) throw new Error("KNOWLEDGE_DATA_INVALID");
+      this.availability = "AVAILABLE";
+    } catch {
+      this.records = []; this.sources = new Map(); this.availability = "UNAVAILABLE";
+    }
+  }
+
+  getStatus() {
+    return { status: this.availability, available: this.availability === "AVAILABLE" };
   }
 
   search(query, limit = 5) {
+    if (this.availability !== "AVAILABLE") throw new Error("KNOWLEDGE_UNAVAILABLE");
     const normalized = normalizeQuestion(expandQuery(query));
     const original = normalizeQuestion(query);
     if (!normalized || knowledgeBoundary(query)) return [];

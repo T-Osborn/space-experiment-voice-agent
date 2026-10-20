@@ -143,7 +143,7 @@ class SessionStore {
     try {
       const result = repeatLast && entry.lastReply
         ? { ...structuredClone(entry.lastReply), session: structuredClone(entry.session), response_type: "GUIDANCE_REPEATED" }
-        : await handler(structuredClone(entry.session));
+        : await handler(structuredClone(entry.session), structuredClone(entry.lastReply || null));
       if (result.session?.session_id !== id) throw failure("SESSION_STATE_INVALID", 500);
       result.session.revision = entry.session.revision + 1;
       // Bound prototype demo history. Long-term mission records need a reviewed durable store.

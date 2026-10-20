@@ -62,7 +62,8 @@ async function runHttpRehearsal({ base = "http://127.0.0.1:8095", fetchImpl = gl
         current_step: session.current_step, status: session.status,
         step_state: session.step_state, completed_gates: session.completed_steps?.length || 0 });
     }
-    assert.equal(session.status, "COMPLETED"); assert.equal(session.completed_steps.length, 9);
+    assert.equal(session.status, scenario.expected_status || "COMPLETED");
+    assert.equal(session.completed_steps.length, scenario.expected_confirmed_steps ?? 9);
     if (scenario.name.startsWith("exception_holds")) {
       assert.ok(turns.some((turn) => turn.response_type === "VALIDATION_FAILED"));
       assert.ok(turns.some((turn) => turn.response_type === "RESUME_REQUIRES_CONFIRMATION"));
@@ -79,7 +80,7 @@ async function runHttpRehearsal({ base = "http://127.0.0.1:8095", fetchImpl = gl
     }
     const refreshed = await (await request("/api/session", cookie, {})).json();
     assert.deepEqual(refreshed, session, "SAME_OWNER_REFRESH_DID_NOT_PRESERVE_TASK");
-    report.scenarios.push({ name: scenario.name, confirmed_gates: 9,
+    report.scenarios.push({ name: scenario.name, confirmed_gates: session.completed_steps.length,
       final_status: session.status, same_owner_refresh_preserved: true, turns });
   }
   return report;

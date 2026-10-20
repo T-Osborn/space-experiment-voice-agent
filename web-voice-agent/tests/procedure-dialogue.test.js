@@ -178,16 +178,16 @@ test("reported exception holds the step when the operator only says continue", a
   assert.equal(result.session.current_step, "melfi_storage_check");
 });
 
-test("operator-reported recovery is logged as unverified and rechecks current inputs", async () => {
+test("operator-reported recovery without an applicable configured instruction remains paused", async () => {
   const { agent, session } = await startTemperature();
   const failed = await turn(agent, session, "温度负六十度");
   const restored = await turn(agent, failed.session, "异常已评估，恢复条件已满足，地面同意恢复流程");
-  assert.equal(restored.response_type, "GUIDANCE_RESUMED");
-  assert.deepEqual(restored.session.step_observations, {});
-  assert.equal(restored.session.observations.melfi_temperature_c, undefined);
-  assert.equal(restored.session.event_log.at(-1).data.independently_verified, false);
+  assert.equal(restored.response_type, "RESUME_REQUIRES_CONFIRMATION");
+  assert.equal(restored.session.status, "PAUSED");
+  assert.equal(restored.session.observations.melfi_temperature_c, -60);
+  assert.equal(restored.session.pending_resume_basis.independently_verified, false);
   const next = await turn(agent, restored.session, "下一步");
-  assert.equal(next.response_type, "STEP_WAITING_INPUT");
+  assert.equal(next.response_type, "RESUME_REQUIRES_CONFIRMATION");
 });
 
 test("a negated or hypothetical recovery instruction cannot resume the procedure", async () => {

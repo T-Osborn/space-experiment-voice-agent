@@ -1,0 +1,66 @@
+name: 2.0测试反馈
+description: 反馈2.0测试版的识别、问答、追问、流程、播报和界面问题。
+title: "[2.0反馈] "
+body:
+  - type: markdown
+    attributes:
+      value: "按包内问答表测试。请勿填写密钥、Cookie、完整数据库或真实私密任务资料；未测试项注明。"
+  - type: input
+    id: version
+    attributes:
+      label: 页面实际版本
+      value: "2.0.0-beta.1"
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 操作系统、浏览器及Node版本
+      placeholder: "Windows 11 / Edge / Node 24.x"
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: 问题类别
+      options:
+        - 启动或配置
+        - 语音识别、数字或编号
+        - 知识答案与出处
+        - 追问与上下文
+        - 实验流程、确认与更正
+        - 暂停、异常与重新开始
+        - 记录下载与恢复
+        - 音色、播报与延迟
+        - 界面与体验建议
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 问答表序号、当时步骤及复现顺序
+    validations:
+      required: true
+  - type: textarea
+    id: utterance
+    attributes:
+      label: 实际说的话与页面识别文字
+      description: "分别写两项，便于区分识别错误和回复错误。"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期结果
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际回复、页面提示及等待时间
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 其他建议（可选）

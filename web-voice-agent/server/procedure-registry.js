@@ -113,6 +113,21 @@ function validateProcedures(procedures, sourceIds) {
         return fields.has(rule.field) && ["equals", "present", ">", ">=", "<", "<="].includes(rule.operator);
       }
       if (!step.validation_rules.every(checkRule)) throw new Error("PROCEDURE_RULE_INVALID");
+      for (const conflict of step.rule_conflicts || []) {
+        if (!conflict.conflict_id || !fields.has(conflict.field) || conflict.status !== "UNRESOLVED"
+          || !conflict.explanation || conflict.alternatives?.length < 2
+          || !conflict.alternatives?.every(rule => [">", ">=", "<", "<=", "equals"].includes(rule.operator)
+            && typeof rule.value === "number" && Number.isFinite(rule.value) && sourceIds.has(rule.source_ref) && rule.locator)) {
+          throw new Error("PROCEDURE_CONFLICT_INVALID");
+        }
+      }
+    }
+    if (procedure.recovery_policy) {
+      const policy = procedure.recovery_policy;
+      if (policy.approval_status !== "APPROVED" || !policy.instructions?.length
+        || !policy.instructions.every(instruction => instruction.id && instruction.source_refs?.length
+          && instruction.source_refs.every(id => sourceIds.has(id)) && instruction.step_ids?.length
+          && instruction.step_ids.every(id => stepIds.has(id)))) throw new Error("RECOVERY_POLICY_INVALID");
     }
   }
 }

@@ -2,6 +2,18 @@ const DIGITS = { 零: 0, 〇: 0, 一: 1, 二: 2, 两: 2, 三: 3, 四: 4, 五: 5,
 const UNITS = { 十: 10, 百: 100, 千: 1000 };
 const NUMBER_PATTERN = /(?:零下|负|[-−])?\s*(?:\d+(?:[.点]\d+)?|\.\d+|[零〇一二两三四五六七八九十百千]+(?:[.点][零〇一二两三四五六七八九\d]+)?)/gu;
 
+function hasWrongUnit(input, text) {
+  if (!input.unit) return false;
+  const mentioned = text.match(/摄氏度|摄氏|华氏度|华氏|开尔文|小时|分钟|毫秒|秒钟|秒|天|日|周|年|个月|月|百分之|百分比|%|℃|℉|°\s*[CF]|毫升|升|毫克|千克|克|兆帕|千帕|帕斯卡|MPa|kPa|毫米|厘米|米|度|kelvin|fahrenheit|celsius|(?<=[\d零〇一二两三四五六七八九十百千])[CFK]\b/giu) || [];
+  const units = {
+    天: new Set(["天", "日"]),
+    "℃": new Set(["℃", "摄氏度", "摄氏", "度", "°c", "c", "celsius"]),
+    "%": new Set(["%", "百分之", "百分比"]),
+  };
+  const accepted = units[input.unit] || new Set([input.unit.toLowerCase()]);
+  return mentioned.some(unit => !accepted.has(unit.toLowerCase().replace(/\s/gu, "")));
+}
+
 function parseInteger(text) {
   if (/^\d+$/u.test(text)) return Number(text);
   if ([...text].every((char) => char in DIGITS)) return Number([...text].map((char) => DIGITS[char]).join(""));
@@ -54,6 +66,7 @@ function readValue(input, text) {
     return { value, ambiguous: !!raw && value === null };
   }
   if (input.type === "number") {
+    if (hasWrongUnit(input, text)) return { value: null, ambiguous: true };
     const matches = [...text.replace(/百分之/gu, "").matchAll(NUMBER_PATTERN)];
     if (matches.length === 0) return { value: null };
     if (matches.length !== 1 || /(低于|高于|大于|小于|至少|超过|不足|大概|左右|约|范围|±|到|至)/u.test(text)) return { value: null, ambiguous: true };
@@ -61,6 +74,8 @@ function readValue(input, text) {
     return { value, ambiguous: value === null };
   }
   if (input.type === "boolean") {
+    if (/(未完成|没有完成|没完成|未核对|未复核)/u.test(text)
+      && /(已完成|已经完成|已核对|已复核)/u.test(text)) return { value: null, ambiguous: true };
     if (/(不是|并非|不能确认|无法确认)/u.test(text) && !/^不是[。.]?$/u.test(text)) return { value: null, ambiguous: true };
     if (/(待完成|待记录|将完成|准备完成|准备记录|待核对|准备核对|待复核)/u.test(text)) return { value: null };
     if (/(尚未|还没|没有完成|没有记录|没完成|没记录|(?:没有|没|未)(?:完成|记录|执行|通过|确认|保存|入柜|核对|复核)|不正常|不达标|失败|缺失|^否$|^不是$)/u.test(text)) return { value: false };
@@ -89,7 +104,7 @@ function isStandaloneAnswer(input, query) {
   if (input.type === "datetime_utc") return parseUtc(query) !== null;
   if (input.type === "identifier") return /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,63}$/u.test(query);
   if (input.type === "number") {
-    return query.replace(/百分之/gu, "").replace(NUMBER_PATTERN, "").replace(/(摄氏度|摄氏|度|天|℃|%|是|为|当前|现在|更正为|改为|剩余|余量|温度)/gu, "").replace(/[\s，。,.]/gu, "") === "";
+    return query.replace(/百分之/gu, "").replace(NUMBER_PATTERN, "").replace(/(摄氏度|华氏度|摄氏|华氏|开尔文|小时|分钟|秒|天|日|周|年|个月|月|度|℃|℉|°\s*[CF]|[CFK]|%|是|为|当前|现在|更正为|改为|剩余|余量|温度)/giu, "").replace(/[\s，。,.]/gu, "") === "";
   }
   if (input.type === "boolean") return /^(是|是的|否|不是|正常|不正常|已完成|已经完成|完成|未完成|已核对|未核对|已复核|未复核|核对完成|复核完成|已记录|未记录|已保存|未保存|已入柜|未入柜|记录完整)[。.]?$/u.test(query);
   if (input.type === "enum") return Object.values(input.options || {}).flat().includes(query.replace(/[。.]$/u, ""));

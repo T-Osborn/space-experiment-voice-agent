@@ -6,7 +6,7 @@ COPY --chown=node:node web-voice-agent/package.json ./web-voice-agent/package.js
 COPY --chown=node:node web-voice-agent/server ./web-voice-agent/server
 COPY --chown=node:node web-voice-agent/public ./web-voice-agent/public
 COPY --chown=node:node web-voice-agent/config ./web-voice-agent/config
-COPY --chown=node:node knowledge_base/records.json knowledge_base/qa-core.json knowledge_base/qa-expanded.json knowledge_base/verified_sources.json knowledge_base/project_sources.json ./knowledge_base/
+COPY --chown=node:node knowledge_base/records.json knowledge_base/qa-core.json knowledge_base/qa-expanded.json knowledge_base/qa-rice-2026-10.json knowledge_base/verified_sources.json knowledge_base/project_sources.json ./knowledge_base/
 RUN mkdir -p /app/web-voice-agent/data && chown node:node /app/web-voice-agent/data
 USER node
 EXPOSE 8080

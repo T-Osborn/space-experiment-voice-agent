@@ -5,6 +5,7 @@ const path = require("node:path");
 const vm = require("node:vm");
 const { ExperimentRegistry } = require("../server/experiment-registry");
 const { ProcedureRegistry } = require("../server/procedure-registry");
+const { ProcedureEngine } = require("../server/procedure-engine");
 
 function dashboard() {
   const nodes = new Map();
@@ -35,7 +36,7 @@ test("read-only dashboard distinguishes 20 directory items from one unreviewed d
   assert.equal(nodes.get("#questionCount").textContent, "36");
   assert.equal(nodes.get("#sourceCount").textContent, "46");
   assert.equal(cards.filter(card => card.children[1].textContent.includes("待审草案")).length, 4);
-  assert.match(nodes.get("#understandingStatus").textContent, /暂未配置/u);
+  assert.match(nodes.get("#understandingStatus").textContent, /题库可用/u);
 });
 
 test("timeline reflects confirmed steps without showing the current unconfirmed step as complete", () => {
@@ -63,4 +64,35 @@ test("generated responses are not falsely presented as heard speech or verified 
   assert.match(app, /EXCEPTION_DETAILS_RECORDED:/u); assert.match(app, /STEP_HELP:/u);
   assert.match(app, /PROCEDURE_VERSION_MISMATCH:/u); assert.match(app, /PROCEDURE_REVIEW_REQUIRED:/u);
   assert.doesNotMatch(app, /已收到播报|已播报下一步|COMPLETED: "实验已完成"/u);
+});
+
+test("V2 dashboard displays backend-reported values, missing fields and rule-conflict decisions", () => {
+  const { api, nodes, procedure } = dashboard();
+  const session = { procedure_id: procedure.procedure_id, procedure_version: procedure.version, experiment_id: procedure.experiment_id,
+    current_step: procedure.steps[0].step_id, completed_steps: [], step_observations: { cultivation_days: 95 },
+    status: "GUIDING", step_state: "WAITING_INPUT" };
+  const engine = new ProcedureEngine();
+  api.update({ session, progress: engine.progress(session, procedure) });
+  assert.match(nodes.get("#reportedInputs").textContent, /95天/u);
+  assert.match(nodes.get("#pendingInputs").textContent, /种子.*营养液/u);
+  assert.doesNotMatch(nodes.get("#pendingInputs").textContent, /周期天数/u);
+  const paused = { ...session, status: "PAUSED", step_state: "RULE_CONFLICT", pause_reason: "RULE_CONFLICT" };
+  api.update({ session: paused, progress: engine.progress(paused, procedure), knowledge: { retrieval_status: "FAILED" } });
+  assert.match(nodes.get("#stepDecision").textContent, /资料冲突/u);
+  assert.match(nodes.get("#nextAction").textContent, /确认适用规则/u);
+  assert.match(nodes.get("#understandingStatus").textContent, /检索失败/u);
+});
+
+test("stale task progress recommends explicit new-task confirmation instead of normal resume", () => {
+  const { api, nodes, procedure } = dashboard();
+  const session = { procedure_id: procedure.procedure_id, procedure_version: "old-fixture", experiment_id: procedure.experiment_id,
+    current_step: procedure.steps[0].step_id, completed_steps: [], step_observations: {}, status: "PAUSED", pause_reason: "OPERATOR" };
+  const engine = new ProcedureEngine();
+  api.update({ session, progress: engine.progress(session, procedure) });
+  assert.match(nodes.get("#stepDecision").textContent, /版本不一致/u);
+  assert.match(nodes.get("#nextAction").textContent, /重新开始/u);
+  assert.doesNotMatch(nodes.get("#nextAction").textContent, /说恢复流程回到原步骤/u);
+  const waiting = { ...session, pending_task_change: { kind: "RESTART", query: "开始流程" } };
+  api.update({ session: waiting, progress: engine.progress(waiting, procedure) });
+  assert.match(nodes.get("#nextAction").textContent, /确认重新开始/u);
 });

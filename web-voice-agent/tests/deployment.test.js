@@ -68,10 +68,11 @@ test("access, CSRF checks, static allowlist and actual capability counts", async
     assert.match(response.headers.get("permissions-policy"), /camera=\(\)/u);
     const caps = await response.json();
     assert.equal(caps.experiment_count, 20); assert.equal(caps.demo_procedure_count, 1);
-    assert.equal(caps.approved_procedure_count, 0); assert.equal(caps.public_source_count, 46);
+    assert.equal(caps.approved_procedure_count, 0); assert.equal(caps.public_source_count, 48);
     assert.equal(caps.review_draft_count, 4); assert.equal(caps.review_draft_step_count, 32);
     assert.equal(caps.review_draft_exception_count, 20);
-    assert.equal(caps.expanded_question_count, 16); assert.equal(caps.curated_question_count, 36);
+    assert.equal(caps.expanded_question_count, 16); assert.equal(caps.curated_question_count, 52);
+    assert.equal(caps.rice_update_question_count, 16);
     assert.equal(caps.core_question_count, 20); assert.equal(caps.flight_ready, false);
     assert.equal(caps.detailed_demo_step_count, 9); assert.equal(caps.knowledge_understanding.configured, false);
     assert.equal(caps.knowledge_understanding.live_verified, false); assert.equal(caps.exception_categories.length, 7);

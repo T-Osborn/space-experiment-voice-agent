@@ -1,0 +1,178 @@
+[
+  {
+    "record_id": "rice_v2_01_facility", "record_type": "verified_qa", "collection": "RICE_DOCUMENT_UPDATE_2026_10",
+    "title": "2022年中国空间站水稻全生命周期实验依托什么设施？",
+    "questions": ["2022年中国空间站水稻全生命周期实验依托什么设施？", "太空水稻在轨取样预处理实验的依托设施是什么？", "那次空间站水稻培养使用哪个模块？"],
+    "match_groups": [["水稻"], ["2022", "空间站"], ["设施", "模块", "依托"]],
+    "content": "2022年研究团队报道中的水稻培养使用问天舱生命生态实验柜的通用生物培养模块。",
+    "keywords": ["水稻", "设施", "模块"], "source_ids": ["official_cemps_rice_shb_mirror_2022"],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION", "source_checked_on": "2026-10-19", "verification_scope": "HISTORICAL_MISSION_BACKGROUND_ONLY",
+    "evidence_locator": "报道图1图注及全生命周期培养说明", "spoken_citation": "分子植物卓越中心2022年报道，中国科学院上海分院转载",
+    "direct_answer_allowed": true, "execution_allowed": false, "limitations": "这是历史任务设施，不证明当前任务的设备配置。"
+  },
+  {
+    "record_id": "rice_v2_02_space", "record_type": "verified_qa", "collection": "RICE_DOCUMENT_UPDATE_2026_10",
+    "title": "2019年资源手册列出的植物实验区空间是多少？",
+    "questions": ["2019年资源手册列出的植物实验区空间是多少？", "生命生态实验柜中用于植物培养的典型实验区空间尺寸是多少？", "手册里的植物培养空间是不小于400乘550乘400毫米吗？"],
+    "match_groups": [["生命生态实验柜", "植物", "水稻"], ["空间尺寸", "实验区空间", "培养空间", "实验区大小"]],
+    "content": "2019年手册表5.3列为不小于400毫米（生长方向）乘550毫米乘400毫米，并支持培养单元组合。",
+    "keywords": ["植物", "空间尺寸"], "source_ids": ["official_cmse_resource_manual_2019"],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION", "source_checked_on": "2026-10-19", "verification_scope": "HISTORICAL_FACILITY_CAPABILITY_ONLY",
+    "evidence_locator": "印刷第19页，PDF第24页，表5.3植物类实验／实验区空间；≮保留为不小于", "spoken_citation": "中国载人航天工程办公室2019年资源手册表5.3",
+    "direct_answer_allowed": true, "execution_allowed": false, "limitations": "实验区空间与可装入单元的接口尺寸不是同一指标；不是本次载荷安装指令。"
+  },
+  {
+    "record_id": "rice_v2_03_resolution", "record_type": "verified_qa", "collection": "RICE_DOCUMENT_UPDATE_2026_10",
+    "title": "2019年手册怎样规定植物可见光成像分辨率？",
+    "questions": ["2019年手册怎样规定植物可见光成像分辨率？", "记录水稻取样过程的可见光成像最高分辨率要求是多少？", "1024乘1024像素在手册中是上限吗？"],
+    "match_groups": [["植物", "生命生态实验柜", "水稻"], ["可见光", "成像"], ["分辨率", "像素"]],
+    "content": "表5.3的可见光成像分辨率是不小于1024乘1024像素，不是最高分辨率限制。",
+    "keywords": ["可见光", "分辨率"], "source_ids": ["official_cmse_resource_manual_2019"],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION", "source_checked_on": "2026-10-19", "verification_scope": "HISTORICAL_FACILITY_CAPABILITY_ONLY",
+    "evidence_locator": "印刷第19页，PDF第24页，表5.3植物类实验／可见光成像／图像分辨率", "spoken_citation": "2019年资源手册表5.3",
+    "direct_answer_allowed": true, "execution_allowed": false, "limitations": "设施能力指标不是本次取样视频的采集设置或验收标准。"
+  },
+  {
+    "record_id": "rice_v2_04_frame_rate", "record_type": "verified_qa", "collection": "RICE_DOCUMENT_UPDATE_2026_10",
+    "title": "2019年手册的植物可见光图像帧频是小于25帧每秒吗？",
+    "questions": ["2019年手册的植物可见光图像帧频是小于25帧每秒吗？", "记录取样过程的可见光成像帧频最高限制为多少？", "生命生态实验柜植物可见光成像的帧频是多少？"],
+    "match_groups": [["植物", "生命生态实验柜", "水稻"], ["帧频", "帧率", "帧每秒"]],
+    "content": "不是。表5.3写不小于25帧每秒、可调；不能录成小于25帧每秒或最高25帧每秒。",
+    "keywords": ["可见光", "帧频", "帧率"], "source_ids": ["official_cmse_resource_manual_2019"],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION", "source_checked_on": "2026-10-19", "verification_scope": "HISTORICAL_FACILITY_CAPABILITY_ONLY",
+    "evidence_locator": "印刷第19页，PDF第24页，表5.3植物类实验／可见光成像／图像帧频，原符号≮", "spoken_citation": "2019年资源手册表5.3原页",
+    "direct_answer_allowed": true, "execution_allowed": false, "limitations": "这里只解释历史设施指标，不调整摄像设备。"
+  },
+  {
+    "record_id": "rice_v2_05_temperature", "record_type": "verified_qa", "collection": "RICE_DOCUMENT_UPDATE_2026_10",
+    "title": "2019年手册中的植物实验温控范围是多少？",
+    "questions": ["2019年手册中的植物实验温控范围是多少？", "生命生态实验柜植物实验的温度控制范围是多少？", "生命生态实验柜植物温度17到28摄氏度指什么？"],
+    "match_groups": [["植物", "生命生态实验柜", "水稻"], ["温控范围", "温度控制范围", "温度范围"]],
+    "content": "表5.3列出的植物类实验温度控制范围为17到28摄氏度，可调。",
+    "keywords": ["植物", "温度范围"], "source_ids": ["official_cmse_resource_manual_2019"],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION", "source_checked_on": "2026-10-19", "verification_scope": "HISTORICAL_FACILITY_CAPABILITY_ONLY",
+    "evidence_locator": "印刷第19页，PDF第24页，表5.3植物类实验／温度控制", "spoken_citation": "2019年资源手册表5.3",
+    "direct_answer_allowed": true, "execution_allowed": false, "limitations": "这是设施支持范围，不是水稻培养的最佳温度、本次设定值或报警范围。"
+  },
+  {
+    "record_id": "rice_v2_06_humidity", "record_type": "verified_qa", "collection": "RICE_DOCUMENT_UPDATE_2026_10",
+    "title": "2019年手册中的植物实验相对湿度范围是多少？",
+    "questions": ["2019年手册中的植物实验相对湿度范围是多少？", "植物实验区对相对湿度的控制范围是多少？", "生命生态实验柜的30到100百分比相对湿度指什么？"],
+    "match_groups": [["植物", "生命生态实验柜", "水稻"], ["相对湿度", "湿度范围"]],
+    "content": "表5.3列出的植物类实验相对湿度为30%到100%，可调。",
+    "keywords": ["植物", "相对湿度"], "source_ids": ["official_cmse_resource_manual_2019"],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION", "source_checked_on": "2026-10-19", "verification_scope": "HISTORICAL_FACILITY_CAPABILITY_ONLY",
+    "evidence_locator": "印刷第19页，PDF第24页，表5.3植物类实验／相对湿度", "spoken_citation": "2019年资源手册表5.3",
+    "direct_answer_allowed": true, "execution_allowed": false, "limitations": "不是本次实验的湿度设定或安全许可区间。"
+  },
+  {
+    "record_id": "rice_v2_07_spectrum", "record_type": "verified_qa", "collection": "RICE_DOCUMENT_UPDATE_2026_10",
+    "title": "2019年手册中的植物照明光谱范围是多少？",
+    "questions": ["2019年手册中的植物照明光谱范围是多少？", "实验环境中模拟太阳光的光谱范围校验区间是多少？", "生命生态实验柜植物照明的400到700纳米表示什么？"],
+    "match_groups": [["植物", "生命生态实验柜", "水稻"], ["光谱范围", "照明光谱"]],
+    "content": "表5.3列出的植物类实验照明光谱范围为400到700纳米。",
+    "keywords": ["植物", "照明", "光谱"], "source_ids": ["official_cmse_resource_manual_2019"],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION", "source_checked_on": "2026-10-19", "verification_scope": "HISTORICAL_FACILITY_CAPABILITY_ONLY",
+    "evidence_locator": "印刷第19页，PDF第24页，表5.3植物类实验／光照条件／光谱范围", "spoken_citation": "2019年资源手册表5.3",
+    "direct_answer_allowed": true, "execution_allowed": false, "limitations": "不能由此推导本次光配方、光周期或光源校验判据。"
+  },
+  {
+    "record_id": "rice_v2_08_light", "record_type": "verified_qa", "collection": "RICE_DOCUMENT_UPDATE_2026_10",
+    "title": "2019年手册的植物照明强度是小于120吗？",
+    "questions": ["2019年手册的植物照明强度是小于120吗？", "到达水稻样品表面的模拟太阳光强度限制是多少？", "生命生态实验柜植物照明的120微摩尔每平方米每秒是什么指标？"],
+    "match_groups": [["植物", "生命生态实验柜", "水稻"], ["照明强度", "光照强度", "太阳光强度"]],
+    "content": "不是。表5.3写到达目标样品表面的强度不小于120微摩尔每平方米每秒，强度和昼夜时间可调。",
+    "keywords": ["植物", "照明强度", "光照强度"], "source_ids": ["official_cmse_resource_manual_2019"],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION", "source_checked_on": "2026-10-19", "verification_scope": "HISTORICAL_FACILITY_CAPABILITY_ONLY",
+    "evidence_locator": "印刷第19页，PDF第24页，表5.3植物类实验／照明强度，原文≮120μmol/(m²·s)", "spoken_citation": "2019年资源手册表5.3原页",
+    "direct_answer_allowed": true, "execution_allowed": false, "limitations": "这是历史设备支持指标，不是水稻光照上限或当前应设强度。"
+  },
+  {
+    "record_id": "rice_v2_09_gases", "record_type": "verified_qa", "collection": "RICE_DOCUMENT_UPDATE_2026_10",
+    "title": "2019年手册列出了哪些植物培养气体检测功能？",
+    "questions": ["2019年手册列出了哪些植物培养气体检测功能？", "生命生态实验柜对培养环境中的哪两种气体成分进行浓度检测？", "手册是否给出植物培养的统一二氧化碳浓度？"],
+    "match_groups": [["植物", "生命生态实验柜", "培养环境"], ["气体检测", "气体成分", "二氧化碳浓度", "气体浓度"]],
+    "content": "表5.3列出二氧化碳和氧气浓度检测。二氧化碳供给可调，其浓度指标按科学实验需求确定。",
+    "keywords": ["气体", "二氧化碳", "氧气"], "source_ids": ["official_cmse_resource_manual_2019"],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION", "source_checked_on": "2026-10-19", "verification_scope": "HISTORICAL_FACILITY_CAPABILITY_ONLY",
+    "evidence_locator": "印刷第19页，PDF第24页，表5.3植物类实验／CO2气体供给和气体成分检测", "spoken_citation": "2019年资源手册表5.3",
+    "direct_answer_allowed": true, "execution_allowed": false, "limitations": "没有设备连接，不能提供当前气体读数或替任务决定浓度。"
+  },
+  {
+    "record_id": "rice_v2_10_water", "record_type": "verified_qa", "collection": "RICE_DOCUMENT_UPDATE_2026_10",
+    "title": "2019年手册怎样描述植物蒸腾水分的处理能力？",
+    "questions": ["2019年手册怎样描述植物蒸腾水分的处理能力？", "实验植物生长期间的蒸腾水分在后处理中如何应对？", "生命生态实验柜是否支持蒸腾水分收集与循环利用？"],
+    "match_groups": [["植物", "生命生态实验柜", "水稻"], ["蒸腾水分", "蒸腾水"]],
+    "content": "表5.3列有蒸腾水分收集与循环利用能力。",
+    "keywords": ["蒸腾水分", "循环利用"], "source_ids": ["official_cmse_resource_manual_2019"],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION", "source_checked_on": "2026-10-19", "verification_scope": "HISTORICAL_FACILITY_CAPABILITY_ONLY",
+    "evidence_locator": "印刷第19页，PDF第24页，表5.3植物类实验／水分收集与控制", "spoken_citation": "2019年资源手册表5.3",
+    "direct_answer_allowed": true, "execution_allowed": false, "limitations": "这是设施功能，不是要求航天员在实验后自行回收、灌注或净化水的操作。"
+  },
+  {
+    "record_id": "rice_v2_11_protons", "record_type": "verified_qa", "collection": "RICE_DOCUMENT_UPDATE_2026_10",
+    "title": "2019年手册的质子测量能谱范围是什么含义？",
+    "questions": ["2019年手册的质子测量能谱范围是什么含义？", "舱内辐射测量系统对质子能谱的监测范围是多少以保障生理安全？", "5到300兆电子伏是宇航员辐射安全限值吗？"],
+    "match_groups": [["质子", "舱内辐射测量", "生命生态实验柜"], ["能谱", "测量范围", "兆电子伏"]],
+    "content": "表5.3给出的质子测量能谱范围为5到300兆电子伏。这是仪器测量范围，不是人体剂量限值，不能用于生理安全放行。",
+    "keywords": ["质子", "能谱", "测量范围"], "source_ids": ["official_cmse_resource_manual_2019"],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION", "source_checked_on": "2026-10-19", "verification_scope": "HISTORICAL_FACILITY_CAPABILITY_ONLY",
+    "evidence_locator": "印刷第19页，PDF第24页，表5.3舱内辐射环境测量／质子测量能谱范围", "spoken_citation": "2019年资源手册表5.3",
+    "direct_answer_allowed": true, "execution_allowed": false, "limitations": "能量与吸收剂量、剂量率不能混为同一物理量；不提供个体医疗判断。"
+  },
+  {
+    "record_id": "rice_v2_12_css_cold_storage", "record_type": "verified_qa", "collection": "RICE_DOCUMENT_UPDATE_2026_10",
+    "title": "2019年中国空间站手册列出的低温存储典型温度有哪些？",
+    "questions": ["2019年中国空间站手册列出的低温存储典型温度有哪些？", "中国空间站低温存储柜和国际空间站MELFI是一回事吗？", "手册里的负80负20和正4摄氏度指什么设备？"],
+    "match_groups": [["中国空间站", "2019年手册", "资源手册"], ["低温存储", "低温柜", "冷冻柜"]],
+    "content": "2019年中国空间站手册列出低温存储设备的负80、负20和正4摄氏度三种典型温度。NASA的MELFI介绍对应国际空间站，不能混用设备身份。",
+    "keywords": ["中国空间站", "低温存储"], "source_ids": ["official_cmse_resource_manual_2019", "nasa_melfi_official"],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION", "source_checked_on": "2026-10-19", "verification_scope": "HISTORICAL_FACILITY_CAPABILITY_ONLY",
+    "evidence_locator": "手册印刷第44页，PDF第49页，低温存储设备功能及表5.13；NASA MELFI段落", "spoken_citation": "2019年中国空间站资源手册表5.13及NASA设备介绍",
+    "direct_answer_allowed": true, "execution_allowed": false, "limitations": "典型温度不是样品转移许可；本次设备型号、设定和允许偏差须另行确认。"
+  },
+  {
+    "record_id": "rice_v2_13_seed_to_seed", "record_type": "verified_qa", "collection": "RICE_DOCUMENT_UPDATE_2026_10",
+    "title": "2022年水稻从种子到种子的全生命周期指什么？",
+    "questions": ["2022年水稻从种子到种子的全生命周期指什么？", "水稻全生命周期培养的科学定义涵盖了哪两个节点？", "那次空间水稻全生命周期包含哪些发育阶段？"],
+    "match_groups": [["水稻"], ["全生命周期"], ["指什么", "涵盖", "发育阶段", "定义", "哪些节点"]],
+    "content": "该次研究所说的从种子到种子，是由种子萌发，经过幼苗生长、抽穗等发育阶段，再形成新一代种子。",
+    "keywords": ["水稻", "全生命周期", "定义"], "source_ids": ["official_cemps_rice_shb_mirror_2022"],
+    "evidence_level": "C_OFFICIAL_DESCRIPTION", "source_checked_on": "2026-10-19", "verification_scope": "HISTORICAL_MISSION_BACKGROUND_ONLY",
+    "evidence_locator": "报道全生命周期及本次项目实验内容段落", "spoken_citation": "中国科学院上海分院转载的2022年研究团队报道",
+    "direct_answer_allowed": true, "execution_allowed": false, "limitations": "生命周期概念不构成满90天即可采样的统一规则。"
+  },
+  {
+    "record_id": "rice_v2_14_duration_limit", "record_type": "source_conflict", "collection": "RICE_DOCUMENT_UPDATE_2026_10",
+    "title": "2022年水稻培养120天是否表示所有任务最多只能培养120天？",
+    "questions": ["2022年水稻培养120天是否表示所有任务最多只能培养120天？", "进行水稻取样实验前，水稻最长在轨培养时间不能超过多少天？", "资料中的水稻120天上限有公开任务依据吗？"],
+    "match_groups": [["水稻"], ["120天"], ["上限", "最多", "最长", "不能超过"]],
+    "content": "新提供的详细版将120天写为上限；2022年研究团队报道只记载该次实验历时120天。历史时长不能证明所有任务的统一最大培养时长。",
+    "keywords": ["水稻", "120天", "上限"], "source_ids": ["official_cemps_rice_shb_mirror_2022", "project_rice_detail_2026_10_19"],
+    "evidence_level": "SOURCE_CONFLICT", "source_checked_on": "2026-10-19", "verification_scope": "REVIEWED_PUBLIC_VS_PROJECT_SCOPE_DIFFERENCE",
+    "evidence_locator": "详细版触发前提；研究团队报道任务起止段落", "spoken_citation": "2022年研究团队报道与T提供的水稻详细版",
+    "direct_answer_allowed": true, "execution_allowed": false, "limitations": "不能据此设置120天自动停止或取样条件。"
+  },
+  {
+    "record_id": "rice_v2_15_melfi_mismatch", "record_type": "source_conflict", "collection": "RICE_DOCUMENT_UPDATE_2026_10",
+    "title": "新水稻资料中的MELFI温度与设备身份有哪些待确认问题？",
+    "questions": ["新水稻资料中的MELFI温度与设备身份有哪些待确认问题？", "取样前必须提前核查状态的低温存储设备是什么？", "MELFI冷冻箱的工作温度标准要求是多少？", "MELFI冷冻箱的允许温度漂移区间是多少？", "负80加减5与不高于负70两个条件一致吗？"],
+    "match_groups": [["MELFI", "冷冻箱"], ["详细版", "新资料", "工作温度标准", "允许温度漂移", "负70" ]],
+    "content": "详细版写负80摄氏度加减5摄氏度，却用不高于负70摄氏度判定，两者不等价。NASA介绍的MELFI属于国际空间站，公开设定点为正2、负35、负95摄氏度；不能直接指认为中国空间站本次设备。",
+    "keywords": ["MELFI", "详细版", "温度"], "source_ids": ["nasa_melfi_official", "project_rice_detail_2026_10_19"],
+    "evidence_level": "SOURCE_CONFLICT", "source_checked_on": "2026-10-19", "verification_scope": "REVIEWED_PUBLIC_VS_PROJECT_AND_INTERNAL_CONFLICT",
+    "evidence_locator": "详细版步骤2额定区间与逻辑判定；NASA MELFI设备介绍段落", "spoken_citation": "NASA的MELFI设备介绍与T提供的水稻详细版步骤2",
+    "direct_answer_allowed": true, "execution_allowed": false, "limitations": "不选其中一个数值作为真实样品转移标准。"
+  },
+  {
+    "record_id": "rice_v2_16_stage_preservation", "record_type": "source_conflict", "collection": "RICE_DOCUMENT_UPDATE_2026_10",
+    "title": "水稻所有阶段样品都要统一负80摄氏度保存到返回吗？",
+    "questions": ["水稻所有阶段样品都要统一负80摄氏度保存到返回吗？", "第五步样品入柜保存的目标冷冻温度环境是多少？", "封装后水稻样品的最终保存去向与处理方式是什么？"],
+    "match_groups": [["水稻"], ["样品"], ["所有阶段", "统一负80", "统一冷冻", "全部冷冻"]],
+    "content": "详细版步骤5统一写负80摄氏度。2022年研究团队报道却区分阶段：孕穗期水稻等样品负80摄氏度保存，种子成熟期样品4摄氏度保存，随后随神舟十四号返回。不能把不同阶段都改成同一保存条件。",
+    "keywords": ["水稻", "样品", "统一冷冻"], "source_ids": ["official_cemps_rice_shb_mirror_2022", "project_rice_detail_2026_10_19"],
+    "evidence_level": "SOURCE_CONFLICT", "source_checked_on": "2026-10-19", "verification_scope": "REVIEWED_PUBLIC_VS_PROJECT_SCOPE_DIFFERENCE",
+    "evidence_locator": "详细版步骤5；2022年研究团队报道三次采样及随后保存、返回段落", "spoken_citation": "2022年研究团队分阶段保存报道与T提供的水稻详细版步骤5",
+    "direct_answer_allowed": true, "execution_allowed": false, "limitations": "这些历史条件不能代替本次样品的保存与返回方案。"
+  }
+]

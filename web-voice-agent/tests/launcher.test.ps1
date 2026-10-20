@@ -15,7 +15,10 @@ $fakeKey = 'launcher-test-only-not-a-real-credential'
 $fakeSecret = 'launcher-test-only-not-a-real-secret'
 $cases = @(
     @{ Provider = 'openai'; ExtraArgs = ''; Service = ''; Voice = 0 },
+    @{ Provider = 'baidu'; ExtraArgs = ''; Service = 'short_text'; Voice = 5 },
+    @{ Provider = 'baidu'; ExtraArgs = ' -BaiduTtsService short_text -BaiduVoiceId 5'; Service = 'short_text'; Voice = 5 },
     @{ Provider = 'baidu'; ExtraArgs = ' -BaiduTtsService short_text -BaiduVoiceId 4100'; Service = 'short_text'; Voice = 4100 },
+    @{ Provider = 'baidu'; ExtraArgs = ' -BaiduTtsService short_text -BaiduVoiceId 0'; Service = 'short_text'; Voice = 0 },
     @{ Provider = 'baidu'; ExtraArgs = ' -BaiduTtsService clone -BaiduVoiceId 100001'; Service = 'clone'; Voice = 100001 }
 )
 
@@ -28,7 +31,7 @@ foreach ($case in $cases) {
 
     $testInfo = [System.Diagnostics.ProcessStartInfo]::new()
     $testInfo.FileName = $launcherShellPath
-    $testInfo.Arguments = '-NoProfile -File "' + $launcherPath + '" -Port ' + $testPort + ' -Provider ' + $case.Provider + $case.ExtraArgs
+    $testInfo.Arguments = '-NoProfile -ExecutionPolicy Bypass -File "' + $launcherPath + '" -Port ' + $testPort + ' -Provider ' + $case.Provider + $case.ExtraArgs
     $testInfo.UseShellExecute = $false
     $testInfo.CreateNoWindow = $true
     $testInfo.RedirectStandardOutput = $true
@@ -36,10 +39,15 @@ foreach ($case in $cases) {
     $testInfo.EnvironmentVariables['OPENAI_API_KEY'] = $fakeKey
     $testInfo.EnvironmentVariables['BAIDU_API_KEY'] = $fakeKey
     $testInfo.EnvironmentVariables['BAIDU_SECRET_KEY'] = $fakeSecret
+    $testInfo.EnvironmentVariables.Remove('BAIDU_TTS_SERVICE')
+    $testInfo.EnvironmentVariables.Remove('BAIDU_TTS_VOICE')
+    $testInfo.EnvironmentVariables['BAIDU_TTS_VOICE_NAME'] = 'stale-test-only-voice-label'
     # Simulate an old terminal carrying mock-provider configuration.
     $testInfo.EnvironmentVariables['ASR_PROVIDER'] = 'generic_http'
     $testInfo.EnvironmentVariables['TTS_PROVIDER'] = 'generic_http'
     $testInfo.EnvironmentVariables['RECORD_STORAGE'] = 'memory'
+    # Exercise a restrictive parent policy without changing global settings.
+    $testInfo.EnvironmentVariables['PSExecutionPolicyPreference'] = 'AllSigned'
     $testInfo.EnvironmentVariables['ASR_UPSTREAM_URL'] = 'http://127.0.0.1:1/'
     $testInfo.EnvironmentVariables['TTS_UPSTREAM_URL'] = 'http://127.0.0.1:1/'
     $testInfo.EnvironmentVariables['APP_ENV'] = 'production'
@@ -72,7 +80,7 @@ foreach ($case in $cases) {
             if ($config.asr.input -ne 'audio/pcm;rate=16000' -or $config.tts.service -ne $case.Service -or $config.tts.voice_id -ne $case.Voice) {
                 throw 'Baidu audio format or voice configuration was not passed correctly.'
             }
-            if ($case.Voice -eq 4100 -and $config.tts.target_voice -notmatch '4100') {
+            if ($config.tts.target_voice -notmatch ([string]$case.Voice) -or $config.tts.target_voice -match 'stale-test-only') {
                 throw 'The selected voice name was not passed to the child server.'
             }
         }

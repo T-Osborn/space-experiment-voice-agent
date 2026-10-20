@@ -8,6 +8,8 @@ const { TTSAdapterRegistry } = require("./tts-adapters");
 const { ROUTES } = require("./exception-assistant");
 const { classifyVoiceIntent } = require("./voice-intents");
 const { summarizeReadiness } = require("./readiness");
+const { behaviorPolicy } = require("./behavior-policy");
+const { version: applicationVersion } = require("../package.json");
 const { deploymentConfig, DemoAccess, SessionStore, assertSameOrigin, setSecurityHeaders, failure } = require("./deployment-security");
 
 const PUBLIC_DIR = path.join(__dirname, "..", "public");
@@ -95,6 +97,11 @@ function createApp({ config = deploymentConfig(), orchestrator = new AgentOrches
         await readJson(req, 2048);
         return json(res, 200, sessions.create(owner, orchestrator.createSession()));
       }
+      if (req.method === "GET" && route === "/api/progress") {
+        const session = sessions.get(url.searchParams.get("session_id"), owner).session;
+        const procedure = procedureRegistry.getForExperiment(session.experiment_id);
+        return json(res, 200, { progress: procedure ? orchestrator.procedureEngine.progress(session, procedure) : null });
+      }
       if (req.method === "GET" && route === "/api/persona") return json(res, 200, orchestrator.persona);
       if (req.method === "GET" && route === "/api/records") return json(res, 200, {
         enabled: Boolean(sessions.repository), records: sessions.repository?.history(owner) || [],
@@ -120,10 +127,14 @@ function createApp({ config = deploymentConfig(), orchestrator = new AgentOrches
         review_draft_step_count: procedureRegistry.drafts.reduce((n, p) => n + p.steps.length, 0),
         review_draft_exception_count: procedureRegistry.drafts.reduce((n, p) => n + p.exception_routes.length, 0),
         approved_procedure_count: procedureRegistry.procedures.filter((p) => p.sop_status === "APPROVED").length,
-        core_question_count: knowledgeRetriever.records.filter((r) => r.questions?.length && r.direct_answer_allowed && r.collection !== "EXPANDED_PUBLIC_KNOWLEDGE").length,
-        expanded_question_count: knowledgeRetriever.records.filter((r) => r.questions?.length && r.direct_answer_allowed && r.collection === "EXPANDED_PUBLIC_KNOWLEDGE").length,
-        curated_question_count: knowledgeRetriever.records.filter((r) => r.questions?.length && r.direct_answer_allowed).length,
-        public_source_count: [...knowledgeRetriever.sources.values()].filter((s) => s.url || s.public_record).length,
+        core_question_count: orchestrator.knowledgeStatus().available ? knowledgeRetriever.records.filter((r) => r.questions?.length && r.direct_answer_allowed && !r.collection).length : null,
+        expanded_question_count: orchestrator.knowledgeStatus().available ? knowledgeRetriever.records.filter((r) => r.questions?.length && r.direct_answer_allowed && r.collection === "EXPANDED_PUBLIC_KNOWLEDGE").length : null,
+        rice_update_question_count: orchestrator.knowledgeStatus().available ? knowledgeRetriever.records.filter((r) => r.questions?.length && r.direct_answer_allowed && r.collection === "RICE_DOCUMENT_UPDATE_2026_10").length : null,
+        curated_question_count: orchestrator.knowledgeStatus().available ? knowledgeRetriever.records.filter((r) => r.questions?.length && r.direct_answer_allowed).length : null,
+        public_source_count: orchestrator.knowledgeStatus().available ? [...knowledgeRetriever.sources.values()].filter((s) => s.url || s.public_record).length : null,
+        knowledge_retrieval: { ...orchestrator.knowledgeStatus(), call_mode: "REQUIRED_FOR_KNOWLEDGE_ANSWERS" },
+        prompt_revision: behaviorPolicy.prompt_revision,
+        behavior_policy_version: behaviorPolicy.version, application_version: applicationVersion,
         voice_only: true, device_connected: false, flight_ready: false, general_llm_connected: false,
         knowledge_understanding: orchestrator.semanticAdapter.getPublicConfig(),
         exception_categories: [...ROUTES.map((route) => route.id), "PARAMETER_DEVIATION", "UNKNOWN"],
@@ -147,7 +158,7 @@ function createApp({ config = deploymentConfig(), orchestrator = new AgentOrches
       });
       if (req.method === "GET" && route === "/api/knowledge/search") return json(res, 200, {
         query: (url.searchParams.get("q") || "").slice(0, 2000),
-        results: knowledgeRetriever.search((url.searchParams.get("q") || "").slice(0, 2000), Number(url.searchParams.get("limit") || 5)),
+        ...await orchestrator.inspectKnowledge((url.searchParams.get("q") || "").slice(0, 2000), Number(url.searchParams.get("limit") || 5)),
         policy: "公开研究不能替代任务级审核SOP。",
       });
       if (req.method === "POST" && route === "/api/voice/turn") {
@@ -164,8 +175,9 @@ function createApp({ config = deploymentConfig(), orchestrator = new AgentOrches
         const canRepeat = !currentSession.procedure_id || currentSession.procedure_version === currentProcedure?.version;
         if (!canRepeat && payload.request_id && storedEntry.receipts.has(payload.request_id)) throw failure("PROCEDURE_VERSION_CHANGED", 409);
         const intent = classifyVoiceIntent(payload.recognized_text);
-        const result = await sessions.turn(payload.session_id, owner, (session) => orchestrator.handleVoiceTurn({
+        const result = await sessions.turn(payload.session_id, owner, (session, previousReply) => orchestrator.handleVoiceTurn({
           session, recognized_text: payload.recognized_text,
+          conversation_context: previousReply?.conversation_context || null,
           record_history: intent === "RECORD_HISTORY" && sessions.repository ? sessions.repository.history(owner) : null,
         }), { requestId: payload.request_id, expectedRevision: payload.expected_revision, text: payload.recognized_text,
           repeatLast: intent === "REPEAT" && canRepeat });

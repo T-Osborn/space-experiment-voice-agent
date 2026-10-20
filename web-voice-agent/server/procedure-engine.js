@@ -1,6 +1,7 @@
 const { classifyVoiceIntent } = require("./voice-intents");
 const { extractStepInputs } = require("./spoken-inputs");
 const { createException, collectExceptionDetails, exceptionPrompt } = require("./exception-assistant");
+const { behaviorPolicy } = require("./behavior-policy");
 
 class ProcedureEngine {
   isGuidanceRequest(query) {
@@ -35,6 +36,8 @@ class ProcedureEngine {
       pause_reason: null,
       last_operator_feedback: null,
       last_exception: null,
+      unresolved_conflicts: [],
+      pending_resume_basis: null,
       event_log: this.appendEvent(session.event_log, "PROCEDURE_STARTED", {
         procedure_id: procedure.procedure_id,
         step_id: firstStep.step_id,
@@ -45,7 +48,10 @@ class ProcedureEngine {
   }
 
   response(response_type, session, procedure, speech_text) {
-    return { response_type, session, procedure, speech_text };
+    const progress = this.progress(session, procedure);
+    const prefix = progress && !speech_text.includes(progress.step_name)
+      ? `第${progress.step_number}/${progress.total_steps}步，${progress.step_name}。` : "";
+    return { response_type, session, procedure, speech_text: prefix + speech_text, progress };
   }
 
   handleInput(session, procedure, query, intent = classifyVoiceIntent(query)) {
@@ -53,9 +59,8 @@ class ProcedureEngine {
     if (procedure.guidance_mode === "EXPERT_REVIEW_DRAFT" || procedure.sop_status === "EXPERT_REVIEW_PENDING") {
       return this.start(session, procedure);
     }
-    if (session.procedure_version !== (procedure.version || null)) {
-      return this.response("PROCEDURE_VERSION_MISMATCH", { ...session, status: "PAUSED", step_state: "ERROR" }, procedure,
-        "当前会话与流程版本不一致。已暂停，请重新选择并开始流程，不迁移旧确认数据。");
+    if (session.procedure_id !== procedure.procedure_id || session.procedure_version !== (procedure.version || null)) {
+      return this.versionMismatch(session, procedure);
     }
     const step = procedure.steps.find((item) => item.step_id === session.current_step);
     if (!step) {
@@ -66,7 +71,8 @@ class ProcedureEngine {
     if (intent === "STATUS") return this.response("GUIDANCE_STATUS", session, procedure, this.describeStatus(session, step));
     if (intent === "SUMMARY") return this.response("GUIDANCE_SUMMARY", session, procedure, this.summarize(session, procedure));
     if (intent === "STEP_HELP") return this.response("STEP_HELP", session, procedure,
-      "当前是" + step.name + "。需要口述：" + (step.required_inputs || []).map((input) => input.label).join("；") + "。"
+      "当前是" + step.name + "。"
+      + (this.describeValues(step, session.step_observations) ? "已报告：" + this.describeValues(step, session.step_observations) + "。" : "")
       + (["PAUSED", "EXCEPTION_REPORTED"].includes(session.status) ? "流程保持暂停。" : "")
       + this.describeMissingInputs(step, session)
       + (step.missing_details?.length ? "尚缺任务资料：" + step.missing_details.join("；") + "。不能生成这些具体操作。" : "现有配置只支持项目核对，具体动作必须依据任务SOP。"));
@@ -92,7 +98,7 @@ class ProcedureEngine {
         }),
       };
       return this.response("STEP_RECHECK_STARTED", nextSession, procedure,
-        "已撤回本步骤未确认的数据，原报告保留在事件记录中。步骤位置和已完成记录不变。仅重新核对口述记录，无需重复实验动作。" + this.promptForInput(step.required_inputs[0]));
+        "已撤回本步骤未确认的数据，原报告保留在事件记录中。步骤位置和已完成记录不变。仅重新核对口述记录，无需重复实验动作。" + this.promptForInputs(step.required_inputs));
     }
     if (intent === "EXCEPTION") {
       if (session.last_exception && ["PAUSED", "EXCEPTION_REPORTED"].includes(session.status)) {
@@ -132,7 +138,7 @@ class ProcedureEngine {
         if (collected.changed) return this.recordExceptionDetails(session, procedure, step, query, collected);
       }
       if (intent === "RESUME" || intent === "CONFIRM") {
-        if (session.pause_reason === "OPERATOR" && !session.last_exception) {
+        if (!behaviorPolicy.ordinary_pause_requires_ground_instruction && session.pause_reason === "OPERATOR" && !session.last_exception) {
           const nextSession = {
             ...session,
             status: "GUIDING",
@@ -145,7 +151,9 @@ class ProcedureEngine {
             : this.buildStepPrompt(step, nextSession);
           return this.response("GUIDANCE_RESUMED", nextSession, procedure, "已恢复到原步骤。" + prompt);
         }
-        if (intent === "RESUME" && this.hasReportedResumeBasis(query)) {
+        const authority = intent === "RESUME" && session.pause_reason !== "RULE_CONFLICT"
+          ? this.configuredResumeAuthority(procedure, step, query) : null;
+        if (authority) {
           const observations = { ...(session.observations || {}) };
           for (const input of step.required_inputs || []) delete observations[input.name];
           const nextSession = {
@@ -157,22 +165,29 @@ class ProcedureEngine {
             pending_confirmation: null,
             pause_reason: null,
             last_exception: null,
+            pending_resume_basis: null,
             event_log: this.appendEvent(session.event_log, "OPERATOR_REPORTED_RESUME_BASIS", {
-              step_id: step.step_id, query, independently_verified: false,
+              step_id: step.step_id, query, instruction_id: authority.id,
+              source_refs: authority.source_refs, independently_verified: false,
             }),
           };
           return this.response("GUIDANCE_RESUMED", nextSession, procedure,
-            "已记录你报告的异常评估、恢复条件及地面指令。恢复后先重新核对本步骤的数据。" + this.buildStepPrompt(step, nextSession));
+            "已核对当前配置中的恢复指令编号，并记录你报告的异常评估与恢复条件，口述情况尚未经设备独立验证。恢复后先重新核对本步骤的数据。" + this.buildStepPrompt(step, nextSession));
         }
       }
       const nextSession = {
         ...session,
+        ...(intent === "RESUME" && this.hasReportedResumeBasis(query) ? {
+          pending_resume_basis: { query, verification_status: "UNVERIFIED", independently_verified: false },
+        } : {}),
         event_log: this.appendEvent(session.event_log, "PAUSED_FEEDBACK", { step_id: step.step_id, query }),
       };
       return this.response("RESUME_REQUIRES_CONFIRMATION", nextSession, procedure,
         session.pause_reason === "OPERATOR"
           ? "当前引导仍然暂停。请说恢复流程，再报告本步骤数据。"
-          : "异常暂停尚未解除。请报告异常评估结果、恢复条件是否满足和地面允许的恢复指令。补报数据不能直接推进步骤。");
+          : session.pause_reason === "RULE_CONFLICT"
+            ? "流程保持暂停，规则冲突尚未解决。请任务负责人确认适用规则并更新有效配置，口述继续或更换数值不能解除本次暂停。"
+            : "当前缺少有效恢复依据，实验保持暂停状态。请确认适用的地面指令及恢复条件；当前配置未提供可核对的恢复指令时，口述同意不会解除暂停。");
     }
     if (intent === "RESUME" || intent === "START") {
       return this.response("GUIDANCE_STATUS", session, procedure, "流程已在进行中。" + this.describeStatus(session, step));
@@ -199,16 +214,21 @@ class ProcedureEngine {
       }),
     };
     if (extracted.ambiguous.length > 0) {
-      const input = step.required_inputs.find((item) => item.name === extracted.ambiguous[0]);
+      const inputs = step.required_inputs.filter((item) => extracted.ambiguous.includes(item.name));
       return this.response("STEP_INPUT_AMBIGUOUS", feedbackSession, procedure,
-        "这条反馈不明确或格式无法核对，尚未确认。" + this.promptForInput(input));
+        "以下报告含糊、相互矛盾或单位格式不符，尚未确认。" + this.promptForInputs(inputs)
+        + (this.describeValues(step, values) ? "其他已报告：" + this.describeValues(step, values) + "。" : ""));
     }
     const missing = (step.required_inputs || []).filter((input) => values[input.name] === undefined);
     if (missing.length > 0) {
       return this.response("STEP_WAITING_INPUT", feedbackSession, procedure,
-        (hasNewInput ? "已记录报告的数据。" : "当前步骤还缺少反馈，不能进入下一步。") + this.promptForInput(missing[0]));
+        (hasNewInput ? "已报告：" + this.describeValues(step, values) + "。" : "当前步骤还缺少反馈，不能进入下一步。") + this.promptForInputs(missing));
     }
-    const validation = this.validateStep(step, values);
+    const conflicts = (step.rule_conflicts || []).filter(conflict => {
+      const verdicts = conflict.alternatives.map(rule => this.evaluateRule({ ...rule, field: conflict.field }, values));
+      return conflict.status === "UNRESOLVED" && verdicts.some(value => value !== verdicts[0]);
+    });
+    const validation = this.validateStep(step, values, new Set(conflicts.map(conflict => conflict.field)));
     if (!validation.ok) {
       const failure = step.on_validation_fail || {};
       const nextSession = {
@@ -231,6 +251,17 @@ class ProcedureEngine {
         (failure.fixed_alert || "校验未通过。暂停当前步骤。") + " " + (failure.handling || "请按当前实验的异常处置规则核对。"));
     }
 
+    if (conflicts.length) {
+      const nextSession = { ...feedbackSession, status: "PAUSED", step_state: "RULE_CONFLICT",
+        pause_reason: "RULE_CONFLICT", pending_confirmation: null,
+        unresolved_conflicts: structuredClone(conflicts),
+        event_log: this.appendEvent(feedbackSession.event_log, "RULE_CONFLICT_REPORTED", {
+          step_id: step.step_id, observations: values, conflicts,
+        }),
+      };
+      return this.response("STEP_RULE_CONFLICT", nextSession, procedure,
+        conflicts.map(conflict => conflict.explanation).join("；") + "流程保持暂停，已报告数据保留。不能据此判定本步骤通过或不通过。");
+    }
     // Read the values back in one turn; only a later confirmation can advance.
     if (intent !== "CONFIRM" || session.step_state !== "WAITING_STEP_CONFIRMATION" || hasNewInput) {
       const nextSession = { ...feedbackSession, step_state: "WAITING_STEP_CONFIRMATION", pending_confirmation: step.expected_confirmation || step.name };
@@ -280,11 +311,30 @@ class ProcedureEngine {
       && /(地面(?:已)?(?:允许|同意)|地面已确认允许)/u.test(query);
   }
 
-  validateStep(step, observations) {
+  configuredResumeAuthority(procedure, step, query) {
+    const policy = procedure.recovery_policy;
+    if (!this.hasReportedResumeBasis(query) || policy?.approval_status !== "APPROVED") return null;
+    const ids = [...query.matchAll(/(?:地面指令编号|恢复指令编号)\s*([\p{L}\p{N}._:/-]+)/gu)].map(match => match[1]);
+    if (new Set(ids).size !== 1) return null;
+    return policy.instructions?.find(instruction => instruction.id === ids[0]
+      && instruction.source_refs?.length && instruction.step_ids?.includes(step.step_id)) || null;
+  }
+
+  validateStep(step, observations, conflictingFields = new Set()) {
     for (const rule of step.validation_rules || []) {
-      if (!this.evaluateRule(rule, observations)) return { ok: false, deviation: JSON.stringify(observations) };
+      if (this.ruleVerdict(rule, observations, conflictingFields) === false) return { ok: false, deviation: JSON.stringify(observations) };
     }
     return { ok: true, deviation: null };
+  }
+
+  ruleVerdict(rule, observations, conflictingFields) {
+    if (rule.all || rule.any) {
+      const values = (rule.all || rule.any).map(item => this.ruleVerdict(item, observations, conflictingFields));
+      if (rule.all && values.includes(false)) return false;
+      if (rule.any && values.includes(true)) return true;
+      return values.includes(null) ? null : Boolean(rule.all);
+    }
+    return conflictingFields.has(rule.field) ? null : this.evaluateRule(rule, observations);
   }
 
   evaluateRule(rule, observations) {
@@ -330,9 +380,16 @@ class ProcedureEngine {
 
   promptForInput(input) {
     const unit = input.unit ? "，单位为" + input.unit : "";
-    return "请提供" + input.label + unit + "。"
+    return "为了准确核对当前步骤，请提供" + input.label + unit + "。"
       + (input.type === "datetime_utc" ? "请使用UTC，逐项报告年份、月份、日期、时、分、秒。不自动换算本地时间。" : "")
       + (input.type === "identifier" ? "请报告完整编号，我会原样读回；不猜测识别错误。" : "");
+  }
+
+  promptForInputs(inputs) {
+    if (inputs.length === 1) return this.promptForInput(inputs[0]);
+    return "为了准确核对当前步骤，请补充：" + inputs.map(input => input.label + (input.unit ? `（${input.unit}）` : "")).join("；") + "。可以一次报告。"
+      + (inputs.some(input => input.type === "datetime_utc") ? "时间请按UTC报告完整年月日、时分秒。" : "")
+      + (inputs.some(input => input.type === "identifier") ? "编号会原样读回，请核对。" : "");
   }
 
   describeMissingInputs(step, session) {
@@ -345,15 +402,63 @@ class ProcedureEngine {
 
   buildStepPrompt(step, session) {
     const preconditions = step.preconditions?.length ? "开始前请确认：" + step.preconditions.join("；") + "。" : "";
-    const missing = (step.required_inputs || []).find((input) => session.step_observations?.[input.name] === undefined);
+    const missing = (step.required_inputs || []).filter((input) => session.step_observations?.[input.name] === undefined);
     return step.spoken_instruction + " " + preconditions + " "
-      + (missing ? this.promptForInput(missing) : "请报告该步骤的完成结果和实验现象。");
+      + (missing.length ? this.promptForInputs(missing) : "请报告该步骤的完成结果和实验现象。");
+  }
+
+  versionMismatch(session, procedure) {
+    const alreadyRecorded = session.pause_reason === "PROCEDURE_VERSION_MISMATCH";
+    const nextSession = { ...session, status: "PAUSED", step_state: "ERROR", pause_reason: "PROCEDURE_VERSION_MISMATCH",
+      event_log: alreadyRecorded ? session.event_log : this.appendEvent(session.event_log, "PROCEDURE_VERSION_MISMATCH", {
+        session_procedure_id: session.procedure_id, session_version: session.procedure_version || null,
+        loaded_procedure_id: procedure.procedure_id, loaded_version: procedure.version || null,
+        previous_pause_reason: session.pause_reason || null,
+      }),
+    };
+    return this.response("PROCEDURE_VERSION_MISMATCH", nextSession, procedure,
+      "旧任务记录与当前流程版本不一致，不能直接继续，旧记录已保留。重新选择同一实验不能解决这个问题。"
+      + "如果要新建本次演示，请说重新开始，听取归档提示后再单独说确认重新开始。不会沿用旧确认数据，也不会删除旧记录。");
   }
 
   describeStatus(session, step) {
     const status = { GUIDING: "引导中", PAUSED: "暂停", EXCEPTION_REPORTED: "异常待处理", COMPLETED: "完成" }[session.status] || session.status;
     const pending = session.step_state === "WAITING_STEP_CONFIRMATION" ? "已读回数据，等待确认。" : "";
-    return "当前步骤：" + step.name + "。状态：" + status + "。" + pending;
+    return "当前步骤：" + step.name + "。状态：" + status + "。已确认" + (session.completed_steps?.length || 0) + "步。" + pending
+      + (this.describeValues(step, session.step_observations) ? "本步已报告：" + this.describeValues(step, session.step_observations) + "。" : "")
+      + this.describeMissingInputs(step, session)
+      + (session.pause_reason === "RULE_CONFLICT" ? "规则冲突尚未解决，等待任务负责人确认适用规则。" : "");
+  }
+
+  progress(session, procedure) {
+    const index = procedure?.steps?.findIndex(step => step.step_id === session.current_step) ?? -1;
+    if (index < 0) return null;
+    const step = procedure.steps[index];
+    const fields = step.required_inputs || [];
+    const values = session.step_observations || {};
+    const versionMismatch = session.procedure_id && (session.procedure_id !== procedure.procedure_id
+      || session.procedure_version !== (procedure.version || null));
+    const paused = Boolean(versionMismatch) || ["PAUSED", "EXCEPTION_REPORTED"].includes(session.status);
+    const completed = session.status === "COMPLETED";
+    const decision = versionMismatch ? "流程版本不一致，旧记录保留" : completed ? "本次交互核对完成" : session.pause_reason === "RULE_CONFLICT" ? "资料冲突，暂不能判定"
+      : paused ? "暂停" : session.step_state === "WAITING_STEP_CONFIRMATION" ? "等待读回确认" : "等待补充报告";
+    const nextAction = versionMismatch ? session.pending_task_change?.kind === "RESTART"
+      ? "说确认重新开始以归档旧记录并新建任务，或说取消重新开始"
+      : "说重新开始，听取归档提示后单独确认；不直接恢复旧任务"
+      : completed ? "可查询总结或保存记录" : session.pause_reason === "RULE_CONFLICT" ? "确认适用规则并更新有效配置"
+      : paused ? session.pause_reason === "OPERATOR" ? "说恢复流程回到原步骤" : "核对适用恢复指令及条件，流程保持暂停"
+      : session.step_state === "WAITING_STEP_CONFIRMATION" ? "核对读回后单独说确认无误" : "补充尚缺或不明确的字段";
+    return { step_number: index + 1, total_steps: procedure.steps.length, step_name: step.name,
+      confirmed_steps: session.completed_steps?.length || 0, paused, decision, next_action: nextAction,
+      reported: fields.filter(input => values[input.name] !== undefined).map(input => ({
+        name: input.name, label: input.label, value: values[input.name], display_value: this.formatValue(input, values[input.name]),
+      })),
+      missing: fields.filter(input => values[input.name] === undefined).map(input => ({ name: input.name, label: input.label })),
+      confirmed: Object.entries(session.step_records || {}).map(([id, record]) => ({ name: record.name, observations: record.observations,
+        display_values: this.describeValues(procedure.steps.find(item => item.step_id === id) || {}, record.observations),
+      })),
+      unresolved_conflicts: session.unresolved_conflicts || [],
+    };
   }
 
   summarize(session, procedure) {

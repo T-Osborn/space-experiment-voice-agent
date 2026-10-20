@@ -137,7 +137,8 @@
     ],
     "limits": "This public facility page does not authorize a mission-specific transfer threshold. It conflicts with the supplied demo value of -80°C ± 5°C and must remain a flagged conflict.",
     "checked_on": "2026-10-07",
-    "verification_scope": "facility_MELFI_paragraph"
+    "verification_scope": "facility_MELFI_paragraph",
+    "rechecked_on": "2026-10-19"
   },
   {
     "id": "nasa_veg04_ntrs",
@@ -736,5 +737,28 @@
     "checked_on": "2026-10-08", "verification_scope": "research_team_article_body_and_linked_paper_identity; complete_paper_not_obtained",
     "supports": ["CSS charged-colloid experiments used spectral/light-scattering instrumentation", "long-lived metastable bcc phase reported for the described study"],
     "limits": "The linked primary paper was not obtained: publisher retrieval failed and PubMed returned a challenge. No raw spectra, fitting parameters, acceptance criteria or full methods were verified. An unusual structure is not automatically an equipment fault."
+  },
+  {
+    "id": "official_cmse_resource_manual_2019",
+    "title": "中国空间站科学实验资源手册（2019年4月）",
+    "source_type": "official_historical_resource_manual", "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "中国载人航天工程办公室", "year": 2019, "published_month": "2019-04",
+    "url": "https://www.cmse.gov.cn/gfgg/201904/P020200225328481496691.pdf",
+    "checked_on": "2026-10-19",
+    "verification_scope": "PDF downloaded; printed pages 19 and 44 (PDF pages 24 and 49) rendered and visually checked; section 5.1.2.1 text checked",
+    "supports": ["historical plant facility support capabilities in Table 5.3", "not-less-than signs for space, resolution, frame rate and illumination", "proton measurement energy range, not dose safety limit", "CSS low-temperature storage capabilities in Table 5.13"],
+    "limits": "2019 resource description, not proof of current hardware configuration or an approved task SOP. Capability ranges are not rice setpoints, alarm limits or transfer criteria."
+  },
+  {
+    "id": "official_cemps_rice_shb_mirror_2022",
+    "title": "中科院分子植物卓越中心在国际上首次完成了水稻从种子到种子全生命周期空间培养实验（上海分院转载）",
+    "source_type": "official_research_team_report_mirror", "evidence_level": "C_OFFICIAL_DESCRIPTION",
+    "publisher": "中国科学院上海分院；原文来源：分子植物科学卓越创新中心",
+    "year": 2022, "published_on": "2022-12-05",
+    "url": "https://shb.cas.cn/kydt2024/kjjz2024/202212/t20221205_6566564.html",
+    "checked_on": "2026-10-19", "verification_scope": "article body and Figure 1 caption; original team report mirrored on official CAS branch site",
+    "same_work_as": "official_cemps_rice_2022",
+    "supports": ["2022 seed-to-seed rice facility and 120-day historical duration", "stage-specific preservation and Shenzhou-14 return"],
+    "limits": "Mirror of the same team report, not an independent experiment or second confirming study. Historical observations do not establish universal 90/120-day rules or an approved sampling protocol."
   }
 ]

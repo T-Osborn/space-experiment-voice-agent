@@ -9,6 +9,8 @@ const { SemanticAdapter } = require("./semantic-adapter");
 const { DialogueMemory } = require("./dialogue-memory");
 const { randomUUID } = require("node:crypto");
 const { exportTask, taskHelp } = require("./task-lifecycle");
+const { behaviorPolicy } = require("./behavior-policy");
+const { clarificationPlan, clarificationReply, sameYear } = require("./knowledge-clarifier");
 
 const PERSONA_PATH = path.join(__dirname, "..", "config", "persona.json");
 
@@ -18,7 +20,7 @@ class AgentOrchestrator {
     this.semanticAdapter = semanticAdapter || new SemanticAdapter();
     this.dialogueMemory = dialogueMemory || new DialogueMemory();
     this.tts = tts;
-    this.knowledgeRetriever = knowledgeRetriever || new KnowledgeRetriever();
+    this.knowledgeRetriever = knowledgeRetriever === undefined ? new KnowledgeRetriever() : knowledgeRetriever;
     this.experimentRegistry = experimentRegistry || new ExperimentRegistry();
     this.procedureRegistry = procedureRegistry || new ProcedureRegistry();
     this.procedureEngine = procedureEngine || new ProcedureEngine();
@@ -34,7 +36,7 @@ class AgentOrchestrator {
     };
   }
 
-  async handleVoiceTurn({ session, recognized_text, record_history = null }) {
+  async handleVoiceTurn({ session, recognized_text, record_history = null, conversation_context = undefined }) {
     if (!session || typeof session !== "object") {
       throw new Error("SESSION_REQUIRED");
     }
@@ -44,10 +46,31 @@ class AgentOrchestrator {
     }
 
     const query = recognized_text.trim();
+    // The last committed reply is authoritative after refresh, restart or a failed storage commit.
+    if (conversation_context !== undefined) this.dialogueMemory.restore(session.session_id, conversation_context);
     let intent = classifyVoiceIntent(query);
+    const pendingQuery = this.dialogueMemory.pending(session.session_id);
+    const activeProcedure = session.procedure_id ? this.procedureRegistry.getForExperiment(session.experiment_id) : null;
+    const step = activeProcedure?.steps.find(item => item.step_id === session.current_step);
+    const explicitReport = step?.required_inputs?.some(input => (input.aliases || [input.label])
+      .some(alias => query.toLowerCase().includes(alias.toLowerCase())));
+    if (intent === "FEEDBACK" && !explicitReport && clarificationReply(pendingQuery, query)) intent = "KNOWLEDGE";
     const currentRouting = this.experimentRegistry.route("", session, { allowSwitch: false });
+    if (intent === "CANCEL_KNOWLEDGE") {
+      this.dialogueMemory.clearPending(session.session_id);
+      return this.buildResponse({ session, routing: currentRouting, query, response_type: "KNOWLEDGE_QUERY_CANCELLED",
+        speech_text: "已取消这次知识查询，当前实验步骤和记录保留。" });
+    }
+    if (["FEEDBACK", "SELECT", "START", "RECHECK_STEP", "EXCEPTION", "EXCEPTION_DETAILS"].includes(intent)) {
+      this.dialogueMemory.clearPending(session.session_id);
+    }
+    if (intent === "NEGATED_COMMAND") return this.buildResponse({ session, routing: currentRouting, query,
+      response_type: "COMMAND_NOT_EXECUTED", speech_text: "收到，不执行这项指令，当前实验状态和记录保留。" });
+    if (intent === "UNRELATED") return this.buildResponse({ session, routing: currentRouting, query,
+      response_type: "OUT_OF_SCOPE", speech_text: "我主要支持在轨实验知识查询、步骤核对与记录整理。可以说语音帮助，听取可提问示例。" });
     if (intent === "HELP") return this.buildResponse({ session, routing: currentRouting, query,
-      response_type: "VOICE_HELP", speech_text: taskHelp(session) });
+      response_type: "VOICE_HELP", speech_text: taskHelp(session, (this.knowledgeRetriever?.records || [])
+        .filter(record => record.questions?.length && record.direct_answer_allowed === true).slice(0, 2).map(record => record.questions[0])) });
     if (intent === "RECORD_HISTORY") {
       const records = (record_history || []).map(record => ({ ...record,
         experiment_name: this.experimentRegistry.list().find(item => item.experiment_id === record.experiment_id)?.display_name || "未选择实验",
@@ -87,7 +110,7 @@ class AgentOrchestrator {
         speech_text: "重新开始会建立新的一次任务，并生成原记录的下载文件。请说确认重新开始，或取消重新开始。普通的确认无误不会执行此变更。" });
     }
     // Known spoken questions still remain queries when ASR omits punctuation.
-    if (intent === "FEEDBACK" && this.knowledgeRetriever.isKnownQuestion?.(query)) intent = "KNOWLEDGE";
+    if (intent === "FEEDBACK" && this.knowledgeRetriever?.isKnownQuestion?.(query)) intent = "KNOWLEDGE";
     // Read-only questions preserve the pending change; a new report or correction invalidates it.
     if (session.pending_task_change && !["STATUS", "LIST_EXPERIMENTS", "SUMMARY", "REPEAT", "STEP_HELP", "KNOWLEDGE", "REVIEW_DRAFT"].includes(intent)) {
       session = { ...session, pending_task_change: null };
@@ -95,12 +118,16 @@ class AgentOrchestrator {
     const routing = this.experimentRegistry.route(query, session, {
       allowSwitch: ["SELECT", "START"].includes(intent) || (!session.experiment_id && intent === "FEEDBACK"),
     });
+    const routedProcedure = this.procedureRegistry.getForExperiment(routing.experiment?.experiment_id);
+    const outdatedTask = Boolean(session.procedure_id && routedProcedure
+      && (session.procedure_id !== routedProcedure.procedure_id || session.procedure_version !== (routedProcedure.version || null)));
     if (session.procedure_id && ((routing.switched && ["SELECT", "START"].includes(intent))
-      || (intent === "START" && session.status === "COMPLETED"))) {
+      || (intent === "START" && (session.status === "COMPLETED" || outdatedTask)))) {
       const restart = !routing.switched;
       return this.buildResponse({ session: { ...session, pending_task_change: { kind: restart ? "RESTART" : "SWITCH", query } },
         routing: currentRouting, query, response_type: "TASK_CHANGE_REQUIRED",
-        speech_text: `${restart ? "重新开始" : `切换到${routing.experiment.display_name}`}会建立新任务，并生成原记录的下载文件。请说${restart ? "确认重新开始" : "确认切换"}，或说取消任务变更。当前实验尚未改变。` });
+        speech_text: (outdatedTask && restart ? "旧任务记录与当前流程版本不一致，不能直接按新版继续。" : "")
+          + `${restart ? "重新开始" : `切换到${routing.experiment.display_name}`}会建立新任务，并生成原记录的下载文件。请说${restart ? "确认重新开始" : "确认切换"}，或说取消任务变更。当前实验尚未改变，不会删除旧记录。` });
     }
     if (intent === "REVIEW_DRAFT") {
       const experiment = this.experimentRegistry.resolve(query) || routing.experiment;
@@ -133,6 +160,10 @@ class AgentOrchestrator {
     if (routing.switched) this.dialogueMemory.clear(session.session_id);
     if (routing.kind === "MATCHED" && intent === "SELECT") {
       const procedure = this.procedureRegistry.getForExperiment(routing.experiment.experiment_id);
+      if (outdatedTask && !routing.switched) {
+        const blocked = this.procedureEngine.versionMismatch(session, procedure);
+        return this.buildResponse({ ...blocked, routing, query });
+      }
       const draft = this.procedureRegistry.getDraftForExperiment?.(routing.experiment.experiment_id);
       const availability = procedure
         ? (procedure.guidance_mode === "PROJECT_DEMO" ? "已加载项目演示流程，可以说开始流程。" : "已加载流程配置，可以说开始流程。")
@@ -177,6 +208,10 @@ class AgentOrchestrator {
         session, routing, query, procedure, response_type: "PROCEDURE_REVIEW_REQUIRED",
         speech_text: "当前没有该任务的已审核飞行SOP，不能开始真实实验操作引导。只能演示交互核对，请先取得任务方审核的操作与异常规程。",
       });
+      if (outdatedTask) {
+        const blocked = this.procedureEngine.versionMismatch(session, procedure);
+        return this.buildResponse({ ...blocked, routing, query });
+      }
       const guidance = session.procedure_id === procedure?.procedure_id && !(intent === "START" && session.status === "COMPLETED")
         ? this.procedureEngine.handleInput(session, procedure, query, intent)
         : this.procedureEngine.start(session, procedure);
@@ -190,15 +225,70 @@ class AgentOrchestrator {
       });
     }
 
-    const resolvedQuery = this.dialogueMemory.resolve(session.session_id, query, this.knowledgeRetriever.records);
-    let results = this.knowledgeRetriever.search(resolvedQuery, 3);
+    return this.handleKnowledgeQuery({ session, routing, query, intent });
+  }
+
+  knowledgeStatus() {
+    const retriever = this.knowledgeRetriever;
+    if (!retriever || typeof retriever.search !== "function") return { status: "UNCONNECTED", available: false };
+    try { return retriever.getStatus?.() || { status: "AVAILABLE", available: true }; }
+    catch { return { status: "UNAVAILABLE", available: false }; }
+  }
+
+  async inspectKnowledge(query, limit = 5) {
+    const status = this.knowledgeStatus();
+    if (!status.available) return { results: [], retrieval_status: status.status };
+    try {
+      const results = await this.knowledgeRetriever.search(query, limit);
+      if (!Array.isArray(results)) throw new Error("KNOWLEDGE_RESULT_INVALID");
+      return { results, retrieval_status: results.length ? "MATCHED" : "NO_MATCH" };
+    } catch { return { results: [], retrieval_status: "FAILED" }; }
+  }
+
+  async handleKnowledgeQuery({ session, routing, query, intent }) {
+    const continuation = clarificationReply(this.dialogueMemory.pending(session.session_id), query);
+    const resolvedQuery = this.dialogueMemory.resolve(session.session_id, continuation?.query || query, this.knowledgeRetriever?.records || []);
+    const boundary = knowledgeBoundary(query) || knowledgeBoundary(resolvedQuery);
+    if (boundary) return this.buildResponse({ session, routing, query,
+      ...this.composeKnowledgeResponse({ query: knowledgeBoundary(query) ? query : resolvedQuery, results: [] }),
+      knowledge: { query, resolved_query: resolvedQuery, matched_records: [], top_record_id: null, retrieval_status: "NOT_REQUIRED", boundary },
+    });
+    const status = this.knowledgeStatus();
+    if (!status.available) return this.retrievalFailure({ session, routing, query, status: status.status });
+    try {
+      return await this.searchKnowledge({ session, routing, query, intent, resolvedQuery });
+    } catch {
+      return this.retrievalFailure({ session, routing, query, status: "FAILED" });
+    }
+  }
+
+  retrievalFailure({ session, routing, query, status }) {
+    const failed = status === "FAILED";
+    return this.buildResponse({ session, routing, query,
+      response_type: failed ? "KNOWLEDGE_RETRIEVAL_FAILED" : "KNOWLEDGE_UNAVAILABLE",
+      speech_text: failed ? "当前题库检索调用失败，请稍后重试。尚不能判断题库是否有答案，当前实验步骤和记录保留。"
+        : status === "UNCONNECTED" ? "当前题库检索功能未连接，尚不能查询答案。当前实验步骤和记录保留。"
+          : "当前题库检索功能不可用，请检查知识库加载状态。尚不能判断是否有答案，当前实验步骤和记录保留。",
+      knowledge: { query, matched_records: [], top_record_id: null, retrieval_status: status },
+    });
+  }
+
+  async searchKnowledge({ session, routing, query, intent, resolvedQuery = query }) {
+    let results = await this.knowledgeRetriever.search(resolvedQuery, 3);
+    if (!Array.isArray(results)) throw new Error("KNOWLEDGE_RESULT_INVALID");
+    const eligible = record => record.direct_answer_allowed === true && record.sources?.some(source => /^https:\/\//u.test(source.url || ""))
+      && sameYear(resolvedQuery, record.title);
+    results = results.filter(eligible);
+    const plan = clarificationPlan(resolvedQuery, results, this.knowledgeRetriever);
     let semanticDecision = null;
-    if (!results.length && intent === "KNOWLEDGE" && !knowledgeBoundary(query) && !knowledgeBoundary(resolvedQuery)) {
-      const catalog = this.knowledgeRetriever.semanticCatalog(resolvedQuery);
-      semanticDecision = await this.semanticAdapter.select({ query: resolvedQuery, catalog });
+    let semanticFailed = false;
+    if (!plan && !results.length && intent === "KNOWLEDGE" && !knowledgeBoundary(query) && !knowledgeBoundary(resolvedQuery)) {
+      const catalog = this.knowledgeRetriever.semanticCatalog?.(resolvedQuery) || [];
+      try { semanticDecision = await this.semanticAdapter.select({ query: resolvedQuery, catalog }); }
+      catch { semanticFailed = true; }
       if (semanticDecision?.decision === "MATCH") {
         const record = this.knowledgeRetriever.getRecord(semanticDecision.record_id);
-        if (record && catalog.some((item) => item.record_id === record.record_id)
+        if (record && eligible(record) && catalog.some((item) => item.record_id === record.record_id)
           && typeof semanticDecision.evidence_quote === "string" && semanticDecision.evidence_quote.length >= 2
           && resolvedQuery.includes(semanticDecision.evidence_quote)) {
           results = [{ ...record, score: 50, match_type: "MODEL_SELECTED_REGISTERED_RECORD" }];
@@ -206,11 +296,17 @@ class AgentOrchestrator {
       }
     }
     const topResult = results[0] || null;
-    const response = semanticDecision?.decision === "CLARIFY"
-      ? { response_type: "KNOWLEDGE_CLARIFICATION", speech_text: "题意尚不明确。请说明具体研究、任务年份，以及要查询的主题。不会据此改变实验记录或步骤。" }
+    const activePlan = plan || (semanticDecision?.decision === "CLARIFY" ? {
+      query: resolvedQuery, kind: "MISSING_SCOPE", choices: [], missing_groups: [{ kind: "SUBJECT", terms: [] }],
+      speech_text: `${behaviorPolicy.clarification_prefix}需要查询的具体研究问题。当前匹配结果不足以确定答案。`,
+    } : null);
+    const response = activePlan
+      ? { response_type: "KNOWLEDGE_CLARIFICATION", speech_text: activePlan.speech_text }
       : this.composeKnowledgeResponse({ query, results });
+    if (activePlan) this.dialogueMemory.ask(session.session_id, activePlan);
+    else this.dialogueMemory.clearPending(session.session_id);
     if (["KNOWLEDGE_ANSWER", "SOURCE_CONFLICT"].includes(response.response_type)) {
-      const record = this.knowledgeRetriever.records.find((item) => item.record_id === topResult.record_id);
+      const record = (this.knowledgeRetriever.records || []).find((item) => item.record_id === topResult.record_id);
       this.dialogueMemory.remember(session.session_id, record);
     }
 
@@ -224,6 +320,8 @@ class AgentOrchestrator {
         query,
         resolved_query: resolvedQuery,
         semantic_mode: results.some((item) => item.match_type === "MODEL_SELECTED_REGISTERED_RECORD") ? "MODEL_ROUTED" : "LOCAL",
+        semantic_status: semanticFailed ? "FAILED" : "COMPLETED_OR_NOT_REQUIRED",
+        retrieval_status: results.length ? "MATCHED" : "NO_MATCH",
         matched_records: results.map((item) => ({
           record_id: item.record_id,
           title: item.title,
@@ -236,6 +334,8 @@ class AgentOrchestrator {
           sources: item.sources,
         })),
         top_record_id: topResult?.record_id || null,
+        retrieval_required: behaviorPolicy.required_knowledge_retrieval,
+        clarification: activePlan ? { kind: activePlan.kind, missing_groups: activePlan.missing_groups, choices: activePlan.choices } : null,
       },
     });
   }
@@ -250,6 +350,10 @@ class AgentOrchestrator {
       session,
       speech_text,
       response_type,
+      behavior_policy_version: behaviorPolicy.version,
+      prompt_revision: behaviorPolicy.prompt_revision,
+      conversation_context: this.dialogueMemory.snapshot(session.session_id),
+      progress: procedure ? this.procedureEngine.progress(session, procedure) : null,
       tts_audio_url: null,
       experiment: routing.experiment
         ? {
@@ -270,7 +374,7 @@ class AgentOrchestrator {
             step_state: session.step_state || null,
           }
         : null,
-      knowledge: knowledge || { query, matched_records: [], top_record_id: null },
+      knowledge: knowledge || { query, matched_records: [], top_record_id: null, retrieval_status: "NOT_REQUESTED" },
       persona: {
         agent_name: this.persona.agent_name,
         language: this.persona.conversation_style.language,

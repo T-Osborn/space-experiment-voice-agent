@@ -24,7 +24,10 @@ test("four simulated scenarios traverse real HTTP access, server-owned states an
   try {
     const report = await runHttpRehearsal({ base: `http://127.0.0.1:${app.server.address().port}` });
     assert.equal(report.scenarios.length, 4); assert.equal(report.real_audio_verified, false);
-    assert.ok(report.scenarios.every((scenario) => scenario.confirmed_gates === 9 && scenario.same_owner_refresh_preserved));
+    assert.ok(report.scenarios.every(scenario => scenario.same_owner_refresh_preserved));
+    assert.equal(report.scenarios.filter(scenario => scenario.confirmed_gates === 9 && scenario.final_status === "COMPLETED").length, 2);
+    assert.equal(report.scenarios.find(scenario => scenario.name.startsWith("exception_holds")).confirmed_gates, 1);
+    assert.equal(report.scenarios.find(scenario => scenario.name.startsWith("identity_exception")).confirmed_gates, 5);
     assert.equal(report.cloud_speech_called, false); assert.equal(report.cloud_model_called, false);
     assert.equal(app.sessions.sessions.size, 4);
   } finally { await new Promise((resolve) => { app.server.close(resolve); app.server.closeAllConnections(); }); }

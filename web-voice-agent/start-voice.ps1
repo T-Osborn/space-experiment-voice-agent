@@ -43,7 +43,7 @@ $voiceUrl = "http://127.0.0.1:$selectedPort/"
 $hasEnvironmentKey = if ($Provider -eq 'baidu') { -not [string]::IsNullOrWhiteSpace($env:BAIDU_API_KEY) } else { -not [string]::IsNullOrWhiteSpace($env:OPENAI_API_KEY) }
 $hasEnvironmentSecret = -not [string]::IsNullOrWhiteSpace($env:BAIDU_SECRET_KEY)
 $selectedService = if ($BaiduTtsService) { $BaiduTtsService } elseif ($env:BAIDU_TTS_SERVICE) { $env:BAIDU_TTS_SERVICE } else { 'short_text' }
-$selectedVoice = if ($BaiduVoiceId) { $BaiduVoiceId } elseif ($env:BAIDU_TTS_VOICE) { $env:BAIDU_TTS_VOICE } elseif ($selectedService -eq 'short_text') { '4100' } else { '' }
+$selectedVoice = if ($BaiduVoiceId) { $BaiduVoiceId } elseif ($env:BAIDU_TTS_VOICE) { $env:BAIDU_TTS_VOICE } elseif ($selectedService -eq 'short_text') { '5' } else { '' }
 $voiceNumber = 0L
 $validBaiduVoice = [long]::TryParse($selectedVoice, [ref]$voiceNumber) -and $voiceNumber -ge 0 -and $voiceNumber -le 9007199254740991 -and ($selectedService -ne 'clone' -or $voiceNumber -gt 0)
 $hasCredentials = $hasEnvironmentKey -and ($Provider -ne 'baidu' -or $hasEnvironmentSecret)
@@ -144,7 +144,7 @@ try {
         $startInfo.EnvironmentVariables['BAIDU_SECRET_KEY'] = $plainBaiduSecret
         $startInfo.EnvironmentVariables['BAIDU_TTS_SERVICE'] = $selectedService
         $startInfo.EnvironmentVariables['BAIDU_TTS_VOICE'] = $selectedVoice
-        $startInfo.EnvironmentVariables['BAIDU_TTS_VOICE_NAME'] = if ($selectedService -eq 'short_text' -and $selectedVoice -eq '4100') { '度小雯（per 4100）' } else { '' }
+        $startInfo.EnvironmentVariables['BAIDU_TTS_VOICE_NAME'] = if ($selectedService -eq 'short_text' -and $voiceNumber -eq 5) { '度小娇（per 5）' } else { '' }
         $startInfo.EnvironmentVariables['ASR_UPSTREAM_URL'] = 'https://vop.baidu.com/server_api'
         $startInfo.EnvironmentVariables['TTS_UPSTREAM_URL'] = if ($selectedService -eq 'clone') { 'https://aip.baidubce.com/rest/2.0/speech/publiccloudspeech/v1/voice/clone/tts' } else { 'https://tsn.baidu.com/text2audio' }
     } else {

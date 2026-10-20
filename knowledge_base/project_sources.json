@@ -58,6 +58,15 @@
     "execution_allowed": false
   },
   {
+    "id": "project_skill_v2_2026_10_15",
+    "title": "2026-10-15通用在轨实验Skill V2",
+    "source_type": "USER_PROVIDED_AGENT_SPECIFICATION",
+    "local_reference": "web-voice-agent/config/SKILL_V2.md",
+    "scope": "意图分流、缺项追问、单位核对、90天规则冲突、检索状态与暂停恢复",
+    "authority": "T提供的产品行为规范，未审核的演示规则差异，不是科学操作参数或飞行SOP",
+    "execution_allowed": false
+  },
+  {
     "id": "project_multiexperiment_review_design_2026_10_08",
     "title": "2026-10-08多实验流程与异常分支待审设计",
     "source_type": "PROJECT_DESIGN_EXTENSION",
@@ -66,5 +75,33 @@
     "scope": "植物、水生生态、蛋白质和复杂流体的记录字段、暂停、复核与专家签审要求",
     "authority": "T授权的流程产品设计，不是已审核的科学操作规程",
     "execution_allowed": false
+  },
+  {
+    "id": "project_prompt_v2_2026_10_15",
+    "title": "T提供的提示词工程2.0及追问补充要求",
+    "source_type": "USER_PROVIDED_AGENT_SPECIFICATION",
+    "local_reference": "web-voice-agent/config/system-prompt-v2.md",
+    "uploaded_filename": "提示词工程2.0.docx",
+    "uploaded_source_sha256": "890F2CDCCA399A35C2AB3EE67FB4D5216C73AD3A68EB7137683ABF6D2C42A59A",
+    "created_on": "2026-10-15",
+    "scope": "仅落实缺项追问、语音短回答衔接、强制知识检索及状态保留；附件中新增参数和强制跳阶段未启用",
+    "authority": "T提供的产品行为需求，不是科学参数来源或任务级审核SOP",
+    "execution_allowed": false
+  },
+  {
+    "id": "project_rice_detail_2026_10_19", "title": "太空水稻实验 详细版.md",
+    "source_type": "USER_PROVIDED_PROJECT_DOCUMENT", "received_on": "2026-10-19",
+    "local_reference": "knowledge_base/uploads/2026-10-19/太空水稻实验 详细版.md",
+    "uploaded_source_sha256": "9C3F32FA616D487AD6E4E0D94EA80443C18D6F6C305DA2F415CB1C12B80480CC",
+    "scope": "五步流程草案；原文引用66无书目映射；归档用于差异核查，不替换当前九步演示",
+    "authority": "未经任务级审核；不是新增放行阈值或技术处置依据", "execution_allowed": false
+  },
+  {
+    "id": "project_rice_50qa_2026_10_19", "title": "太空水稻实验 50问.md",
+    "source_type": "USER_PROVIDED_QA_KNOWLEDGE_BASE", "received_on": "2026-10-19",
+    "local_reference": "knowledge_base/uploads/2026-10-19/太空水稻实验 50问.md",
+    "uploaded_source_sha256": "1357762D9EF674E5774EFE1652E8FCB14A351BB7835A0F342F7EC79FBBC521B4",
+    "scope": "50条原始问答及引用66、80、91；逐题审查，原答案不直接加载",
+    "authority": "产品行为、设施能力、历史任务与未核实参数混合，不能整体标记为专业标准", "execution_allowed": false
   }
 ]

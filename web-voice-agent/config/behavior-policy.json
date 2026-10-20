@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "prompt_document": "system-prompt-v2.md",
+  "prompt_revision": "2.0.0-prompt.1",
+  "required_knowledge_retrieval": true,
+  "clarification_prefix": "为了给你更准确的建议，请告诉我",
+  "source_document": "SKILL_V2.md",
+  "uploaded_source_sha256": "FC00190F8EF1D91C018D7688C9000E83D79904ABB22C2B56437F846D22593DCD",
+  "user_clarification": "2026-10-15：普通操作者暂停可恢复原步骤；异常、条件不达标或规则冲突暂停须有相应恢复依据。",
+  "knowledge_queries_preserve_task": true,
+  "combine_missing_input_questions": true,
+  "validate_explicit_units": true,
+  "independent_readback_confirmation": true,
+  "ordinary_pause_requires_ground_instruction": false,
+  "abnormal_resume_requires_configured_authority": true
+}

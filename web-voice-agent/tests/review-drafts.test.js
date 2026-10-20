@@ -105,7 +105,7 @@ test("review export is traceable, not submitted or approved, with partial scopes
   assert.equal(pkg.status, "PREPARED_FOR_EXTERNAL_EXPERT_REVIEW_NOT_SUBMITTED");
   assert.equal(pkg.expert_reviews_received, 0);
   assert.equal(pkg.summary.approved_procedures, 0);
-  assert.equal(pkg.summary.public_source_inventory_count, 46);
+  assert.equal(pkg.summary.public_source_inventory_count, 48);
   assert.equal(pkg.other_directory_items.length, 15);
   assert(pkg.drafts.every(d => /^[a-f0-9]{64}$/u.test(d.content_sha256)));
   const text = toMarkdown(pkg);

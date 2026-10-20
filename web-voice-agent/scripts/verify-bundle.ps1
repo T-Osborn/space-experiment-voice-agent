@@ -15,7 +15,7 @@ try {
   foreach ($entry in $zip.Entries) {
     $destination = [IO.Path]::GetFullPath((Join-Path $stagePath $entry.FullName))
     if (-not $destination.StartsWith($stagePath + '\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Unsafe archive path.' }
-    if ($entry.FullName.Replace('\','/') -match '(^|/)(\.env|\.env\.deploy)$|project-question-candidates|\.docx$|(^|/)data/|\.sqlite(?:-wal|-shm)?$') { throw 'Private input unexpectedly included.' }
+    if ($entry.FullName.Replace('\','/') -match '(^|/)(\.env|\.env\.deploy)$|project-question-candidates|\.docx$|(^|/)(data|backups|tmp|\.git|\.release-tools)/|\.sqlite(?:-wal|-shm)?$') { throw 'Private input unexpectedly included.' }
   }
 } finally { $zip.Dispose() }
 $process = $null
@@ -41,7 +41,14 @@ const {createApp}=require('./web-voice-agent/server/app-server');
   assert.equal(granted.status,200);const cookie=granted.headers.get('set-cookie').split(';')[0];
   const caps=await(await fetch(base+'/api/capabilities',{headers:{Cookie:cookie}})).json();
   assert.equal(caps.experiment_count,20);assert.equal(caps.core_question_count,20);assert.equal(caps.demo_procedure_count,1);assert.equal(caps.flight_ready,false);
-  assert.equal(caps.expanded_question_count,16);assert.equal(caps.curated_question_count,36);assert.equal(caps.public_source_count,46);
+  const packagedVersion=require('./web-voice-agent/package.json').version;
+  assert.equal(caps.application_version,packagedVersion);
+  for(const file of ['docs/44-2.0团队独立测试指南.md','docs/45-2.0语音测试问答表.md','.github/ISSUE_TEMPLATE/team-feedback-v2.yml']) assert.ok(require('node:fs').existsSync(file),file);
+  const readFile=file=>require('node:fs').readFileSync(file,'utf8');
+  for(const file of ['README.md','FEEDBACK.md']) assert.ok(readFile(file).includes(packagedVersion),file);
+  for(const file of ['Start-Baidu-Voice-Agent.cmd','Start-Voice-Agent.cmd']) assert.match(readFile(file),/-NoProfile -ExecutionPolicy Bypass -File/u);
+  for(const file of ['web-voice-agent/.env.example','web-voice-agent/.env.deploy.example']) assert.ok(!/^(?:BAIDU_API_KEY|BAIDU_SECRET_KEY|OPENAI_API_KEY|DEPLOY_ACCESS_TOKEN)=[ \t]*[^\s#]/mu.test(readFile(file)),'Non-empty credential template: '+file);
+  assert.equal(caps.expanded_question_count,16);assert.equal(caps.curated_question_count,52);assert.equal(caps.public_source_count,48);assert.equal(caps.rice_update_question_count,16);
   assert.equal(caps.record_export,true);assert.equal(caps.task_change_confirmation,true);assert.equal(caps.voice_turn_deduplication,true);
   assert.equal(caps.review_draft_count,4);
   assert.equal(caps.detailed_demo_step_count,9);assert.equal(caps.knowledge_understanding.configured,false);

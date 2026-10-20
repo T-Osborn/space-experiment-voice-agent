@@ -7,9 +7,14 @@ function normalizeUtterance(query) {
 function classifyVoiceIntent(query) {
   const text = normalizeUtterance(query);
   const command = text.replace(/[\s，。！？、,.!?]/gu, "").replace(/^请/u, "");
+  if (/^(不要|别|先别|暂不|不需要|不想).*(暂停|恢复|开始|切换|重新|继续)/u.test(command)
+    && !/[?？]|什么意思|为什么|能否|是否/u.test(text)) return "NEGATED_COMMAND";
+  if (/讲(?:个|一个)?笑话|写(?:首|一首)?诗|推荐(?:餐厅|电影)|算命|炒股/u.test(text)
+    && !/实验|空间|微重力|研究/u.test(text)) return "UNRELATED";
   if (/^(你好|您好|在吗|帮助|语音帮助|使用帮助|你是谁|你能做什么|怎么使用|我该怎么开始)$/u.test(command)) return "HELP";
   if (/^(保存记录|保存实验记录|导出记录|导出实验记录|下载记录)$/u.test(command)) return "EXPORT_RECORD";
   if (/^(历史记录|查看历史记录|查看已保存记录|查看归档记录)$/u.test(command)) return "RECORD_HISTORY";
+  if (/^(取消追问|取消查询|取消知识查询|不问了|返回实验)$/u.test(command)) return "CANCEL_KNOWLEDGE";
   if (/^(重新开始|重新开始流程|重新开始实验|开始新任务)$/u.test(command)) return "RESTART_TASK";
   if (/^(确认切换|确认重新开始)$/u.test(command)) return "CONFIRM_TASK_CHANGE";
   if (/^(取消切换|取消重新开始|取消任务变更)$/u.test(command)) return "CANCEL_TASK_CHANGE";
@@ -24,7 +29,7 @@ function classifyVoiceIntent(query) {
   // A real fault report remains an exception even when followed by "怎么办".
   if (actualException(text)) return "EXCEPTION";
   // Questions and hypothetical statements must never become measured values or commands.
-  if (/[?？]/u.test(text) || /(为什么|为何|怎么|怎样|如何|什么|啥|哪些|哪几|哪两|哪种|哪个|哪里|哪儿|多久|几天|几档|多长|多少|能否|能不能|是否|吗|如果|假如|假设|解释|介绍|说说|讲讲|查询资料|参考来源|论文|文献)/u.test(text)) return "KNOWLEDGE";
+  if (/[?？]|呢[。！!]?$/u.test(text) || /(为什么|为何|怎么|怎样|如何|什么|啥|哪些|哪几|哪两|哪种|哪个|哪里|哪儿|多久|几天|几档|多长|多少|能否|能不能|是否|吗|如果|假如|假设|解释|介绍|说说|讲讲|查询|查一下|帮我查|我想了解|了解一下|说一下|讲一下|区别|作用|用途|含义|原理|参考来源|论文|文献)/u.test(text)) return "KNOWLEDGE";
   if (/^(重新核对本步|重新核对本步骤|重新核对当前步骤|重新报告本步|重新报告本步骤)$/u.test(command)) return "RECHECK_STEP";
   if (/^(暂停|暂停流程|暂停实验|停止|停止流程|先停一下)$/u.test(command)) return "PAUSE";
   if (/(恢复|恢复引导|恢复流程)/u.test(text)) return "RESUME";

@@ -115,7 +115,8 @@ test("real-flight requests do not start unreviewed project configurations", asyn
 });
 
 test("schema validation rejects broken step chains, types, rules and unknown citations", () => {
-  const sources = new Set(rice.steps.flatMap((step) => step.source_refs));
+  const sources = new Set(rice.steps.flatMap(step => [...step.source_refs,
+    ...(step.rule_conflicts || []).flatMap(conflict => conflict.alternatives.map(rule => rule.source_ref))]));
   validateProcedures([rice], sources);
   for (const mutate of [
     (p) => { p.steps[0].next_step = "unknown"; }, (p) => { p.steps[0].required_inputs[0].type = "executable"; },

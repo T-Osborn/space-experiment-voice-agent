@@ -39,11 +39,15 @@ const RESPONSE_LABELS = {
   RECORD_HISTORY: "历史归档已查询，当前任务未改变",
   TASK_CHANGE_REQUIRED: "等待单独确认任务变更",
   TASK_CHANGE_CANCELLED: "任务变更已取消",
+  KNOWLEDGE_QUERY_CANCELLED: "知识查询已取消，实验状态保留",
   EXPERIMENT_SELECTED: "已切换实验上下文",
   STEP_GUIDANCE: "步骤引导已生成，准备播报",
   STEP_WAITING_INPUT: "等待当前步骤反馈",
   STEP_AWAITING_CONFIRMATION: "数据读回已生成，等待语音确认",
   STEP_INPUT_AMBIGUOUS: "反馈不明确，等待补充",
+  STEP_RULE_CONFLICT: "规则冲突，暂停相关判定",
+  COMMAND_NOT_EXECUTED: "已保留当前任务状态",
+  OUT_OF_SCOPE: "请查询在轨实验相关知识或任务",
   STEP_RECHECK_STARTED: "本步待重新报告，原报告已留痕",
   STEP_RECHECK_BLOCKED: "流程保持暂停，尚不能重新核对",
   GUIDANCE_STATUS: "当前进度已生成，准备播报",
@@ -58,13 +62,15 @@ const RESPONSE_LABELS = {
   STEP_HELP: "当前步骤核对说明已生成",
   PROCEDURE_REVIEW_REQUIRED: "缺少已审核任务流程，未开始真实操作引导",
   PROCEDURE_DRAFT_OVERVIEW: "待审草案说明已生成，不改变实验状态",
-  PROCEDURE_VERSION_MISMATCH: "流程版本不一致，已暂停",
+  PROCEDURE_VERSION_MISMATCH: "旧记录已保留；说重新开始，再单独确认新任务",
   RESUME_REQUIRES_CONFIRMATION: "等待恢复确认",
   PROCEDURE_COMPLETED: "流程已完成",
   PROCEDURE_UNAVAILABLE: "当前实验暂无可用流程",
   KNOWLEDGE_ANSWER: "有出处的知识回复已生成，准备播报",
   SOURCE_CONFLICT: "来源冲突提示已生成，准备播报",
   KNOWLEDGE_MISSING: "知识库未找到依据",
+  KNOWLEDGE_UNAVAILABLE: "题库检索当前不可用",
+  KNOWLEDGE_RETRIEVAL_FAILED: "本次检索失败，任务状态保留",
   KNOWLEDGE_CLARIFICATION: "等待澄清知识问题",
   KNOWLEDGE_NO_TELEMETRY: "未连接设备，等待口述读数",
   KNOWLEDGE_SOP_REQUIRED: "需要任务级审核依据",
@@ -214,7 +220,16 @@ async function createSession() {
   experimentStatus.textContent = STATUS_LABELS[session.status] || session.status;
 }
 
+async function restoredProgress() {
+  if (!session?.session_id) return null;
+  const response = await window.VoiceNetwork.request("/api/progress?session_id=" + encodeURIComponent(session.session_id));
+  if (response.status === 404) return null; // Older running 1.0 servers have no detailed-progress endpoint.
+  if (!response.ok) throw new Error("PROGRESS_RESTORE_FAILED");
+  return response.data.progress;
+}
+
 async function sendRecognizedText(recognizedText) {
+  window.VoiceDashboard?.heard?.(recognizedText);
   setStatus("正在处理语音指令");
   setVoicePhase("PROCESSING");
   const response = await window.VoiceNetwork.voiceTurn({ session_id: session.session_id, recognized_text: recognizedText,
@@ -223,7 +238,7 @@ async function sendRecognizedText(recognizedText) {
   if (!response.ok) {
     if (response.status === 409) {
       await createSession();
-      updateSessionView({ session, ...(window.VoiceDashboard?.context(session) || {}), response_type: "SESSION_LOADED" });
+      updateSessionView({ session, ...(window.VoiceDashboard?.context(session) || {}), progress: await restoredProgress(), response_type: "SESSION_LOADED" });
     }
     const error = new Error(result.error || "VOICE_TURN_FAILED");
     error.userMessage = /^RECORD_/u.test(result.error || "")
@@ -487,7 +502,7 @@ async function bootstrap() {
   window.VoiceDashboard?.load({ voice: voiceConfig, capabilities: capabilitiesResponse.data,
     experimentData: experimentsResponse.data, procedureData: proceduresResponse.data });
   const context = window.VoiceDashboard?.context(session) || {};
-  updateSessionView({ session, ...context, response_type: "SESSION_LOADED" });
+  updateSessionView({ session, ...context, progress: await restoredProgress(), response_type: "SESSION_LOADED" });
   voiceButton.disabled = true;
   if (!readinessResponse.data.configuration_ready) {
     supportMessage.textContent = `${readinessResponse.data.message}接齐配置并重启服务后，刷新本页。`;

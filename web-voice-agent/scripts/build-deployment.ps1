@@ -19,7 +19,13 @@ if (-not $stagingDirectory.StartsWith($tempParent.TrimEnd('\') + '\', [StringCom
 New-Item -ItemType Directory -Path $stagingDirectory | Out-Null
 $relativeFiles = @(
   'README.md', 'FEEDBACK.md', 'RELEASE_NOTES.md', '.gitignore',
+  'docs/44-2.0团队独立测试指南.md', 'docs/45-2.0语音测试问答表.md',
+  'docs/38-SkillV2规则实现与验收.md', 'docs/39-追问衔接与强制知识检索.md', 'docs/40-旧会话版本循环修复.md',
+  'web-voice-agent/config/SKILL_V2.md',
+  'web-voice-agent/config/system-prompt-v2.md',
+  'docs/41-水稻知识库更新验收.md', 'docs/42-交同事修订的水稻资料问题清单.md',
   '.github/ISSUE_TEMPLATE/team-feedback.yml', '.github/ISSUE_TEMPLATE/config.yml', 'docs/35-1.0团队试用指南.md',
+  '.github/ISSUE_TEMPLATE/team-feedback-v2.yml',
   'web-voice-agent/scripts/build-deployment.ps1', 'web-voice-agent/scripts/verify-bundle.ps1', 'web-voice-agent/tests/launcher.test.ps1',
   'Start-Voice-Agent.cmd', 'web-voice-agent/start-app.ps1', 'docs/30-主框架使用说明.md',
   'Check-Voice-Readiness.cmd', 'web-voice-agent/scripts/check-readiness.js', 'docs/31-语音接入检查.md',
@@ -29,7 +35,7 @@ $relativeFiles = @(
   'web-voice-agent/start-voice.ps1',
   'web-voice-agent/scripts/inspect-baidu-voices.js', 'web-voice-agent/scripts/export-procedure-review.js',
   'Dockerfile', '.dockerignore', 'compose.yaml', 'docs/21-部署打包与界面验收.md', 'docs/22-流程细化与对话理解验收.md', 'docs/23-新版预览与HTTP演练验收.md', 'docs/25-水稻与生态知识扩展验收.md',
-  'knowledge_base/records.json', 'knowledge_base/qa-core.json', 'knowledge_base/qa-expanded.json', 'knowledge_base/verified_sources.json', 'knowledge_base/project_sources.json',
+  'knowledge_base/records.json', 'knowledge_base/qa-core.json', 'knowledge_base/qa-expanded.json', 'knowledge_base/qa-rice-2026-10.json', 'knowledge_base/verified_sources.json', 'knowledge_base/project_sources.json',
   'web-voice-agent/package.json', 'web-voice-agent/README.md', 'web-voice-agent/.env.example', 'web-voice-agent/.env.deploy.example',
   'web-voice-agent/scripts/check-deployment.js', 'web-voice-agent/scripts/rehearse-demo.js', 'web-voice-agent/scripts/run-tests.js', 'web-voice-agent/scripts/demo-inputs.js', 'web-voice-agent/scripts/rehearse-http.js'
 )

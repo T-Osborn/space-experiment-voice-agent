@@ -41,7 +41,7 @@ class BaiduSpeechClient {
     const service = env.BAIDU_TTS_SERVICE || "short_text";
     return {
       service,
-      voiceId: integerOption(env.BAIDU_TTS_VOICE, service === "clone" ? null : 0, 0, Number.MAX_SAFE_INTEGER),
+      voiceId: integerOption(env.BAIDU_TTS_VOICE, service === "clone" ? null : 5, 0, Number.MAX_SAFE_INTEGER),
       speed: integerOption(env.BAIDU_TTS_SPEED, 5, 0, 15),
       pitch: integerOption(env.BAIDU_TTS_PITCH, 5, 0, 15),
       volume: integerOption(env.BAIDU_TTS_VOLUME, 5, 0, service === "clone" ? 15 : 9),

@@ -102,6 +102,16 @@ test("clone TTS sends a voice_id to the distinct documented clone endpoint", asy
   assert.equal(body.text, "请报告实验状态。");
 });
 
+test("2.0 defaults to short-text per=5 while an explicit zero remains selectable", async () => {
+  for (const [overrides, expectedVoice] of [[{}, "5"], [{ BAIDU_TTS_VOICE: "0" }, "0"]]) {
+    const { client, calls } = makeClient(overrides);
+    assert.equal(client.getTtsConfig().voiceId, Number(expectedVoice));
+    assert.equal((await client.synthesize("请报告实验状态。")).ok, true);
+    assert.equal(calls[1].url.href, "https://tsn.baidu.com/text2audio");
+    assert.equal(new URLSearchParams(calls[1].options.body).get("per"), expectedVoice);
+  }
+});
+
 test("clone without a positive voice_id cannot be mistaken for configured speech", async () => {
   const { client, calls } = makeClient({ BAIDU_TTS_SERVICE: "clone" });
   assert.equal(client.isTtsConfigured(), false);
@@ -163,7 +173,7 @@ test("Baidu public configuration exposes format and voice metadata, never creden
     assert.equal(asr.input, "audio/pcm;rate=16000");
     assert.equal(asr.configured, true);
     assert.equal(tts.configured, true);
-    assert.equal(tts.voice_id, 0);
+    assert.equal(tts.voice_id, 5);
     assert.ok(tts.chunking.max_utf8_bytes < 1024);
     const publicText = JSON.stringify({ asr, tts });
     for (const secret of Object.values(credentials)) assert.ok(!publicText.includes(secret));

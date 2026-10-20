@@ -5,7 +5,7 @@
       "procedure_id": "rice_sampling_preprocess",
       "experiment_id": "rice_in_orbit_preprocessing_demo",
       "display_name": "太空水稻在轨取样预处理",
-      "version": "0.2-detailed-demo",
+      "version": "0.3-v2-behavior-demo",
       "sop_status": "PROJECT_DEMO_REVIEW_REQUIRED",
       "guidance_mode": "PROJECT_DEMO",
       "source_refs": [
@@ -81,6 +81,19 @@
                 "营养液余量",
                 "营养液剩余",
                 "余量"
+              ]
+            }
+          ],
+          "rule_conflicts": [
+            {
+              "conflict_id": "cultivation_day_90_boundary",
+              "field": "cultivation_days",
+              "status": "UNRESOLVED",
+              "scope": "PROJECT_DEMO_ONLY",
+              "explanation": "培养周期边界存在>90天与≥90天的表述差异，90天暂不能判定，请任务负责人确认适用规则。",
+              "alternatives": [
+                { "operator": ">", "value": 90, "source_ref": "project_md_20_experiment_sops", "locator": "实验01培养状态达标条件：周期＞90天" },
+                { "operator": ">=", "value": 90, "source_ref": "project_skill_v2_2026_10_15", "locator": "第六节边界冲突说明；原SOP前置描述为90天以上；此项未经任务审批" }
               ]
             }
           ],
